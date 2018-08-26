@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GodotSpriteSheet.png-1fab7da852a54bc856fc39e1ee385da6.stex"
+path="res://.import/Pipe.png-ddbaa1d827873182ffcae1e93bb18ca1.stex"
 
 [deps]
 
-source_file="res://GodotSpriteSheet.png"
-dest_files=[ "res://.import/GodotSpriteSheet.png-1fab7da852a54bc856fc39e1ee385da6.stex" ]
+source_file="res://resources/Pipe.png"
+dest_files=[ "res://.import/Pipe.png-ddbaa1d827873182ffcae1e93bb18ca1.stex" ]
 
 [params]
 

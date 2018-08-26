@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="MarioClone"
-run/main_scene="res://world.tscn"
+run/main_scene="res://Scenes/World_Scene.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -32,4 +32,3 @@ move_jump=[ Object(InputEventKey,"resource_local_to_scene":false,"resource_name"
 [rendering]
 
 environment/default_clear_color=Color( 0.418991, 0.688247, 0.949219, 1 )
-environment/default_environment="res://default_env.tres"

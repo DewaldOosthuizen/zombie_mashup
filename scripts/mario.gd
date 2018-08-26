@@ -10,18 +10,21 @@ var playerSprite
 var maxJumpCount = 1
 var currentJumpCount = 0
 var deltaTime = 0
+var power = 0
 
 # constants
 const MAXIMUMSPEED = 300
 const MOVEMULTI = 800
 const JUMPFORCE = 350
 const GRAVITY = 800
-
+const bricksParticle_scene = preload("res://Scenes/Bricks_Particle_Scene.tscn")
+const powerUp_scene = preload("res://Scenes/Power_Up_Scene.tscn")
+const powerUpBrick_scene = preload("res://Scenes/Box_Scene.tscn")
 
 func _ready():
 	playerSprite = get_node("Mario")
 	set_process(true)
-	
+	$CollisionShape2D.connect("area_entered", self, "_remove_if_brick")
 	pass
 
 
@@ -46,6 +49,7 @@ func _control_mario(delta):
 		playerSprite.frame = 0
 	
 	_handle_collision(collidedObject)
+	_check_for_power_up()
 	
 	pass
 
@@ -116,19 +120,57 @@ func _handle_collision(collidedObject):
 	if (collidedObject):
 		#if character is on the floor
 		if (collidedObject.normal == Vector2(0, -1)):
-			playerSpeedY = 0
+			playerSpeedY= 0
 			 
 			if (currentJumpCount > 0):
 				playerSprite.frame = 0
 				currentJumpCount = 0
 	
-		#if character collides with an object from beneath
-		if (collidedObject.normal == Vector2(0, 1)):
- 			_remove_if_brick(collidedObject);
-	
+		#if character collides with an object
+		_remove_if_brick(collidedObject);
+		_check_if_power_up_brick(collidedObject)
+		
 	pass
 	
 func _remove_if_brick(object):
-	print(object.transform.parent.gameObject)
-	#object.collider.free()
+	if (power > 0):
+		var objectParent = object.collider.get_parent()
+		
+		if (objectParent.is_in_group("Bricks") and object.normal == Vector2(0, 1)):
+			#add the particle effect of the brick breaking
+			var particleEffect = bricksParticle_scene.instance()
+			particleEffect.get_node(".").set_emitting(true)
+			particleEffect.position = self.get_position()  - Vector2(0, 20)
+			get_tree().root.add_child(particleEffect)
+			#remove the brick
+			objectParent.queue_free()
+	pass
+	
+func _check_if_power_up_brick(object):
+	var objectParent = object.collider.get_parent()
+		
+	if (objectParent.is_in_group("PowerUpBrick")):
+		# create power up brick
+		var powerUpBrick = powerUpBrick_scene.instance()
+		powerUpBrick.position = objectParent.get_node("Sprite").global_position
+		#remove the brick previous brick
+		objectParent.queue_free()
+		# add the new box brick
+		get_tree().root.add_child(powerUpBrick)
+		
+		# create actual power up
+		var powerUp = powerUp_scene.instance()
+		powerUp.position = powerUpBrick.position - Vector2(0, 50)
+		get_tree().root.add_child(powerUp)
+		
+	pass
+	
+func _check_for_power_up():
+	var area = get_node("Area2D").get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body.is_in_group("PowerUp")):
+				power += 1
+				body.queue_free()
+				get_node("Mario").modulate = Color("#242cfb")
 	pass
