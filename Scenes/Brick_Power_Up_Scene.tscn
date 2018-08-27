@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://resources/MapTileset.png" type="Texture" id=1]
+[ext_resource path="res://resources/graveyardtilesetnew/png/Objects/Crate.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 8.37564, 8.36045 )
+extents = Vector2( 9.08232, 9.78767 )
 
 [node name="brick_box" type="Node2D" groups=[
 "PowerUpBrick",
@@ -25,7 +25,7 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
-position = Vector2( -0.285408, -4.94167 )
+position = Vector2( 0.298561, -4.35769 )
 scale = Vector2( 1.23956, 1.22752 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -33,10 +33,8 @@ _sections_unfolded = [ "Transform" ]
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
 position = Vector2( 0.137497, -4.61093 )
-scale = Vector2( 1.2, 1.2 )
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
-vframes = 2
-hframes = 2
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Animation", "Transform" ]
 
 

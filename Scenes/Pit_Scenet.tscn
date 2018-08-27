@@ -1,4 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/freetileset/png/Tiles/17.png" type="Texture" id=1]
+[ext_resource path="res://resources/freetileset/png/Tiles/18.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -20,7 +23,71 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( 20.3627, 0 )
+position = Vector2( 25.8194, 0.7738 )
+scale = Vector2( 1.25022, 1.22187 )
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+position = Vector2( 1.18523, -4.64908 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite2" type="Sprite" parent="." index="2"]
+
+position = Vector2( 17.2633, -4.64908 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite3" type="Sprite" parent="." index="3"]
+
+position = Vector2( 33.7288, -5.03651 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite4" type="Sprite" parent="." index="4"]
+
+position = Vector2( 33.7288, -5.03651 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite5" type="Sprite" parent="." index="5"]
+
+position = Vector2( 49.8069, -5.23022 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite6" type="Sprite" parent="." index="6"]
+
+position = Vector2( 1.37895, 8.5 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite7" type="Sprite" parent="." index="7"]
+
+position = Vector2( 17.8444, 8.5 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite8" type="Sprite" parent="." index="8"]
+
+position = Vector2( 34.3099, 8.5 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite9" type="Sprite" parent="." index="9"]
+
+position = Vector2( 50.0006, 8.5 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 

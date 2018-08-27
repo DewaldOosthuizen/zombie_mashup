@@ -22,7 +22,6 @@ const JUMPFORCE = 350
 const GRAVITY = 800
 const bricksParticle_scene = preload("res://Scenes/Bricks_Particle_Scene.tscn")
 const powerUp_scene = preload("res://Scenes/Power_Up_Scene.tscn")
-const powerUpBrick_scene = preload("res://Scenes/Box_Scene.tscn")
 
 func _ready():
 	playerSprite = get_node("Mario")
@@ -56,6 +55,7 @@ func _check_invincibility(delta):
 			invincibleTime = 0
 	else:
 		playerSprite.visible = true
+
 
 func _control_mario(delta):
 	_jump_mario()
@@ -172,17 +172,12 @@ func _remove_if_brick(object):
 func _check_if_power_up_brick(object):
 	var objectParent = object.collider.get_parent()
 	if (objectParent.is_in_group("PowerUpBrick")):
-		# create power up brick
-		var powerUpBrick = powerUpBrick_scene.instance()
-		powerUpBrick.position = objectParent.get_node("Sprite").global_position
 		#remove the brick previous brick
 		objectParent.queue_free()
-		# add the new box brick
-		get_tree().root.add_child(powerUpBrick)
 		
 		# create actual power up
 		var powerUp = powerUp_scene.instance()
-		powerUp.position = powerUpBrick.position - Vector2(0, 50)
+		powerUp.position = objectParent.position - Vector2(0, 50)
 		get_tree().root.add_child(powerUp)
 		
 	pass
@@ -217,11 +212,19 @@ func _check_if_enemy_has_killed_player():
 	var area = get_node("Area2D").get_overlapping_bodies()
 	if (area.size() != 0):
 		for body in area:
-			if (body.is_in_group("Enemy")):
+			if (body.is_in_group("Enemy_drop")):
 				if (body.position.y > self.position.y + 5):
 					body.get_node("CollisionShape2D").disabled = true
 					#body.queue_free()
 				elif(!invincible):
+					power -= 1
+					invincible = true
+					if (power < 0):
+						get_tree().reload_current_scene()
+					else:
+						_remove_power_up()
+			if (body.is_in_group("Enemy_saw")):
+				if(!invincible):
 					power -= 1
 					invincible = true
 					if (power < 0):
