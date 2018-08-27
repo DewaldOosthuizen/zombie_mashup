@@ -11,6 +11,9 @@ var maxJumpCount = 1
 var currentJumpCount = 0
 var deltaTime = 0
 var power = 0
+var invincible = false;
+var invincibleTime = 0;
+var invincibleTimer = 0;
 
 # constants
 const MAXIMUMSPEED = 300
@@ -31,9 +34,28 @@ func _ready():
 func _process(delta):
 	deltaTime = deltaTime + delta
 	_control_mario(delta)
+	_check_invincibility(delta)
 	
 	pass
 
+
+func _check_invincibility(delta):
+	if (invincible):
+		invincibleTime = invincibleTime + delta
+		invincibleTimer = invincibleTimer + delta
+		if (invincibleTimer > 2):
+			playerSprite.visible = true
+			invincible = false
+			
+		if(invincibleTime > 0.05):
+			if(playerSprite.visible):
+				playerSprite.visible = false
+			else:
+				playerSprite.visible = true
+			
+			invincibleTime = 0
+	else:
+		playerSprite.visible = true
 
 func _control_mario(delta):
 	_jump_mario()
@@ -50,6 +72,8 @@ func _control_mario(delta):
 	
 	_handle_collision(collidedObject)
 	_check_for_power_up()
+	_check_if_player_has_fallen_in_pit()
+	_check_if_enemy_has_killed_player()
 	
 	pass
 
@@ -129,7 +153,6 @@ func _handle_collision(collidedObject):
 		#if character collides with an object
 		_remove_if_brick(collidedObject);
 		_check_if_power_up_brick(collidedObject)
-		
 	pass
 	
 func _remove_if_brick(object):
@@ -148,7 +171,6 @@ func _remove_if_brick(object):
 	
 func _check_if_power_up_brick(object):
 	var objectParent = object.collider.get_parent()
-		
 	if (objectParent.is_in_group("PowerUpBrick")):
 		# create power up brick
 		var powerUpBrick = powerUpBrick_scene.instance()
@@ -172,5 +194,38 @@ func _check_for_power_up():
 			if (body.is_in_group("PowerUp")):
 				power += 1
 				body.queue_free()
-				get_node("Mario").modulate = Color("#242cfb")
+				var mario = get_node("Mario")
+				mario.scale = Vector2(1.3, 1.3)
+				mario.position = Vector2(mario.position.x, mario.position.y - 8)
+	pass
+	
+func _remove_power_up():
+	var mario = get_node("Mario")
+	mario.scale = Vector2(1, 1)
+	mario.position = Vector2(mario.position.x, mario.position.y + 8)
+	pass
+	
+func _check_if_player_has_fallen_in_pit():
+	var area = get_node("Area2D").get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body.is_in_group("Pits")):
+				get_tree().reload_current_scene()
+	pass
+	
+func _check_if_enemy_has_killed_player():
+	var area = get_node("Area2D").get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body.is_in_group("Enemy")):
+				if (body.position.y > self.position.y + 5):
+					body.get_node("CollisionShape2D").disabled = true
+					#body.queue_free()
+				elif(!invincible):
+					power -= 1
+					invincible = true
+					if (power < 0):
+						get_tree().reload_current_scene()
+					else:
+						_remove_power_up()
 	pass

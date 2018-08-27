@@ -7,7 +7,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 7.23361, 7.50125 )
 
-[node name="brick" type="Node2D" groups=[
+[node name="brick" type="Node2D" index="0" groups=[
 "Bricks",
 ]]
 

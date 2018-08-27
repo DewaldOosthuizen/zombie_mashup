@@ -6,14 +6,14 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 7, 12 )
+extents = Vector2( 7, 11.5313 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 18.4952, 20.7176 )
 
-[node name="(Mario) KinematicBody2D" type="KinematicBody2D" index="0"]
+[node name="(Mario) KinematicBody2D" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -63,6 +63,8 @@ _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform",
 
 [node name="Area2D" type="Area2D" parent="." index="3"]
 
+position = Vector2( -2.04039, 0 )
+scale = Vector2( 1.06376, 1 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -75,5 +77,6 @@ audio_bus_name = "Master"
 
 position = Vector2( -0.540375, 0 )
 shape = SubResource( 2 )
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
 
