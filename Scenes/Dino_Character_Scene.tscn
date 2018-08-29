@@ -1,33 +1,339 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scripts/Dino_Character_Scene.gd" type="Script" id=1]
-[ext_resource path="res://resources/GodotSpriteSheet.png" type="Texture" id=2]
+[ext_resource path="res://resources/freedinosprite/spritesheet.png" type="Texture" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="GDScript" id=1]
 
-custom_solver_bias = 0.0
-extents = Vector2( 7, 11.5313 )
+script/source = "extends KinematicBody2D
+
+# variables
+var playerSpeedX = 0
+var playerSpeedY = 0
+var velocity = Vector2(0, 0)
+var facingDirection = 0
+var movementDirection = 0
+var playerSprite
+var maxJumpCount = 1
+var currentJumpCount = 0
+var deltaTime = 0
+var power = 0
+var invincible = false;
+var invincibleTime = 0;
+var invincibleTimer = 0;
+var bloodParticleTimer = 0;
+var blood = false
+var moveFrames = [43, 29, 44]
+var moveFrame = 0;
+var jumpFrames = [11]
+var playerArea
+
+# constants
+const MAXIMUMSPEED = 300
+const MOVEMULTI = 800
+const JUMPFORCE = 350
+const GRAVITY = 800
+const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
+const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
+const bloodParticle_scene = preload(\"res://Scenes/Blood_Splash_Particle_Scene.tscn\")
+
+func _ready():
+	playerSprite = get_node(\"Sprite\")
+	_enable_move_right()
+	set_process(true)
+	$CollisionShape2D.connect(\"area_entered\", self, \"_remove_if_brick\")
+	pass
+
+
+func _enable_move_right():
+	get_node(\"Area2D/CollisionShape2D\").disabled = false
+	get_node(\"Area2D2/CollisionShape2D\").disabled = true
+	get_node(\"CollisionShape2D\").disabled = false
+	get_node(\"CollisionShape2D2\").disabled = true
+	playerArea = get_node(\"Area2D\")
+	pass
+	
+	
+func _enable_move_left():
+	get_node(\"Area2D/CollisionShape2D\").disabled = true
+	get_node(\"Area2D2/CollisionShape2D\").disabled = false
+	get_node(\"CollisionShape2D\").disabled = true
+	get_node(\"CollisionShape2D2\").disabled = false
+	playerArea = get_node(\"Area2D2\")
+	pass
+
+
+func _process(delta):
+	deltaTime = deltaTime + delta
+	_control_mario(delta)
+	_check_invincibility(delta)
+	pass
+
+
+func _check_invincibility(delta):
+	if (invincible):
+		invincibleTime = invincibleTime + delta
+		invincibleTimer = invincibleTimer + delta
+		
+		if (invincibleTimer > 2):
+			playerSprite.visible = true
+			invincible = false
+			if(power < 0):
+				power = 0
+			
+		if(invincibleTime > 0.05):
+			if(playerSprite.visible):
+				playerSprite.visible = false
+			else:
+				playerSprite.visible = true
+			
+			invincibleTime = 0
+	else:
+		playerSprite.visible = true
+
+
+func _control_mario(delta):
+	_jump_mario()
+	_move_mario()
+	_set_mario_speed(delta)
+	_apply_gravity(delta)
+	
+	var collidedObject = move_and_collide(Vector2(0, velocity.y))
+	move_local_x(velocity.x)
+	
+	# reset the current sprite frame to 0 if standing still on the x axis and not jumping
+	if (velocity.x == 0 and currentJumpCount == 0):
+		playerSprite.frame = 2
+	
+	_handle_collision(collidedObject)
+	_check_for_power_up()
+	_check_if_player_has_fallen_in_pit()
+	_check_if_enemy_has_killed_player(delta)
+	
+	pass
+
+
+func _jump_mario():
+	# control mario jump
+	if (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount):
+		playerSpeedY = -JUMPFORCE
+		currentJumpCount += 1
+		playerSprite.frame = jumpFrames[0]
+	
+	pass
+
+
+func _move_mario():
+	# control mario facing direction
+	if (Input.is_action_pressed(\"move_left\")):
+		facingDirection = -1
+		movementDirection = facingDirection
+		playerSprite.flip_h = true;
+		_enable_move_left()
+		if (deltaTime > 0.1 and currentJumpCount == 0):
+			_animate_player()
+	elif (Input.is_action_pressed(\"move_right\")):
+		facingDirection = 1
+		movementDirection = facingDirection
+		playerSprite.flip_h = false;
+		_enable_move_right()
+		if (deltaTime > 0.1 and currentJumpCount == 0):
+			_animate_player()
+	else:
+		facingDirection = 0
+		if (currentJumpCount == 0):
+			playerSprite.frame = 2
+	
+	pass
+
+
+func _set_mario_speed(delta):
+	# control mario speed
+	if (facingDirection != 0):
+		playerSpeedX += MOVEMULTI * delta
+	else:
+		playerSpeedX -= MOVEMULTI * 2 * delta
+		
+	pass
+	
+
+func _apply_gravity(delta):
+	#apply gravity to jump
+	playerSpeedY += GRAVITY * delta
+	#stop player from keeping on increasing speed
+	playerSpeedX = clamp(playerSpeedX, 0, MAXIMUMSPEED)
+	#set player speed
+	velocity.x = playerSpeedX * delta * movementDirection
+	velocity.y = playerSpeedY * delta
+	
+	pass
+
+
+func _animate_player():
+	if (moveFrame >= moveFrames.size()):
+		moveFrame = 0
+	
+	playerSprite.frame = moveFrames[moveFrame]
+	moveFrame += 1
+	deltaTime = 0
+	
+	pass
+
+
+func _handle_collision(collidedObject):
+	if (collidedObject):
+		#if character is on the floor
+		if (collidedObject.normal == Vector2(0, -1)):
+			playerSpeedY= 0
+			 
+			if (currentJumpCount > 0):
+				playerSprite.frame = jumpFrames[0]
+				currentJumpCount = 0
+	
+		#if character collides with an object
+		_remove_if_brick(collidedObject);
+		_check_if_power_up_brick(collidedObject)
+	pass
+
+	
+func _remove_if_brick(object):
+	if (power > 0):
+		var objectParent = object.collider.get_parent()
+		
+		if (objectParent.is_in_group(\"Bricks\") and object.normal == Vector2(0, 1)):
+			#add the particle effect of the brick breaking
+			var particleEffect = bricksParticle_scene.instance()
+			particleEffect.get_node(\".\").set_emitting(true)
+			particleEffect.position = self.get_position()  - Vector2(0, 20)
+			get_tree().root.add_child(particleEffect)
+			#remove the brick
+			objectParent.queue_free()
+	pass
+	
+	
+func _check_if_power_up_brick(object):
+	var objectParent = object.collider.get_parent()
+	if (objectParent.is_in_group(\"PowerUpBrick\") and object.normal == Vector2(0, 1)):
+		var particleEffect = bricksParticle_scene.instance()
+		particleEffect.get_node(\".\").set_emitting(true)
+		particleEffect.position = self.get_position()  - Vector2(0, 20)
+		get_tree().root.add_child(particleEffect)
+		#remove the brick
+		objectParent.queue_free()
+		
+		# create actual power up
+		var powerUp = powerUp_scene.instance()
+		powerUp.position = objectParent.position - Vector2(0, 50)
+		get_tree().root.add_child(powerUp)
+		
+	pass
+
+	
+func _check_for_power_up():
+	var area = playerArea.get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body.is_in_group(\"PowerUp\")):
+				power += 1
+				body.queue_free()
+				self.scale = Vector2(1.8, 1.8)
+				self.position = Vector2(self.position.x, self.position.y - 50)
+	pass
+
+	
+func _remove_power_up():
+	if (power == 0):
+		self.scale = Vector2(1, 1)
+		self.position = Vector2(self.position.x, self.position.y + 8)
+	pass
+
+	
+func _check_if_player_has_fallen_in_pit():
+	var area = playerArea.get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body.is_in_group(\"Pits\")):
+				get_tree().reload_current_scene()
+	pass
+
+	
+func _check_if_enemy_has_killed_player(delta):
+	var area = playerArea.get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body.is_in_group(\"Enemy_drop\")):
+				if(self.scale == Vector2(1, 1)):
+					if (body.position.y > self.position.y + 15):
+						body.get_node(\"CollisionShape2D\").disabled = true
+					else:
+						_take_damage()
+				if(self.scale == Vector2(1.8, 1.8)):
+					if (body.position.y > self.position.y + 30):
+						body.get_node(\"CollisionShape2D\").disabled = true
+					else:
+						_take_damage()
+				else:
+					_take_damage()
+			if (body.is_in_group(\"Enemy_saw\")):
+				var particleEffect = bloodParticle_scene.instance()
+				particleEffect.get_node(\".\").set_emitting(true)
+				particleEffect.position = self.get_position()
+				get_tree().root.add_child(particleEffect)
+				blood = true
+			
+	#Gives some time for showing blood
+	if (blood):
+		bloodParticleTimer = bloodParticleTimer + delta
+		if(bloodParticleTimer and bloodParticleTimer > 0.3):
+			bloodParticleTimer = 0
+			_take_damage()
+			blood = false
+		
+	pass
+	
+	
+func _take_damage():
+	if(!invincible):
+		power -= 1
+		invincible = true
+		if (power < 0):
+			self.queue_free()
+			get_tree().reload_current_scene()
+		else:
+			_remove_power_up()
+	pass"
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 18.4952, 20.7176 )
+extents = Vector2( 11.6536, 18.6731 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 19.5331, 20.7176 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
-script = ExtResource( 1 )
+script = SubResource( 1 )
 _sections_unfolded = [ "Collision", "Material", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
+position = Vector2( -2.20065, -1.32039 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
-[node name="Camera2D" type="Camera2D" parent="." index="1"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 31.2492, -1.32039 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
 
 position = Vector2( 66.2978, 17.1883 )
 anchor_mode = 1
@@ -54,17 +360,41 @@ editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Limit" ]
 
-[node name="Sprite" type="Sprite" parent="." index="2"]
+[node name="Sprite" type="Sprite" parent="." index="3"]
 
-texture = ExtResource( 2 )
-hframes = 20
-region_rect = Rect2( 0, 0, 200, 100 )
+position = Vector2( 11.8835, 0 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+vframes = 8
+hframes = 6
+frame = 2
+region_rect = Rect2( 0, 0, 60, 100 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
 
-[node name="Area2D" type="Area2D" parent="." index="3"]
+[node name="Area2D" type="Area2D" parent="." index="4"]
 
-position = Vector2( -2.04039, 0 )
-scale = Vector2( 1.06376, 1 )
+position = Vector2( -0.109978, 0.851117 )
+scale = Vector2( 1.12409, 1.0266 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Audio Bus", "Collision", "Visibility" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( -2.88015, -2.07533 )
+scale = Vector2( 0.923752, 0.912498 )
+shape = SubResource( 3 )
+_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
+
+[node name="Area2D2" type="Area2D" parent="." index="5"]
+
+position = Vector2( -0.109978, 0.851117 )
+scale = Vector2( 1.12409, 1.0266 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -73,10 +403,11 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
 
-position = Vector2( -0.540375, 0 )
-shape = SubResource( 2 )
+position = Vector2( 24.1364, -2.07533 )
+scale = Vector2( 0.923752, 0.912498 )
+shape = SubResource( 3 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 
 

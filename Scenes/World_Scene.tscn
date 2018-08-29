@@ -1,20 +1,21 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://resources/freetileset/png/BG/BG.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Mushroom_Scene.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Mushroom_2_Scene.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Tree_1_Scene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Tree_2_Scene.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Bush_Scene.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Brick_Power_Up_Scene.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Brick_Scene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Tree_1_Scene.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Tree_2_Scene.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Mushroom_Scene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Mushroom_2_Scene.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Brick_Power_Up_Scene.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Brick_Scene.tscn" type="PackedScene" id=8]
 [ext_resource path="res://resources/Cloud.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Enemy_Saw_Scene.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Floor_Section_grass_Scene.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Pit_Scenet.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Enemy_Drop_Scene.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Open_Door_Scene.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Scenes/Mario_Character_Scene.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Float_Scene.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Enemy_Drop_Scene.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Open_Door_Scene.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Mario_Character_Scene.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -27,18 +28,16 @@ position = Vector2( 0, -2.72073 )
 
 [node name="Backgrounds" type="Node2D" parent="." index="0"]
 
-editor/display_folded = true
-
 [node name="BG" type="Sprite" parent="Backgrounds" index="0"]
 
-position = Vector2( 500.63, 229.246 )
+position = Vector2( 500.63, 227.617 )
 scale = Vector2( 1, 0.6 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="BG2" type="Sprite" parent="Backgrounds" index="1"]
 
-position = Vector2( 1499.97, 229.246 )
+position = Vector2( 1499.97, 227.617 )
 scale = Vector2( 1, 0.6 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -71,37 +70,30 @@ scale = Vector2( 1, 0.6 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Mushrooms" type="Node2D" parent="." index="1"]
+[node name="Trees" type="Node2D" parent="." index="1"]
 
 editor/display_folded = true
+position = Vector2( 196.122, 361.219 )
 
-[node name="Mushroom1" parent="Mushrooms" index="0" instance=ExtResource( 2 )]
+[node name="Tree1" parent="Trees" index="0" instance=ExtResource( 2 )]
 
-position = Vector2( 584.003, 369.787 )
+position = Vector2( 253.865, -34.1281 )
 
-[node name="Mushroom2" parent="Mushrooms" index="1" instance=ExtResource( 2 )]
+[node name="Tree3" parent="Trees" index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 1169.63, 368.973 )
+position = Vector2( 2014.76, -35.3256 )
 
-[node name="Mushroom5" parent="Mushrooms" index="2" instance=ExtResource( 2 )]
+[node name="Tree2" parent="Trees" index="2" instance=ExtResource( 3 )]
 
-position = Vector2( 1906.77, 371.416 )
+position = Vector2( 699.926, -40.7142 )
 
-[node name="Mushroom7" parent="Mushrooms" index="3" instance=ExtResource( 2 )]
+[node name="Tree5" parent="Trees" index="3" instance=ExtResource( 3 )]
 
-position = Vector2( 3750, 368.158 )
+position = Vector2( 3870.85, -42.5105 )
 
-[node name="Mushroom3" parent="Mushrooms" index="4" instance=ExtResource( 3 )]
+[node name="Tree4" parent="Trees" index="4" instance=ExtResource( 3 )]
 
-position = Vector2( 1040.94, 368.973 )
-
-[node name="Mushroom4" parent="Mushrooms" index="5" instance=ExtResource( 3 )]
-
-position = Vector2( 1730.02, 366.529 )
-
-[node name="Mushroom6" parent="Mushrooms" index="6" instance=ExtResource( 3 )]
-
-position = Vector2( 3349.26, 365.715 )
+position = Vector2( 3042.19, -44.3066 )
 
 [node name="Bushes" type="Node2D" parent="." index="2"]
 
@@ -137,59 +129,103 @@ position = Vector2( 3534.66, 384.901 )
 flip_h = true
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Bricks" type="Node2D" parent="." index="3"]
+[node name="Mushrooms" type="Node2D" parent="." index="3"]
 
 editor/display_folded = true
 
-[node name="brick_power_up" parent="Bricks" index="0" instance=ExtResource( 5 )]
+[node name="Mushroom1" parent="Mushrooms" index="0" instance=ExtResource( 5 )]
 
-position = Vector2( 324.14, 304 )
+position = Vector2( 584.003, 369.787 )
 
-[node name="brick2" parent="Bricks" index="1" instance=ExtResource( 6 )]
+[node name="Mushroom2" parent="Mushrooms" index="1" instance=ExtResource( 5 )]
 
-position = Vector2( 345.827, 297.6 )
+position = Vector2( 1169.63, 368.973 )
 
-[node name="brick3" parent="Bricks" index="2" instance=ExtResource( 6 )]
+[node name="Mushroom5" parent="Mushrooms" index="2" instance=ExtResource( 5 )]
 
-position = Vector2( 367.045, 297.6 )
+position = Vector2( 1906.77, 371.416 )
 
-[node name="brick4" parent="Bricks" index="3" instance=ExtResource( 6 )]
+[node name="Mushroom7" parent="Mushrooms" index="3" instance=ExtResource( 5 )]
 
-position = Vector2( 1299.22, 297.6 )
+position = Vector2( 3750, 368.158 )
 
-[node name="brick5" parent="Bricks" index="4" instance=ExtResource( 6 )]
+[node name="Mushroom3" parent="Mushrooms" index="4" instance=ExtResource( 6 )]
+
+position = Vector2( 1040.94, 368.973 )
+
+[node name="Mushroom4" parent="Mushrooms" index="5" instance=ExtResource( 6 )]
+
+position = Vector2( 1730.02, 366.529 )
+
+[node name="Mushroom6" parent="Mushrooms" index="6" instance=ExtResource( 6 )]
+
+position = Vector2( 3349.26, 365.715 )
+
+[node name="Bricks" type="Node2D" parent="." index="4"]
+
+editor/display_folded = true
+
+[node name="brick_power_up" parent="Bricks" index="0" instance=ExtResource( 7 )]
+
+position = Vector2( 315.115, 304 )
+
+[node name="brick_power_up2" parent="Bricks" index="1" instance=ExtResource( 7 )]
+
+position = Vector2( 1300.14, 304 )
+
+[node name="brick2" parent="Bricks" index="2" instance=ExtResource( 8 )]
+
+position = Vector2( 336.802, 297.6 )
+
+[node name="brick3" parent="Bricks" index="3" instance=ExtResource( 8 )]
+
+position = Vector2( 358.02, 297.6 )
+
+[node name="brick5" parent="Bricks" index="4" instance=ExtResource( 8 )]
 
 position = Vector2( 1320.39, 297.6 )
 
-[node name="brick6" parent="Bricks" index="5" instance=ExtResource( 6 )]
+[node name="brick6" parent="Bricks" index="5" instance=ExtResource( 8 )]
 
 position = Vector2( 1341.41, 297.6 )
 
-[node name="brick7" parent="Bricks" index="6" instance=ExtResource( 6 )]
+[node name="brick7" parent="Bricks" index="6" instance=ExtResource( 8 )]
 
 position = Vector2( 1442.79, 297.6 )
 
-[node name="brick8" parent="Bricks" index="7" instance=ExtResource( 6 )]
+[node name="brick8" parent="Bricks" index="7" instance=ExtResource( 8 )]
 
 position = Vector2( 1421.73, 297.6 )
 
-[node name="brick9" parent="Bricks" index="8" instance=ExtResource( 6 )]
+[node name="brick9" parent="Bricks" index="8" instance=ExtResource( 8 )]
 
 position = Vector2( 1400.66, 297.6 )
 
-[node name="brick10" parent="Bricks" index="9" instance=ExtResource( 6 )]
+[node name="brick10" parent="Bricks" index="9" instance=ExtResource( 8 )]
 
 position = Vector2( 2295.65, 297.6 )
 
-[node name="brick11" parent="Bricks" index="10" instance=ExtResource( 6 )]
+[node name="brick11" parent="Bricks" index="10" instance=ExtResource( 8 )]
 
 position = Vector2( 2316.83, 297.6 )
 
-[node name="brick12" parent="Bricks" index="11" instance=ExtResource( 6 )]
+[node name="brick12" parent="Bricks" index="11" instance=ExtResource( 8 )]
 
 position = Vector2( 2338.13, 297.6 )
 
-[node name="Wall" type="Node2D" parent="." index="4"]
+[node name="brick13" parent="Bricks" index="12" instance=ExtResource( 8 )]
+
+position = Vector2( 483.91, 379.728 )
+
+[node name="brick14" parent="Bricks" index="13" instance=ExtResource( 8 )]
+
+position = Vector2( 483.91, 358.068 )
+
+[node name="brick15" parent="Bricks" index="14" instance=ExtResource( 8 )]
+
+position = Vector2( 463.152, 379.728 )
+
+[node name="Wall" type="Node2D" parent="." index="5"]
 
 editor/display_folded = true
 position = Vector2( -9.47479, 345.345 )
@@ -239,31 +275,6 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( -135.599, 33.9609 )
 shape = SubResource( 1 )
-
-[node name="Trees" type="Node2D" parent="." index="5"]
-
-editor/display_folded = true
-position = Vector2( 196.122, 361.219 )
-
-[node name="Tree1" parent="Trees" index="0" instance=ExtResource( 7 )]
-
-position = Vector2( 253.865, -34.1281 )
-
-[node name="Tree3" parent="Trees" index="1" instance=ExtResource( 7 )]
-
-position = Vector2( 2014.76, -35.3256 )
-
-[node name="Tree2" parent="Trees" index="2" instance=ExtResource( 8 )]
-
-position = Vector2( 699.926, -40.7142 )
-
-[node name="Tree5" parent="Trees" index="3" instance=ExtResource( 8 )]
-
-position = Vector2( 3870.85, -42.5105 )
-
-[node name="Tree4" parent="Trees" index="4" instance=ExtResource( 8 )]
-
-position = Vector2( 3042.19, -44.3066 )
 
 [node name="Clouds" type="Node2D" parent="." index="6"]
 
@@ -436,27 +447,26 @@ editor/display_folded = true
 
 [node name="Enemy" parent="Enemies_saw" index="0" instance=ExtResource( 10 )]
 
-position = Vector2( 2474.01, 393.001 )
+position = Vector2( 1598.07, 373.861 )
 
 [node name="Enemy2" parent="Enemies_saw" index="1" instance=ExtResource( 10 )]
 
-position = Vector2( 1416, 393.001 )
+position = Vector2( 2103.07, 375.49 )
 
 [node name="Enemy3" parent="Enemies_saw" index="2" instance=ExtResource( 10 )]
 
-position = Vector2( 4179.01, 394.001 )
+position = Vector2( 2698.48, 375.49 )
 
 [node name="Enemy4" parent="Enemies_saw" index="3" instance=ExtResource( 10 )]
 
-position = Vector2( 3700.01, 394.001 )
+position = Vector2( 4007.4, 373.861 )
 
 [node name="Enemy5" parent="Enemies_saw" index="4" instance=ExtResource( 10 )]
 
-position = Vector2( 3122.01, 391.001 )
+position = Vector2( 3688.11, 376.304 )
 
 [node name="Ground" type="Node2D" parent="." index="8"]
 
-editor/display_folded = true
 position = Vector2( 6.13867, 419.887 )
 
 [node name="floor" parent="Ground" index="0" instance=ExtResource( 11 )]
@@ -467,11 +477,11 @@ position = Vector2( 124.263, 0 )
 
 [node name="floor3" parent="Ground" index="2" instance=ExtResource( 11 )]
 
-position = Vector2( 248.691, 0 )
+position = Vector2( 247.978, 0 )
 
 [node name="floor4" parent="Ground" index="3" instance=ExtResource( 11 )]
 
-position = Vector2( 372.677, 0 )
+position = Vector2( 372.201, 0 )
 
 [node name="floor5" parent="Ground" index="4" instance=ExtResource( 11 )]
 
@@ -617,48 +627,88 @@ scale = Vector2( 0.586533, 1.332 )
 position = Vector2( 1430.29, 443.334 )
 scale = Vector2( 2.70135, 2.97842 )
 
-[node name="Enemies" type="Node2D" parent="." index="10"]
+[node name="Floats" type="Node2D" parent="." index="10"]
 
 editor/display_folded = true
 
-[node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 13 )]
+[node name="Float" parent="Floats" index="0" instance=ExtResource( 13 )]
+
+position = Vector2( 724.709, 332.121 )
+
+[node name="Float2" parent="Floats" index="1" instance=ExtResource( 13 )]
+
+position = Vector2( 876.33, 289.703 )
+
+[node name="Float3" parent="Floats" index="2" instance=ExtResource( 13 )]
+
+position = Vector2( 1022.53, 238.261 )
+
+[node name="Float4" parent="Floats" index="3" instance=ExtResource( 13 )]
+
+position = Vector2( 1183.18, 293.313 )
+
+[node name="Float5" parent="Floats" index="4" instance=ExtResource( 13 )]
+
+position = Vector2( 1814.93, 273.458 )
+
+[node name="Float6" parent="Floats" index="5" instance=ExtResource( 13 )]
+
+position = Vector2( 1990.02, 222.918 )
+
+[node name="Float7" parent="Floats" index="6" instance=ExtResource( 13 )]
+
+position = Vector2( 2231.89, 229.236 )
+
+[node name="Float8" parent="Floats" index="7" instance=ExtResource( 13 )]
+
+position = Vector2( 2783.32, 331.218 )
+
+[node name="Float9" parent="Floats" index="8" instance=ExtResource( 13 )]
+
+position = Vector2( 2932.23, 280.678 )
+
+[node name="Enemies" type="Node2D" parent="." index="11"]
+
+editor/display_folded = true
+
+[node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 14 )]
 
 position = Vector2( 1014.95, 386.353 )
 
-[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 13 )]
+[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 14 )]
 
 position = Vector2( 1217.76, 387.167 )
 
-[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource( 13 )]
+[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource( 14 )]
 
 position = Vector2( 1698.5, 387.982 )
 
-[node name="Enemy4" parent="Enemies" index="3" instance=ExtResource( 13 )]
+[node name="Enemy4" parent="Enemies" index="3" instance=ExtResource( 14 )]
 
 position = Vector2( 2220.42, 387.167 )
 
-[node name="Enemy5" parent="Enemies" index="4" instance=ExtResource( 13 )]
+[node name="Enemy5" parent="Enemies" index="4" instance=ExtResource( 14 )]
 
 position = Vector2( 2637.45, 389.611 )
 
-[node name="Enemy6" parent="Enemies" index="5" instance=ExtResource( 13 )]
+[node name="Enemy6" parent="Enemies" index="5" instance=ExtResource( 14 )]
 
 position = Vector2( 2911.12, 387.167 )
 
-[node name="Enemy7" parent="Enemies" index="6" instance=ExtResource( 13 )]
+[node name="Enemy7" parent="Enemies" index="6" instance=ExtResource( 14 )]
 
 position = Vector2( 3205.16, 387.167 )
 
-[node name="Enemy8" parent="Enemies" index="7" instance=ExtResource( 13 )]
+[node name="Enemy8" parent="Enemies" index="7" instance=ExtResource( 14 )]
 
 position = Vector2( 3941.47, 386.353 )
 
-[node name="OpenDoor" parent="." index="11" instance=ExtResource( 14 )]
+[node name="OpenDoor" parent="." index="12" instance=ExtResource( 15 )]
 
 position = Vector2( 4219.01, 360.001 )
 
-[node name="(Mario) KinematicBody2D" parent="." index="12" instance=ExtResource( 15 )]
+[node name="(Mario) KinematicBody2D" parent="." index="13" instance=ExtResource( 16 )]
 
-position = Vector2( 33.0867, 55.4603 )
+position = Vector2( 118.61, 66.8634 )
 
 

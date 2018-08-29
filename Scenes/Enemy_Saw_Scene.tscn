@@ -1,14 +1,61 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scripts/Enemy_Saw_Scene.gd" type="Script" id=1]
-[ext_resource path="res://resources/freescifiplatform/png/Objects/Saw.png" type="Texture" id=2]
+[ext_resource path="res://resources/freescifiplatform/png/Objects/Saw.png" type="Texture" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends KinematicBody2D
+
+# variables
+var playerSpeedY = 0
+var velocity = Vector2(0, 0)
+var movementDirection = -1
+var playerSprite
+var deltaTime = 0
+
+const PLAYERSPEEDX = 50
+const GRAVITY = 800
+
+func _ready():
+	playerSprite = get_node(\"Sprite\")
+	set_process(true)
+	pass
+	
+	
+func _process(delta):
+	deltaTime = deltaTime + delta
+	if(get_node(\"CollisionShape2D\").disabled):
+		playerSprite.frame = 4
+	
+	if(self.position.y < -20):
+		self.free()
+	
+	if(deltaTime > 0.1):
+		playerSprite.rotation += 20
+		deltaTime = 0
+	
+	playerSpeedY += GRAVITY * delta
+	velocity.x = PLAYERSPEEDX * delta * movementDirection
+	velocity.y = playerSpeedY * delta - 8
+	var collider = move_and_collide(velocity)
+	move_local_x(velocity.x)
+	
+	if (collider):
+		if (collider.normal == Vector2(0,-1)):
+			playerSpeedY = 0
+		if (collider.normal == Vector2(1,0)):
+			movementDirection = 1
+		elif ( collider.normal == Vector2(-1,0)):
+			movementDirection = -1
+	pass"
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 17.499, 7.85441 )
 
-[node name="Enemy" type="KinematicBody2D" index="0" groups=[
+[node name="Enemy" type="KinematicBody2D" groups=[
 "Enemy_saw",
 ]]
 
@@ -16,20 +63,20 @@ input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
-script = ExtResource( 1 )
+script = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
 position = Vector2( 0, 0.899192 )
 scale = Vector2( 1, 2.13758 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
 position = Vector2( 0.35849, -7.62939e-006 )
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 2 )
+texture = ExtResource( 1 )
 _sections_unfolded = [ "Animation", "Offset", "Transform" ]
 
 
