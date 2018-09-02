@@ -7,12 +7,12 @@
 custom_solver_bias = 0.0
 extents = Vector2( 14.002, 24.7784 )
 
-[node name="OpenDoor" type="Area2D" index="0" groups=[
+[node name="OpenDoor" type="Area2D" groups=[
 "End_Door",
 ]]
 
 position = Vector2( 1.00006, 0 )
-scale = Vector2( 1, 1.4 )
+scale = Vector2( 2, 3 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

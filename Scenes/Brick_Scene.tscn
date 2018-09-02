@@ -7,10 +7,12 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10.0865, 9.89342 )
 
-[node name="brick" type="Node2D" index="0" groups=[
+[node name="brick" type="Node2D" groups=[
 "Bricks",
 ]]
 
+position = Vector2( 0, -4.19563 )
+scale = Vector2( 0.8, 0.8 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
@@ -26,15 +28,15 @@ _sections_unfolded = [ "Pickable", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
-position = Vector2( -0.407669, 1.93539 )
-scale = Vector2( 1.2, 1.2 )
+position = Vector2( 0.0674987, -0.138093 )
+scale = Vector2( 2.403, 2.47986 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D" index="1"]
 
-position = Vector2( -0.389572, 1.97709 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( 0.116503, -0.035367 )
+scale = Vector2( 0.595409, 0.605439 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Animation", "Transform" ]
 

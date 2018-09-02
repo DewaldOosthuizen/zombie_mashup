@@ -35,12 +35,12 @@ const GRAVITY = 800
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bloodParticle_scene = preload(\"res://Scenes/Blood_Splash_Particle_Scene.tscn\")
+const Robot_Character_Scene = preload(\"res://Scenes/Robot_Character_Scene.tscn\")
 
 func _ready():
 	playerSprite = get_node(\"Sprite\")
 	_enable_move_right()
 	set_process(true)
-	$CollisionShape2D.connect(\"area_entered\", self, \"_remove_if_brick\")
 	pass
 
 
@@ -64,7 +64,7 @@ func _enable_move_left():
 
 func _process(delta):
 	deltaTime = deltaTime + delta
-	_control_mario(delta)
+	_control(delta)
 	_check_invincibility(delta)
 	pass
 
@@ -91,10 +91,11 @@ func _check_invincibility(delta):
 		playerSprite.visible = true
 
 
-func _control_mario(delta):
-	_jump_mario()
-	_move_mario()
-	_set_mario_speed(delta)
+func _control(delta):
+	_swap_character()
+	_jump()
+	_move()
+	_set_speed(delta)
 	_apply_gravity(delta)
 	
 	var collidedObject = move_and_collide(Vector2(0, velocity.y))
@@ -111,9 +112,18 @@ func _control_mario(delta):
 	
 	pass
 
+func _swap_character():
+	if (Input.is_action_just_pressed(\"tab\")):
+			playerSprite.visible = false
+			var character = Robot_Character_Scene.instance()
+			character.position = self.get_position()
+			get_tree().root.add_child(character)
+			self.queue_free()
+	
+	pass
 
-func _jump_mario():
-	# control mario jump
+func _jump():
+	# control jump
 	if (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount):
 		playerSpeedY = -JUMPFORCE
 		currentJumpCount += 1
@@ -122,8 +132,8 @@ func _jump_mario():
 	pass
 
 
-func _move_mario():
-	# control mario facing direction
+func _move():
+	# control facing direction
 	if (Input.is_action_pressed(\"move_left\")):
 		facingDirection = -1
 		movementDirection = facingDirection
@@ -146,8 +156,8 @@ func _move_mario():
 	pass
 
 
-func _set_mario_speed(delta):
-	# control mario speed
+func _set_speed(delta):
+	# control speed
 	if (facingDirection != 0):
 		playerSpeedX += MOVEMULTI * delta
 	else:
@@ -226,6 +236,7 @@ func _check_if_power_up_brick(object):
 		get_tree().root.add_child(powerUp)
 		
 	pass
+	
 
 	
 func _check_for_power_up():
@@ -235,7 +246,7 @@ func _check_for_power_up():
 			if (body.is_in_group(\"PowerUp\")):
 				power += 1
 				body.queue_free()
-				self.scale = Vector2(1.8, 1.8)
+				self.scale = Vector2(0.8, 0.8)
 				self.position = Vector2(self.position.x, self.position.y - 50)
 	pass
 
@@ -305,15 +316,19 @@ func _take_damage():
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 11.6536, 18.6731 )
+extents = Vector2( 14.7345, 18.6731 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
 extents = Vector2( 19.5331, 20.7176 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+"Dino",
+]]
 
+editor/display_folded = true
+scale = Vector2( 2, 2 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -329,7 +344,7 @@ _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 31.2492, -1.32039 )
+position = Vector2( 24.6473, -1.32039 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility" ]
 
@@ -365,6 +380,7 @@ _sections_unfolded = [ "Limit" ]
 position = Vector2( 11.8835, 0 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
+flip_h = true
 vframes = 8
 hframes = 6
 frame = 2
@@ -373,8 +389,8 @@ _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform",
 
 [node name="Area2D" type="Area2D" parent="." index="4"]
 
-position = Vector2( -0.109978, 0.851117 )
-scale = Vector2( 1.12409, 1.0266 )
+position = Vector2( 0.870476, 0.851117 )
+scale = Vector2( 1.03843, 1.0266 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -393,7 +409,7 @@ _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index"
 
 [node name="Area2D2" type="Area2D" parent="." index="5"]
 
-position = Vector2( -0.109978, 0.851117 )
+position = Vector2( 2.5308, 0.851116 )
 scale = Vector2( 1.12409, 1.0266 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -405,8 +421,8 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" index="0"]
 
-position = Vector2( 24.1364, -2.07533 )
-scale = Vector2( 0.923752, 0.912498 )
+position = Vector2( 23.597, -2.07533 )
+scale = Vector2( 0.843432, 0.912498 )
 shape = SubResource( 3 )
 _sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
 

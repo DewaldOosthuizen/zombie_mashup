@@ -12,6 +12,7 @@ extents = Vector2( 27.6785, 10 )
 "Pits",
 ]]
 
+scale = Vector2( 3, 3 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -36,57 +37,29 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite2" type="Sprite" parent="." index="2"]
 
-position = Vector2( 17.2633, -4.64908 )
+position = Vector2( 17.8444, -4.58451 )
 scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite3" type="Sprite" parent="." index="3"]
 
-position = Vector2( 33.7288, -5.03651 )
+position = Vector2( 34.4391, -4.51995 )
 scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Sprite4" type="Sprite" parent="." index="4"]
+[node name="Sprite5" type="Sprite" parent="." index="4"]
 
-position = Vector2( 33.7288, -5.03651 )
+position = Vector2( 51.0983, -4.45537 )
 scale = Vector2( 0.13, 0.13 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Sprite5" type="Sprite" parent="." index="5"]
+[node name="Sprite6" type="Sprite" parent="." index="5"]
 
-position = Vector2( 49.8069, -5.23022 )
-scale = Vector2( 0.13, 0.13 )
-texture = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite6" type="Sprite" parent="." index="6"]
-
-position = Vector2( 1.37895, 8.5 )
-scale = Vector2( 0.13, 0.13 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite7" type="Sprite" parent="." index="7"]
-
-position = Vector2( 17.8444, 8.5 )
-scale = Vector2( 0.13, 0.13 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite8" type="Sprite" parent="." index="8"]
-
-position = Vector2( 34.3099, 8.5 )
-scale = Vector2( 0.13, 0.13 )
-texture = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite9" type="Sprite" parent="." index="9"]
-
-position = Vector2( 50.0006, 8.5 )
-scale = Vector2( 0.13, 0.13 )
+position = Vector2( 26.1697, 8.5 )
+scale = Vector2( 0.5206, 0.13 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 

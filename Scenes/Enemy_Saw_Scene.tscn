@@ -30,15 +30,15 @@ func _process(delta):
 	if(self.position.y < -20):
 		self.free()
 	
-	if(deltaTime > 0.1):
-		playerSprite.rotation += 20
+	if(deltaTime > 0.01):
+		playerSprite.rotation += 5
 		deltaTime = 0
 	
 	playerSpeedY += GRAVITY * delta
-	velocity.x = PLAYERSPEEDX * delta * movementDirection
-	velocity.y = playerSpeedY * delta - 8
+	#velocity.x = PLAYERSPEEDX * delta * movementDirection
+	velocity.y = playerSpeedY * delta - 10
 	var collider = move_and_collide(velocity)
-	move_local_x(velocity.x)
+	#move_local_x(velocity.x)
 	
 	if (collider):
 		if (collider.normal == Vector2(0,-1)):
@@ -59,11 +59,13 @@ extents = Vector2( 17.499, 7.85441 )
 "Enemy_saw",
 ]]
 
+scale = Vector2( 2, 2 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 

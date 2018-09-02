@@ -7,10 +7,12 @@
 custom_solver_bias = 0.0
 extents = Vector2( 9.08232, 9.78767 )
 
-[node name="brick_box" type="Node2D" groups=[
+[node name="brick" type="Node2D" groups=[
 "PowerUpBrick",
 ]]
 
+position = Vector2( 0, -4.19563 )
+scale = Vector2( 0.8, 0.8 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
@@ -22,18 +24,19 @@ constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
+_sections_unfolded = [ "Pickable", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
-position = Vector2( 0.298561, -4.35769 )
-scale = Vector2( 1.23956, 1.22752 )
+position = Vector2( 0.0674987, -0.138093 )
+scale = Vector2( 2.403, 2.47986 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="StaticBody2D" index="1"]
 
-position = Vector2( 0.137497, -4.61093 )
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( 0.116503, -0.035367 )
+scale = Vector2( 0.595409, 0.605439 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Animation", "Transform" ]
 

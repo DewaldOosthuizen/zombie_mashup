@@ -10,6 +10,7 @@ extents = Vector2( 63.721, 16.8726 )
 
 [node name="floor" type="Node2D"]
 
+scale = Vector2( 3, 3 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
