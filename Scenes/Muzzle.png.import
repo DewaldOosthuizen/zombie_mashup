@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Enemy.png-c437e08f17b00d60fc75b076bb9b99de.stex"
+path="res://.import/Muzzle.png-570c8289120ce6326c4a851048d3d172.stex"
 
 [deps]
 
-source_file="res://resources/Enemy.png"
-dest_files=[ "res://.import/Enemy.png-c437e08f17b00d60fc75b076bb9b99de.stex" ]
+source_file="res://Scenes/Muzzle.png"
+dest_files=[ "res://.import/Muzzle.png-570c8289120ce6326c4a851048d3d172.stex" ]
 
 [params]
 

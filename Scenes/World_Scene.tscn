@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/Floor_Section_grass_Scene.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Pit_Scenet.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Float_Scene.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Enemy_Drop_Scene.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Enemy_Dino_Scene.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Open_Door_Scene.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Robot_Character_Scene.tscn" type="PackedScene" id=16]
 
@@ -22,7 +22,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 218.973, 9.32855 )
 
-[node name="World" type="Node2D" index="0"]
+[node name="World" type="Node2D"]
 
 position = Vector2( 0, -2.72073 )
 
@@ -79,7 +79,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Trees" type="Node2D" parent="." index="1"]
 
-editor/display_folded = true
 position = Vector2( 196.122, 361.219 )
 
 [node name="Tree1" parent="Trees" index="0" instance=ExtResource( 2 )]
@@ -104,15 +103,13 @@ position = Vector2( 9296.89, 84.5823 )
 
 [node name="Tree7" parent="Trees" index="5" instance=ExtResource( 3 )]
 
-position = Vector2( 11088.3, 84.7415 )
+position = Vector2( 11089.3, 90.7415 )
 
 [node name="Tree4" parent="Trees" index="6" instance=ExtResource( 3 )]
 
 position = Vector2( 4298.77, 91.4876 )
 
 [node name="Bushes" type="Node2D" parent="." index="2"]
-
-editor/display_folded = true
 
 [node name="Bush" parent="Bushes" index="0" instance=ExtResource( 4 )]
 
@@ -150,11 +147,11 @@ position = Vector2( 2942.55, 697.19 )
 
 [node name="Bush8" parent="Bushes" index="7" instance=ExtResource( 5 )]
 
-position = Vector2( 3732.02, 693.089 )
+position = Vector2( 3732.02, 698.089 )
 
 [node name="Bush9" parent="Bushes" index="8" instance=ExtResource( 5 )]
 
-position = Vector2( 7515.3, 693.089 )
+position = Vector2( 7515.3, 695.089 )
 
 [node name="Bush10" parent="Bushes" index="9" instance=ExtResource( 5 )]
 
@@ -211,15 +208,13 @@ position = Vector2( 11159.9, 677.213 )
 
 [node name="Bricks" type="Node2D" parent="." index="4"]
 
-editor/display_folded = true
-
 [node name="brick_power_up" parent="Bricks" index="0" instance=ExtResource( 8 )]
 
-position = Vector2( 1149.46, 642.532 )
+position = Vector2( 1148.93, 694.055 )
 
 [node name="brick_power_up2" parent="Bricks" index="1" instance=ExtResource( 8 )]
 
-position = Vector2( 1614.47, 694.457 )
+position = Vector2( 4448.11, 229.377 )
 
 [node name="brick2" parent="Bricks" index="2" instance=ExtResource( 9 )]
 
@@ -271,7 +266,7 @@ position = Vector2( 1199.35, 693.032 )
 
 [node name="brick15" parent="Bricks" index="14" instance=ExtResource( 9 )]
 
-position = Vector2( 1149.31, 693.676 )
+position = Vector2( 1148.59, 642.771 )
 
 [node name="brick16" parent="Bricks" index="15" instance=ExtResource( 9 )]
 
@@ -342,23 +337,51 @@ editor/display_folded = true
 
 [node name="Enemy" parent="Enemies_saw" index="0" instance=ExtResource( 10 )]
 
-position = Vector2( 6521.46, 611.726 )
+position = Vector2( 6773.13, 468.886 )
 
-[node name="Enemy2" parent="Enemies_saw" index="1" instance=ExtResource( 10 )]
+[node name="Enemy10" parent="Enemies_saw" index="1" instance=ExtResource( 10 )]
 
-position = Vector2( 7241.77, 211.445 )
+position = Vector2( 6914.61, 720.557 )
 
-[node name="Enemy3" parent="Enemies_saw" index="2" instance=ExtResource( 10 )]
+[node name="Enemy11" parent="Enemies_saw" index="2" instance=ExtResource( 10 )]
 
-position = Vector2( 8251.39, 586.698 )
+position = Vector2( 5405.95, 409.029 )
 
-[node name="Enemy4" parent="Enemies_saw" index="3" instance=ExtResource( 10 )]
+[node name="Enemy12" parent="Enemies_saw" index="3" instance=ExtResource( 10 )]
 
-position = Vector2( 10889.1, 367.709 )
+position = Vector2( 5809.98, 719.196 )
 
-[node name="Enemy5" parent="Enemies_saw" index="4" instance=ExtResource( 10 )]
+[node name="Enemy6" parent="Enemies_saw" index="4" instance=ExtResource( 10 )]
 
-position = Vector2( 11627.5, 580.97 )
+position = Vector2( 1877.16, 502.523 )
+
+[node name="Enemy8" parent="Enemies_saw" index="5" instance=ExtResource( 10 )]
+
+position = Vector2( 2501.58, 313.43 )
+
+[node name="Enemy9" parent="Enemies_saw" index="6" instance=ExtResource( 10 )]
+
+position = Vector2( 2989.96, 211.401 )
+
+[node name="Enemy2" parent="Enemies_saw" index="7" instance=ExtResource( 10 )]
+
+position = Vector2( 7213.2, 324.357 )
+
+[node name="Enemy3" parent="Enemies_saw" index="8" instance=ExtResource( 10 )]
+
+position = Vector2( 8237.79, 452.02 )
+
+[node name="Enemy4" parent="Enemies_saw" index="9" instance=ExtResource( 10 )]
+
+position = Vector2( 10350.4, 718.688 )
+
+[node name="Enemy5" parent="Enemies_saw" index="10" instance=ExtResource( 10 )]
+
+position = Vector2( 8015.68, 378.273 )
+
+[node name="Enemy7" parent="Enemies_saw" index="11" instance=ExtResource( 10 )]
+
+position = Vector2( 11649.3, 719.729 )
 
 [node name="Ground" type="Node2D" parent="." index="7"]
 
@@ -465,15 +488,15 @@ position = Vector2( 9092.78, 380 )
 
 [node name="floor25" parent="Ground" index="24" instance=ExtResource( 11 )]
 
-position = Vector2( 9835.8, 380.804 )
+position = Vector2( 9835.8, 380 )
 
 [node name="floor26" parent="Ground" index="25" instance=ExtResource( 11 )]
 
-position = Vector2( 10208.9, 380.804 )
+position = Vector2( 10208.9, 380 )
 
 [node name="floor27" parent="Ground" index="26" instance=ExtResource( 11 )]
 
-position = Vector2( 10576.8, 380.804 )
+position = Vector2( 10576.8, 380 )
 
 [node name="floor28" parent="Ground" index="27" instance=ExtResource( 11 )]
 
@@ -481,15 +504,15 @@ position = Vector2( 10938.3, 380 )
 
 [node name="floor29" parent="Ground" index="28" instance=ExtResource( 11 )]
 
-position = Vector2( 11304.7, 380.804 )
+position = Vector2( 11304.7, 380 )
 
 [node name="floor30" parent="Ground" index="29" instance=ExtResource( 11 )]
 
-position = Vector2( 11671.5, 379.134 )
+position = Vector2( 11671.5, 380 )
 
 [node name="floor31" parent="Ground" index="30" instance=ExtResource( 11 )]
 
-position = Vector2( 12039.6, 379.134 )
+position = Vector2( 12039.6, 380 )
 
 [node name="Pits" type="Node2D" parent="." index="8"]
 
@@ -499,7 +522,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Pit5" parent="Pits" index="0" instance=ExtResource( 12 )]
 
-position = Vector2( -291.931, 786.219 )
+position = Vector2( -291.931, 805.264 )
 scale = Vector2( 4.87685, 5.94719 )
 
 [node name="Pit2" parent="Pits" index="1" instance=ExtResource( 12 )]
@@ -519,7 +542,7 @@ scale = Vector2( 1.60847, 3.02917 )
 
 [node name="Pit6" parent="Pits" index="4" instance=ExtResource( 12 )]
 
-position = Vector2( 4164.73, 763.853 )
+position = Vector2( 4164.4, 791.853 )
 scale = Vector2( 4.62355, 4.45125 )
 
 [node name="Floats" type="Node2D" parent="." index="9"]
@@ -596,11 +619,10 @@ position = Vector2( 8333.27, 427.809 )
 
 [node name="Enemies" type="Node2D" parent="." index="10"]
 
-editor/display_folded = true
-
 [node name="Enemy" parent="Enemies" index="0" instance=ExtResource( 14 )]
 
 position = Vector2( 1349.91, 684.304 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
 
 [node name="Enemy2" parent="Enemies" index="1" instance=ExtResource( 14 )]
 

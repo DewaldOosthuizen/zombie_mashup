@@ -1,0 +1,119 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/freedinosprite/spritesheet.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends KinematicBody2D
+
+# variables
+var playerSpeedY = 0
+var velocity = Vector2(0, 0)
+var movementDirection = -1
+var playerSprite
+var deltaTime = 0
+var moveFrames = [43, 29, 44]
+var moveFrame = 0
+
+const PLAYERSPEEDX = 200
+const GRAVITY = 800
+
+func _ready():
+	playerSprite = get_node(\"Sprite\")
+	set_process(true)
+	pass
+	
+	
+func _process(delta):
+	deltaTime = deltaTime + delta
+	_animate_player()
+	if(get_node(\"CollisionShape2D\").disabled):
+		playerSprite.frame = 4
+	
+	if(self.position.y < -20):
+		self.free()
+	
+	playerSpeedY += GRAVITY * delta
+	velocity.x = PLAYERSPEEDX * delta * movementDirection
+	velocity.y = playerSpeedY * delta
+	var collider1 = move_and_collide(velocity)
+	
+	if (collider1):
+		if (collider1.normal == Vector2(0,-1)):
+			playerSpeedY = 0
+		if (collider1.normal == Vector2(1,0)):
+			movementDirection = 1
+			playerSprite.flip_h = false
+		elif (collider1.normal == Vector2(-1,0)):
+			movementDirection = -1
+			playerSprite.flip_h = true
+			
+	pass
+
+
+func _animate_player():
+	if(deltaTime > 0.1):
+		moveFrame += 1
+		if (playerSprite.frame >= moveFrames.size()):
+			moveFrame = 0
+		
+		playerSprite.frame = moveFrames[moveFrame]
+		deltaTime = 0
+	pass"
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 7.94617, 57.4961 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 26.9512, 12.3048 )
+
+[node name="Enemy" type="KinematicBody2D" index="0" groups=[
+"Enemy_drop",
+]]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = SubResource( 1 )
+_sections_unfolded = [ "Collision", "Pickable", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( -30.8831, -14.3272 )
+scale = Vector2( 4.98001, 0.875146 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+position = Vector2( 0.35849, -7.62939e-006 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 1 )
+vframes = 8
+hframes = 6
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Area2D" type="Area2D" parent="." index="2"]
+
+position = Vector2( -268.805, -18.3998 )
+scale = Vector2( 1.71326, 2.08717 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( 139.296, 1.95123 )
+scale = Vector2( 1, 2.06535 )
+shape = SubResource( 3 )
+
+

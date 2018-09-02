@@ -20,21 +20,18 @@ func _ready():
 	
 	
 func _process(delta):
-	playerSpeedY += GRAVITY * delta
-	velocity.x = PLAYERSPEEDX * delta * movementDirection
-	velocity.y = playerSpeedY * delta
-	var collider = move_and_collide(velocity)
-	move_local_x(velocity.x)
-	
-	if (collider):
-		if (collider.normal == Vector2(0,-1)):
-			playerSpeedY = 0
-		if (collider.normal == Vector2(1,0)):
-			movementDirection = 1
-		elif ( collider.normal == Vector2(-1,0)):
-			movementDirection = -1
+	_move(delta)
 	pass
-"
+
+
+func _move(delta):
+	playerSpeedY += GRAVITY * delta
+	velocity.x = 0
+	velocity.y = playerSpeedY * delta
+	var collider = move_and_collide(Vector2(1, 1))
+	#move_local_x(velocity.x)
+	
+	pass"
 
 [sub_resource type="RectangleShape2D" id=2]
 

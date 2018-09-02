@@ -17,50 +17,71 @@ var maxJumpCount = 1
 var currentJumpCount = 0
 var deltaTime = 0
 var power = 0
+
+# Control sprite sheet
+var jumpFrames = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+var idleFrames = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+var slideFrames = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+var powerFrames = [50, 51, 52, 53, 54, 55, 56, 57, 58]
+var defaultMoveFrames = [60, 61, 62, 63, 64, 65, 66, 67]
+var shootFrames = [70, 71, 72, 73]
+var moveFrames = []
+var IdleFrame = 0;
+var jumpFrame = 0
+var moveFrame = 0;
+var slideFrame = 0;
+var shootFrame = 0;
+
+var sliding = false
+var blood = false
 var invincible = false;
+var shooting = false;
+
+var slidingTimer = 0
+var shootingTimer = 0
+var shootingFrameTimer = 0
 var invincibleTime = 0;
 var invincibleTimer = 0;
 var bloodParticleTimer = 0;
-var blood = false
-var moveFrames = [60, 61, 62, 63, 64, 65, 66, 67]
-var moveFrame = 0;
-var jumpFrames = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
-var jumpFrame = 0
-var defaultFrames = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-var defaultFrame = 0;
-var slideFrames = [30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
-var slideFrame = 0;
-var defaultScale = Vector2(2, 2)
-var powerScale = Vector2(3, 3)
-var sliding = false
-var slidingTimer = 0
+var started = false
 
 # constants
 const MAXIMUMSPEED = 400
-const MOVEMULTI = 1000
+const MOVEMULTI = 800
 const JUMPFORCE = 450
 const GRAVITY = 800
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bloodParticle_scene = preload(\"res://Scenes/Blood_Splash_Particle_Scene.tscn\")
+const bullet_scene = preload(\"res://Scenes/Bullet_Scene.tscn\")
+const muzzle_scene = preload(\"res://Scenes/Muzzle_Scene.tscn\")
+const spiral_scene = preload(\"res://Scenes/Spiral_Particle_Scene.tscn\")
 
 func _ready():
+	moveFrames = defaultMoveFrames
 	playerSprite = get_node(\"Sprite\")
 	set_process(true)
 	pass
 
 
 func _process(delta):
-	deltaTime = deltaTime + delta
+	deltaTime += delta
 	_control(delta)
 	_check_invincibility(delta)
+	
+	if (!started):
+		var particleEffect = spiral_scene.instance()
+		particleEffect.get_node(\".\").set_emitting(true)
+		particleEffect.position = self.get_position()
+		get_tree().root.add_child(particleEffect)
+		started = true
 	pass
 
 
 func _check_invincibility(delta):
 	if (invincible):
-		invincibleTime = invincibleTime + delta
-		invincibleTimer = invincibleTimer + delta
+		invincibleTime += delta
+		invincibleTimer += delta
 		
 		if (invincibleTimer > 2):
 			playerSprite.visible = true
@@ -83,20 +104,23 @@ func _check_invincibility(delta):
 func _control(delta):
 	_jump()
 	_move()
+	_action_1(delta)
 	_action_2(delta)
 	
 	_set_speed(delta)
 	_apply_gravity(delta)
 	
-	var collidedObject = move_and_collide(Vector2(0, velocity.y))
-	move_local_x(velocity.x)
+	var tempVelocityX
+	if (currentJumpCount > 0 or sliding):
+		tempVelocityX = velocity.x
+	else: 
+		tempVelocityX = velocity.x
+		
+	var collidedObject1 = move_and_collide(Vector2(0, velocity.y))
+	var collidedObject2 = move_and_collide(Vector2(tempVelocityX, 0))
 	
-	# reset the current sprite frame to standing still on the x axis and not jumping
-	if (velocity.x == 0 and currentJumpCount == 0):
-		playerSprite.frame = defaultFrame
-	
-	
-	_handle_collision(collidedObject)
+	_handle_collision(collidedObject1)
+	_handle_collision(collidedObject2)
 	_check_for_power_up()
 	_check_if_player_has_fallen_in_pit()
 	_check_if_enemy_has_killed_player(delta)
@@ -132,10 +156,62 @@ func _jump():
 	pass
 	
 	
+func _action_1(delta):
+	# action 2
+	if (Input.is_action_just_pressed(\"action_1\") and !shooting):
+		shooting = true
+		shootFrame = 0
+		var bullet = bullet_scene.instance()
+		var muzzle = muzzle_scene.instance()
+		bullet.speed = 800
+		bullet.power = power
+		var bulletSprite = bullet.get_node(\"Sprite\")
+		var muzzleSprite = bullet.get_node(\"Sprite\")
+		
+		if (!playerSprite.flip_h):
+			bulletSprite.flip_h = false
+			muzzleSprite.flip_h = false
+			bullet.movementDirection = 1
+			bullet.position = self.get_position()  - Vector2(-50, 5)
+			muzzle.position = self.get_position()  - Vector2(-50, 5)
+		else:
+			bulletSprite.flip_h = true;
+			muzzleSprite.flip_h = true
+			bullet.movementDirection = -1
+			bullet.position = self.get_position()  - Vector2(50, 5)
+			muzzle.position = self.get_position()  - Vector2(50, 5)
+		
+		get_tree().root.add_child(bullet)
+		get_tree().root.add_child(muzzle)
+	
+	if (shooting):
+		shootingTimer += delta
+		shootingFrameTimer += delta
+		
+		if (shootingFrameTimer > 0.1 and facingDirection == 0 and !sliding and currentJumpCount == 0):
+			if (shootFrame < shootFrames.size()):
+				playerSprite.frame = shootFrames[shootFrame]
+				shootFrame += 1
+			shootingFrameTimer = 0
+			deltaTime = 0
+		
+		if (shootingTimer > 1):
+			shooting = false
+			shootingTimer = 0
+			shootFrame = 0
+
+	pass
+	
+	
 func _action_2(delta):
+	# action 2
+	if (Input.is_action_just_pressed(\"action_2\") and velocity.x != 0):
+		sliding = true
+		playerSprite.frame = slideFrames[0]
+	
 	if (sliding):
-		slidingTimer = slidingTimer + delta
-		if (slidingTimer > 1.2):
+		slidingTimer += delta
+		if (slidingTimer > 1):
 			sliding = false
 			slidingTimer = 0
 	
@@ -146,10 +222,6 @@ func _action_2(delta):
 		playerSprite.frame = slideFrames[slideFrame]
 		slideFrame += 1
 		deltaTime = 0
-	
-	# action 2
-	if (Input.is_action_just_pressed(\"action_2\")):
-		sliding = true
 		
 	pass
 
@@ -169,15 +241,17 @@ func _move():
 			_animate_player()
 		else:
 			facingDirection = 0
-			if (currentJumpCount == 0 and !sliding): 
-				if (defaultFrame >= defaultFrames.size()):
-						defaultFrame = 0
+			if (currentJumpCount == 0 and !sliding and !shooting): 
+				if (IdleFrame >= idleFrames.size()):
+					IdleFrame = 0
 			
 				if (deltaTime > 0.1):
-					playerSprite.frame = defaultFrames[defaultFrame]
-					defaultFrame += 1
-					deltaTime = 0
+					playerSprite.frame = idleFrames[IdleFrame]
+					IdleFrame += 1
 					jumpFrame = 0
+					shootFrame = 0
+					slideFrame = 0
+					deltaTime = 0
 		
 	pass
 
@@ -223,7 +297,7 @@ func _handle_collision(collidedObject):
 			playerSpeedY= 0
 			 
 			if (currentJumpCount > 0):
-				playerSprite.frame = defaultFrame
+				playerSprite.frame = idleFrames[0]
 				currentJumpCount = 0
 				jumpFrame = 0
 	
@@ -244,19 +318,7 @@ func _remove_if_brick(object):
 			get_tree().root.add_child(particleEffect)
 			#remove the brick
 			objectParent.queue_free()
-			
-	var area = get_node(\"Area2D\").get_overlapping_bodies()
-	if (area.size() != 0):
-		for body in area:
-			if (objectParent.is_in_group(\"Bricks\")):
-				if (sliding):
-					#add the particle effect of the brick breaking
-					var particleEffect = bricksParticle_scene.instance()
-					particleEffect.get_node(\".\").set_emitting(true)
-					particleEffect.position = self.get_position()  - Vector2(0, 20)
-					get_tree().root.add_child(particleEffect)
-					#remove the brick
-					objectParent.queue_free()
+		
 	pass
 	
 	
@@ -275,23 +337,6 @@ func _check_if_power_up_brick(object):
 			var powerUp = powerUp_scene.instance()
 			powerUp.position = objectParent.position - Vector2(0, 50)
 			get_tree().root.add_child(powerUp)
-	
-	var area = get_node(\"Area2D\").get_overlapping_bodies()
-	if (area.size() != 0):
-		for body in area:
-			if (objectParent.is_in_group(\"PowerUpBrick\")):
-				if (sliding):
-					var particleEffect = bricksParticle_scene.instance()
-					particleEffect.get_node(\".\").set_emitting(true)
-					particleEffect.position = self.get_position()  - Vector2(0, 20)
-					get_tree().root.add_child(particleEffect)
-					#remove the brick
-					objectParent.queue_free()
-				
-					# create actual power up
-					var powerUp = powerUp_scene.instance()
-					powerUp.position = objectParent.position - Vector2(0, 50)
-					get_tree().root.add_child(powerUp)
 	pass
 
 	
@@ -302,15 +347,13 @@ func _check_for_power_up():
 			if (body.is_in_group(\"PowerUp\")):
 				power += 1
 				body.queue_free()
-				self.scale = powerScale
-				self.position = Vector2(self.position.x, self.position.y - 8)
+				moveFrames = powerFrames
 	pass
 
 	
 func _remove_power_up():
 	if (power == 0):
-		self.scale = defaultScale
-		self.position = Vector2(self.position.x, self.position.y + 8)
+		moveFrames = defaultMoveFrames
 	pass
 
 	
@@ -319,6 +362,7 @@ func _check_if_player_has_fallen_in_pit():
 	if (area.size() != 0):
 		for body in area:
 			if (body.is_in_group(\"Pits\")):
+				power = 0
 				get_tree().reload_current_scene()
 	pass
 
@@ -341,7 +385,7 @@ func _check_if_enemy_has_killed_player(delta):
 			
 	#Gives some time for showing blood
 	if (blood):
-		bloodParticleTimer = bloodParticleTimer + delta
+		bloodParticleTimer += delta
 		if(bloodParticleTimer and bloodParticleTimer > 0.3):
 			bloodParticleTimer = 0
 			_take_damage()
@@ -385,7 +429,8 @@ _sections_unfolded = [ "Collision", "Material", "Pickable", "Transform", "Visibi
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -2.27834, 2.27835 )
+position = Vector2( -2.27834, 1.80669 )
+scale = Vector2( 1, 0.980141 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
@@ -422,14 +467,13 @@ scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 vframes = 8
 hframes = 10
-frame = 1
 region_rect = Rect2( 0, 0, 200, 100 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="Area2D" type="Area2D" parent="." index="3"]
 
-position = Vector2( 2.39998, 0 )
-scale = Vector2( 0.787411, 1 )
+position = Vector2( 0.756516, -1.60598 )
+scale = Vector2( 0.838769, 1.05019 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0

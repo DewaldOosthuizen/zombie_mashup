@@ -1,0 +1,150 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/robotfree/Bullet.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends KinematicBody2D
+
+# variables
+export var movementDirection = 1
+export var speed = 800
+export var power = 0
+
+var velocity = Vector2(0, 0)
+
+
+const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
+const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
+
+func _ready():
+	set_process(true)
+	pass
+	
+	
+func _process(delta):
+	_set_speed(delta)
+	
+	if (power == 0):
+		self.scale = Vector2(0.2, 0.2)
+	elif (power == 1):
+		self.scale = Vector2(0.3, 0.3)
+	elif (power == 2):
+		self.scale = Vector2(0.3, 0.3)
+		self.modulate = Color(\"#ff00c5\")
+		
+	var collider1 = move_and_collide(Vector2(velocity.x, 0))
+	var collider2 = move_and_collide(Vector2(0, velocity.y))
+	_check_collision_bjects(collider1, delta)
+	_check_collision_bjects(collider2, delta)
+	pass
+
+
+func _set_speed(delta):
+	velocity.x = speed * delta * movementDirection
+	velocity.y = 0
+	pass
+	
+
+func _remove_if_brick(object):
+	if (object and object.collider):
+		var objectParent = object.collider.get_parent()
+		if (objectParent.is_in_group(\"Bricks\")):
+			#add the particle effect of the brick breaking
+			var particleEffect = bricksParticle_scene.instance()
+			particleEffect.get_node(\".\").set_emitting(true)
+			particleEffect.position = self.get_position()  - Vector2(0, 20)
+			get_tree().root.add_child(particleEffect)
+			#remove the brick
+			objectParent.queue_free()
+			if (power < 2):
+				self.queue_free()
+		elif (objectParent.is_in_group(\"PowerUpBrick\")):
+			var particleEffect = bricksParticle_scene.instance()
+			particleEffect.get_node(\".\").set_emitting(true)
+			particleEffect.position = self.get_position()  - Vector2(0, 20)
+			get_tree().root.add_child(particleEffect)
+			#remove the brick
+			objectParent.queue_free()
+			# create actual power up
+			var powerUp = powerUp_scene.instance()
+			powerUp.position = objectParent.position - Vector2(0, 50)
+			get_tree().root.add_child(powerUp)
+			if (power < 2):
+				self.queue_free()
+		else:
+			self.queue_free()
+		
+	pass
+
+	
+func _check_collision_bjects(collisionObject, delta):
+	_remove_if_brick(collisionObject)
+	var area = get_node(\"Area2D\").get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body.is_in_group(\"Enemy_drop\")):
+				body.queue_free()
+				self.queue_free()
+			if (body.is_in_group(\"Enemy_saw\")):
+				if (power > 1):
+					body.queue_free()
+				self.queue_free()
+	
+	
+	pass"
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 8.24199, 5.50218 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 11.1887, 9.31444 )
+
+[node name="Bullet" type="KinematicBody2D"]
+
+scale = Vector2( 0.3, 0.3 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = SubResource( 3 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+movementDirection = 1
+speed = 800
+power = 0
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 1 )
+hframes = 5
+_sections_unfolded = [ "Animation", "Visibility" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 9.74112, 2.74975 )
+scale = Vector2( 4.88204, 4.85901 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="." index="2"]
+
+position = Vector2( -3.05157, 2.52981 )
+scale = Vector2( 2.8045, 2.28548 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( 3.81603, -1.03587 )
+scale = Vector2( 2.31469, 3.05057 )
+shape = SubResource( 2 )
+
+

@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/robotfree/Muzzle.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Sprite
+
+var deltaTime = 0
+var frames = [1, 2, 3, 4, 5]
+var currentFrame = 0
+
+func _ready():
+	set_process(true)
+	pass
+	
+	
+func _process(delta):
+	deltaTime = deltaTime + delta
+	
+	if (deltaTime > 0.1):
+		
+		# after all frames have been played, remove muzzle
+		if (currentFrame >= frames.size()):
+			currentFrame = frames.size() - 1
+			self.queue_free()
+			
+		self.frame = frames[currentFrame]
+		currentFrame = currentFrame + 1
+		deltaTime = 0
+		
+	
+	pass
+"
+
+[node name="Bullet" type="Sprite"]
+
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 1 )
+hframes = 5
+script = SubResource( 1 )
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+
