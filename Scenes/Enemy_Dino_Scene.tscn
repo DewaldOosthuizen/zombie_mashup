@@ -12,7 +12,7 @@ var velocity = Vector2(0, 0)
 var movementDirection = -1
 var playerSprite
 var deltaTime = 0
-var moveFrames = [43, 29, 44]
+var moveFrames = [11, 17, 23, 29, 35, 41]
 var moveFrame = 0
 
 const PLAYERSPEEDX = 200
@@ -25,56 +25,62 @@ func _ready():
 	
 	
 func _process(delta):
-	deltaTime = deltaTime + delta
+	deltaTime += delta
 	_animate_player()
-	if(get_node(\"CollisionShape2D\").disabled):
-		playerSprite.frame = 4
-	
-	if(self.position.y < -20):
-		self.free()
 	
 	playerSpeedY += GRAVITY * delta
 	velocity.x = PLAYERSPEEDX * delta * movementDirection
 	velocity.y = playerSpeedY * delta
-	var collider1 = move_and_collide(velocity)
 	
-	if (collider1):
-		if (collider1.normal == Vector2(0,-1)):
+	if(get_node(\"CollisionShape2D\").disabled):
+		playerSprite.frame = 4
+		velocity.y = 5
+	
+	if(self.position.y < -20):
+		self.free()
+	
+	move_and_collide(Vector2(0, velocity.y))
+	var collidedObject = move_and_collide(Vector2(velocity.x, 0))
+	
+	if (collidedObject):
+		if (collidedObject.normal == Vector2(0,-1)):
 			playerSpeedY = 0
-		if (collider1.normal == Vector2(1,0)):
+		if (collidedObject.normal == Vector2(1,0)):
 			movementDirection = 1
 			playerSprite.flip_h = false
-		elif (collider1.normal == Vector2(-1,0)):
+		elif (collidedObject.normal == Vector2(-1,0)):
 			movementDirection = -1
 			playerSprite.flip_h = true
-			
+	
 	pass
 
 
 func _animate_player():
 	if(deltaTime > 0.1):
-		moveFrame += 1
-		if (playerSprite.frame >= moveFrames.size()):
+		if (moveFrame >= moveFrames.size()):
 			moveFrame = 0
-		
+			
 		playerSprite.frame = moveFrames[moveFrame]
+		moveFrame += 1
 		deltaTime = 0
 	pass"
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 7.94617, 57.4961 )
+extents = Vector2( 6.1692, 52.9992 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 26.9512, 12.3048 )
+extents = Vector2( 22.5625, 13.3965 )
 
-[node name="Enemy" type="KinematicBody2D" index="0" groups=[
+[node name="Enemy" type="KinematicBody2D" groups=[
 "Enemy_drop",
 ]]
 
+position = Vector2( -0.0189209, 1.0983 )
+scale = Vector2( 0.771513, 0.812959 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -84,24 +90,25 @@ _sections_unfolded = [ "Collision", "Pickable", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -30.8831, -14.3272 )
-scale = Vector2( 4.98001, 0.875146 )
+position = Vector2( -32.1349, -13.0409 )
+scale = Vector2( 6.3536, 0.962654 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
-position = Vector2( 0.35849, -7.62939e-006 )
+position = Vector2( 0.358491, -9.01711 )
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 1 )
 vframes = 8
 hframes = 6
+frame = 3
 _sections_unfolded = [ "Animation", "Transform" ]
 
 [node name="Area2D" type="Area2D" parent="." index="2"]
 
-position = Vector2( -268.805, -18.3998 )
-scale = Vector2( 1.71326, 2.08717 )
+position = Vector2( -30.8162, -10.2547 )
+scale = Vector2( 2.09989, 2.08717 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -112,7 +119,7 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 
-position = Vector2( 139.296, 1.95123 )
+position = Vector2( -1.50801, 0.92898 )
 scale = Vector2( 1, 2.06535 )
 shape = SubResource( 3 )
 

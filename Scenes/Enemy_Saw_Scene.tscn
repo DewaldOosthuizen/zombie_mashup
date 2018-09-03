@@ -25,10 +25,10 @@ func _process(delta):
 	pass"
 _sections_unfolded = [ "Resource" ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 17.499, 7.85441 )
+radius = 16.6984
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "Enemy_saw",
@@ -42,18 +42,16 @@ collision/safe_margin = 0.08
 script = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-
-position = Vector2( 0, -0.199018 )
-scale = Vector2( 1, 1.99935 )
-shape = SubResource( 2 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite" type="Sprite" parent="." index="1"]
+[node name="Sprite" type="Sprite" parent="." index="0"]
 
 position = Vector2( 0.35849, -7.62939e-006 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 0, 0.118916 )
+shape = SubResource( 2 )
 
 

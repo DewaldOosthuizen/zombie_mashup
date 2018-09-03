@@ -2,7 +2,7 @@
 
 [ext_resource path="res://resources/robotfree/Bullet.png" type="Texture" id=1]
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=1]
 
 script/source = "extends KinematicBody2D
 
@@ -12,10 +12,12 @@ export var speed = 800
 export var power = 0
 
 var velocity = Vector2(0, 0)
-
+var noValidCollision = []
+var noValidArea = false
 
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
+const bone_scene = preload(\"res://Scenes/Bone_Scene.tscn\")
 
 func _ready():
 	set_process(true)
@@ -35,8 +37,14 @@ func _process(delta):
 		
 	var collider1 = move_and_collide(Vector2(velocity.x, 0))
 	var collider2 = move_and_collide(Vector2(0, velocity.y))
-	_check_collision_bjects(collider1, delta)
-	_check_collision_bjects(collider2, delta)
+	_check_collision_objects(delta)
+	_remove_if_brick(collider1)
+	_remove_if_brick(collider2)
+	
+	# Ensures bullet disapears upon hitting invalid objects
+	if (noValidCollision.size() == 2 and noValidArea):
+		self.queue_free()
+		
 	pass
 
 
@@ -73,36 +81,39 @@ func _remove_if_brick(object):
 			if (power < 2):
 				self.queue_free()
 		else:
-			self.queue_free()
-		
+			noValidCollision.append(true)
 	pass
 
 	
-func _check_collision_bjects(collisionObject, delta):
-	_remove_if_brick(collisionObject)
+func _check_collision_objects(delta):
 	var area = get_node(\"Area2D\").get_overlapping_bodies()
 	if (area.size() != 0):
 		for body in area:
 			if (body.is_in_group(\"Enemy_drop\")):
 				body.queue_free()
+				self.visible = false
+				var bones = bone_scene.instance()
+				bones.position = self.get_position()  - Vector2(0, 10)
+				get_tree().root.add_child(bones)
 				self.queue_free()
 			if (body.is_in_group(\"Enemy_saw\")):
 				if (power > 1):
 					body.queue_free()
 				self.queue_free()
-	
+			else:
+				noValidArea = true
 	
 	pass"
-
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 8.24199, 5.50218 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 11.1887, 9.31444 )
+extents = Vector2( 8.24199, 13.5504 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 12.7592, 8.29752 )
 
 [node name="Bullet" type="KinematicBody2D"]
 
@@ -111,7 +122,7 @@ input_pickable = false
 collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
-script = SubResource( 3 )
+script = SubResource( 1 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 movementDirection = 1
 speed = 800
@@ -125,9 +136,9 @@ _sections_unfolded = [ "Animation", "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( 9.74112, 2.74975 )
+position = Vector2( -6.46972, 4.55095 )
 scale = Vector2( 4.88204, 4.85901 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="." index="2"]
 
@@ -143,8 +154,8 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" index="0"]
 
-position = Vector2( 3.81603, -1.03587 )
+position = Vector2( -0.679795, 1.32847 )
 scale = Vector2( 2.31469, 3.05057 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 
