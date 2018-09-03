@@ -45,7 +45,7 @@ _sections_unfolded = [ "Angle", "Angular Velocity", "Animation", "Color", "Dampi
 [node name="BricksParticle" type="Particles2D"]
 
 pause_mode = 1
-modulate = Color( 0.40625, 0.00634766, 0.00634766, 1 )
+modulate = Color( 0.679688, 0.143372, 0.143372, 1 )
 use_parent_material = true
 emitting = false
 amount = 300

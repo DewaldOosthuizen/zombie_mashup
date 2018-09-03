@@ -18,6 +18,7 @@ var noValidArea = false
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bone_scene = preload(\"res://Scenes/Bone_Scene.tscn\")
+const blood_scene = preload(\"res://Scenes/Blood_Splash_Particle_Scene.tscn\")
 
 func _ready():
 	set_process(true)
@@ -92,8 +93,16 @@ func _check_collision_objects(delta):
 			if (body.is_in_group(\"Enemy_drop\")):
 				body.queue_free()
 				self.visible = false
+				
+				#blood
+				var blood = blood_scene.instance()
+				blood.get_node(\".\").set_emitting(true)
+				blood.position = self.get_position()
+				get_tree().root.add_child(blood)
+				
+				#bones
 				var bones = bone_scene.instance()
-				bones.position = self.get_position()  - Vector2(0, 10)
+				bones.position = self.get_position()  - Vector2(0, -70)
 				get_tree().root.add_child(bones)
 				self.queue_free()
 			if (body.is_in_group(\"Enemy_saw\")):

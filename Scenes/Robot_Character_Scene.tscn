@@ -172,14 +172,14 @@ func _action_1(delta):
 			bulletSprite.flip_h = false
 			muzzleSprite.flip_h = false
 			bullet.movementDirection = 1
-			bullet.position = self.get_position()  - Vector2(-50, 5)
-			muzzle.position = self.get_position()  - Vector2(-50, 5)
+			bullet.position = self.get_position()  - Vector2(-40, 5)
+			muzzle.position = self.get_position()  - Vector2(-40, 5)
 		else:
 			bulletSprite.flip_h = true;
 			muzzleSprite.flip_h = true
 			bullet.movementDirection = -1
-			bullet.position = self.get_position()  - Vector2(50, 5)
-			muzzle.position = self.get_position()  - Vector2(50, 5)
+			bullet.position = self.get_position()  - Vector2(40, 5)
+			muzzle.position = self.get_position()  - Vector2(40, 5)
 		
 		get_tree().root.add_child(bullet)
 		get_tree().root.add_child(muzzle)
