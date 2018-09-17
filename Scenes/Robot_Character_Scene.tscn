@@ -279,7 +279,7 @@ func _apply_gravity(delta):
 
 
 func _animate_player():
-	if (deltaTime > 0.05 and currentJumpCount == 0):
+	if (deltaTime > 0.065 and currentJumpCount == 0):
 		if (moveFrame >= moveFrames.size()):
 			moveFrame = 0
 	
@@ -415,7 +415,7 @@ extents = Vector2( 8.23116, 20.7507 )
 custom_solver_bias = 0.0
 extents = Vector2( 19.8815, 20.7176 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" groups=[
+[node name="KinematicBody2D" type="KinematicBody2D" index="0" groups=[
 "Robot",
 ]]
 
@@ -436,7 +436,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Camera2D" type="Camera2D" parent="." index="1"]
 
-position = Vector2( 134.207, 115.858 )
+position = Vector2( 95.016, 115.858 )
 anchor_mode = 1
 rotating = false
 current = true

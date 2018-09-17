@@ -1,19 +1,19 @@
 [gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://resources/freetileset/png/BG/BG.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Tree_1_Scene.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Tree_2_Scene.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Bush_Scene.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Bush_2_Scene.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Mushroom_Scene.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Mushroom_2_Scene.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Brick_Power_Up_Scene.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Brick_Scene.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Enemy_Saw_Scene.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Scenes/Floor_Section_grass_Scene.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Pit_Scenet.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Float_Scene.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Enemy_Dino_Scene.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Level 1/Tree_1_Scene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Level 1/Tree_2_Scene.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Level 1/Bush_Scene.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Level 1/Bush_2_Scene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Level 1/Enemy_Saw_Scene.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Level 1/Mushroom_Scene.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Level 1/Mushroom_2_Scene.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Brick_Power_Up_Scene.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Level 1/Brick_Scene.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Level 1/Pit_Scenet.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Level 1/Floor_Section_grass_Scene.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Level 1/Float_Scene.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Level 1/Enemy_Orc_Scene.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Open_Door_Scene.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Robot_Character_Scene.tscn" type="PackedScene" id=16]
 
@@ -22,7 +22,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 218.973, 9.32855 )
 
-[node name="World" type="Node2D" index="0"]
+[node name="World" type="Node2D"]
 
 position = Vector2( 0, -2.72073 )
 
@@ -46,14 +46,14 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="BG8" type="Sprite" parent="Level1/Backgrounds" index="2"]
 
-position = Vector2( 2118.75, 414.885 )
+position = Vector2( 2117.35, 416.26 )
 scale = Vector2( 2.07082, 1.10163 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="BG9" type="Sprite" parent="Level1/Backgrounds" index="3"]
 
-position = Vector2( 4188.12, 416.254 )
+position = Vector2( 4188.15, 416.585 )
 scale = Vector2( 2.07082, 1.10369 )
 texture = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -81,6 +81,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Trees" type="Node2D" parent="Level1" index="1"]
 
+editor/display_folded = true
 position = Vector2( 196.122, 361.219 )
 
 [node name="Tree1" parent="Level1/Trees" index="0" instance=ExtResource( 2 )]
@@ -93,7 +94,7 @@ position = Vector2( 2645.63, 157.955 )
 
 [node name="Tree6" parent="Level1/Trees" index="2" instance=ExtResource( 2 )]
 
-position = Vector2( 7388.99, 157.955 )
+position = Vector2( 7398.81, 156.727 )
 
 [node name="Tree2" parent="Level1/Trees" index="3" instance=ExtResource( 3 )]
 
@@ -112,8 +113,6 @@ position = Vector2( 11089.3, 90.7415 )
 position = Vector2( 4297.87, 100.513 )
 
 [node name="Bushes" type="Node2D" parent="Level1" index="2"]
-
-editor/display_folded = true
 
 [node name="Bush" parent="Level1/Bushes" index="0" instance=ExtResource( 4 )]
 
@@ -177,116 +176,194 @@ position = Vector2( 11120.2, 697.19 )
 
 position = Vector2( 11688.2, 697.19 )
 
-[node name="Mushrooms" type="Node2D" parent="Level1" index="3"]
+[node name="Enemies_saw" type="Node2D" parent="Level1" index="3"]
 
-editor/display_folded = true
+[node name="Enemy" parent="Level1/Enemies_saw" index="0" instance=ExtResource( 6 )]
 
-[node name="Mushroom1" parent="Level1/Mushrooms" index="0" instance=ExtResource( 6 )]
+position = Vector2( 6773.13, 472.226 )
+
+[node name="Enemy10" parent="Level1/Enemies_saw" index="1" instance=ExtResource( 6 )]
+
+position = Vector2( 6914.61, 720.557 )
+
+[node name="Enemy11" parent="Level1/Enemies_saw" index="2" instance=ExtResource( 6 )]
+
+position = Vector2( 5639.22, 428.673 )
+
+[node name="Enemy12" parent="Level1/Enemies_saw" index="3" instance=ExtResource( 6 )]
+
+position = Vector2( 6156.53, 460.945 )
+
+[node name="Enemy13" parent="Level1/Enemies_saw" index="4" instance=ExtResource( 6 )]
+
+position = Vector2( 6380.64, 373.069 )
+
+[node name="Enemy6" parent="Level1/Enemies_saw" index="5" instance=ExtResource( 6 )]
+
+position = Vector2( 1877.16, 502.523 )
+
+[node name="Enemy8" parent="Level1/Enemies_saw" index="6" instance=ExtResource( 6 )]
+
+position = Vector2( 2501.58, 313.43 )
+
+[node name="Enemy9" parent="Level1/Enemies_saw" index="7" instance=ExtResource( 6 )]
+
+position = Vector2( 2989.96, 211.401 )
+
+[node name="Enemy2" parent="Level1/Enemies_saw" index="8" instance=ExtResource( 6 )]
+
+position = Vector2( 7229.9, 384.484 )
+
+[node name="Enemy3" parent="Level1/Enemies_saw" index="9" instance=ExtResource( 6 )]
+
+position = Vector2( 8237.79, 452.02 )
+
+[node name="Enemy4" parent="Level1/Enemies_saw" index="10" instance=ExtResource( 6 )]
+
+position = Vector2( 10350.4, 718.688 )
+
+[node name="Enemy7" parent="Level1/Enemies_saw" index="11" instance=ExtResource( 6 )]
+
+position = Vector2( 11649.3, 719.729 )
+
+[node name="Mushrooms" type="Node2D" parent="Level1" index="4"]
+
+[node name="Mushroom1" parent="Level1/Mushrooms" index="0" instance=ExtResource( 7 )]
 
 position = Vector2( 3298.88, 680.693 )
 
-[node name="Mushroom2" parent="Level1/Mushrooms" index="1" instance=ExtResource( 6 )]
+[node name="Mushroom2" parent="Level1/Mushrooms" index="1" instance=ExtResource( 7 )]
 
 position = Vector2( 5466.79, 679.879 )
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="Mushroom3" parent="Level1/Mushrooms" index="2" instance=ExtResource( 7 )]
+[node name="Mushroom3" parent="Level1/Mushrooms" index="2" instance=ExtResource( 8 )]
 
 position = Vector2( 3668.83, 683.58 )
 
-[node name="Mushroom4" parent="Level1/Mushrooms" index="3" instance=ExtResource( 7 )]
+[node name="Mushroom4" parent="Level1/Mushrooms" index="3" instance=ExtResource( 8 )]
 
 position = Vector2( 8358.97, 684.837 )
 
-[node name="Mushroom5" parent="Level1/Mushrooms" index="4" instance=ExtResource( 6 )]
+[node name="Mushroom5" parent="Level1/Mushrooms" index="4" instance=ExtResource( 7 )]
 
 position = Vector2( 8730.04, 676.77 )
 
-[node name="Mushroom6" parent="Level1/Mushrooms" index="5" instance=ExtResource( 7 )]
+[node name="Mushroom6" parent="Level1/Mushrooms" index="5" instance=ExtResource( 8 )]
 
 position = Vector2( 5083.3, 684.023 )
 
-[node name="Mushroom7" parent="Level1/Mushrooms" index="6" instance=ExtResource( 6 )]
+[node name="Mushroom7" parent="Level1/Mushrooms" index="6" instance=ExtResource( 7 )]
 
 position = Vector2( 11159.9, 677.213 )
 
-[node name="Bricks" type="Node2D" parent="Level1" index="4"]
+[node name="Bricks" type="Node2D" parent="Level1" index="5"]
 
-editor/display_folded = true
-
-[node name="brick_power_up" parent="Level1/Bricks" index="0" instance=ExtResource( 8 )]
+[node name="brick_power_up" parent="Level1/Bricks" index="0" instance=ExtResource( 9 )]
 
 position = Vector2( 1148.93, 694.055 )
 
-[node name="brick_power_up2" parent="Level1/Bricks" index="1" instance=ExtResource( 8 )]
+[node name="brick_power_up2" parent="Level1/Bricks" index="1" instance=ExtResource( 9 )]
 
-position = Vector2( 4448.11, 229.377 )
+position = Vector2( 4027.77, 381.607 )
 
-[node name="brick2" parent="Level1/Bricks" index="2" instance=ExtResource( 9 )]
+[node name="brick2" parent="Level1/Bricks" index="2" instance=ExtResource( 10 )]
 
-position = Vector2( 2279.99, 278.223 )
+position = Vector2( 2073.48, 430.465 )
 
-[node name="brick3" parent="Level1/Bricks" index="3" instance=ExtResource( 9 )]
+[node name="brick4" parent="Level1/Bricks" index="3" instance=ExtResource( 10 )]
+
+position = Vector2( 5356.72, 536.049 )
+
+[node name="brick19" parent="Level1/Bricks" index="4" instance=ExtResource( 10 )]
+
+position = Vector2( 5407.06, 536.62 )
+
+[node name="brick20" parent="Level1/Bricks" index="5" instance=ExtResource( 10 )]
+
+position = Vector2( 5406.56, 485.473 )
+
+[node name="brick21" parent="Level1/Bricks" index="6" instance=ExtResource( 10 )]
+
+position = Vector2( 5456.43, 485.325 )
+
+[node name="brick24" parent="Level1/Bricks" index="7" instance=ExtResource( 10 )]
+
+position = Vector2( 5456.33, 434.392 )
+
+[node name="brick22" parent="Level1/Bricks" index="8" instance=ExtResource( 10 )]
+
+position = Vector2( 5278.28, 696.444 )
+
+[node name="brick23" parent="Level1/Bricks" index="9" instance=ExtResource( 10 )]
+
+position = Vector2( 5277.83, 645.176 )
+
+[node name="brick3" parent="Level1/Bricks" index="10" instance=ExtResource( 10 )]
 
 position = Vector2( 2279.63, 329.321 )
 
-[node name="brick5" parent="Level1/Bricks" index="4" instance=ExtResource( 9 )]
+[node name="brick5" parent="Level1/Bricks" index="11" instance=ExtResource( 10 )]
 
 position = Vector2( 1713.92, 643.705 )
 
-[node name="brick6" parent="Level1/Bricks" index="5" instance=ExtResource( 9 )]
+[node name="brick6" parent="Level1/Bricks" index="12" instance=ExtResource( 10 )]
 
-position = Vector2( 1714.33, 592.752 )
+position = Vector2( 1713.85, 592.752 )
 
-[node name="brick7" parent="Level1/Bricks" index="6" instance=ExtResource( 9 )]
+[node name="brick7" parent="Level1/Bricks" index="13" instance=ExtResource( 10 )]
 
 position = Vector2( 1664.42, 643.238 )
 
-[node name="brick8" parent="Level1/Bricks" index="7" instance=ExtResource( 9 )]
+[node name="brick8" parent="Level1/Bricks" index="14" instance=ExtResource( 10 )]
 
-position = Vector2( 1713.57, 694.585 )
+position = Vector2( 1713.76, 694.585 )
 
-[node name="brick9" parent="Level1/Bricks" index="8" instance=ExtResource( 9 )]
+[node name="brick9" parent="Level1/Bricks" index="15" instance=ExtResource( 10 )]
 
-position = Vector2( 1663.88, 694.064 )
+position = Vector2( 1664.46, 694.258 )
 
-[node name="brick10" parent="Level1/Bricks" index="9" instance=ExtResource( 9 )]
+[node name="brick10" parent="Level1/Bricks" index="16" instance=ExtResource( 10 )]
 
 position = Vector2( 4447.43, 280.472 )
 
-[node name="brick11" parent="Level1/Bricks" index="10" instance=ExtResource( 9 )]
+[node name="brick11" parent="Level1/Bricks" index="17" instance=ExtResource( 10 )]
 
 position = Vector2( 3485.79, 750.765 )
 
-[node name="brick12" parent="Level1/Bricks" index="11" instance=ExtResource( 9 )]
+[node name="brick12" parent="Level1/Bricks" index="18" instance=ExtResource( 10 )]
 
 position = Vector2( 5278.18, 746.243 )
 
-[node name="brick13" parent="Level1/Bricks" index="12" instance=ExtResource( 9 )]
+[node name="brick13" parent="Level1/Bricks" index="19" instance=ExtResource( 10 )]
 
 position = Vector2( 1198.96, 642.566 )
 
-[node name="brick14" parent="Level1/Bricks" index="13" instance=ExtResource( 9 )]
+[node name="brick14" parent="Level1/Bricks" index="20" instance=ExtResource( 10 )]
 
 position = Vector2( 1199.35, 693.032 )
 
-[node name="brick15" parent="Level1/Bricks" index="14" instance=ExtResource( 9 )]
+[node name="brick15" parent="Level1/Bricks" index="21" instance=ExtResource( 10 )]
 
 position = Vector2( 1148.59, 642.771 )
 
-[node name="brick16" parent="Level1/Bricks" index="15" instance=ExtResource( 9 )]
+[node name="brick16" parent="Level1/Bricks" index="22" instance=ExtResource( 10 )]
 
-position = Vector2( 5613.79, 293.082 )
+position = Vector2( 5940.6, 381.201 )
 
-[node name="brick17" parent="Level1/Bricks" index="16" instance=ExtResource( 9 )]
+[node name="brick25" parent="Level1/Bricks" index="23" instance=ExtResource( 10 )]
 
-position = Vector2( 5613.71, 343.728 )
+position = Vector2( 6276.79, 368.45 )
 
-[node name="brick18" parent="Level1/Bricks" index="17" instance=ExtResource( 9 )]
+[node name="brick17" parent="Level1/Bricks" index="24" instance=ExtResource( 10 )]
 
-position = Vector2( 6527.18, 690.419 )
+position = Vector2( 5456.78, 536.458 )
 
-[node name="Wall" type="Node2D" parent="Level1" index="5"]
+[node name="brick18" parent="Level1/Bricks" index="25" instance=ExtResource( 10 )]
+
+position = Vector2( 6527.18, 694.941 )
+
+[node name="Wall" type="Node2D" parent="Level1" index="6"]
 
 editor/display_folded = true
 position = Vector2( -9.47479, 345.345 )
@@ -337,218 +414,166 @@ position = Vector2( 11.8882, -8109.9 )
 scale = Vector2( 1.61456, 1 )
 shape = SubResource( 1 )
 
-[node name="Enemies_saw" type="Node2D" parent="Level1" index="6"]
+[node name="Pits" type="Node2D" parent="Level1" index="7"]
 
-editor/display_folded = true
-
-[node name="Enemy" parent="Level1/Enemies_saw" index="0" instance=ExtResource( 10 )]
-
-position = Vector2( 6773.13, 472.226 )
-
-[node name="Enemy10" parent="Level1/Enemies_saw" index="1" instance=ExtResource( 10 )]
-
-position = Vector2( 6914.61, 720.557 )
-
-[node name="Enemy11" parent="Level1/Enemies_saw" index="2" instance=ExtResource( 10 )]
-
-position = Vector2( 5405.95, 409.029 )
-
-[node name="Enemy12" parent="Level1/Enemies_saw" index="3" instance=ExtResource( 10 )]
-
-position = Vector2( 5809.98, 719.196 )
-
-[node name="Enemy6" parent="Level1/Enemies_saw" index="4" instance=ExtResource( 10 )]
-
-position = Vector2( 1877.16, 502.523 )
-
-[node name="Enemy8" parent="Level1/Enemies_saw" index="5" instance=ExtResource( 10 )]
-
-position = Vector2( 2501.58, 313.43 )
-
-[node name="Enemy9" parent="Level1/Enemies_saw" index="6" instance=ExtResource( 10 )]
-
-position = Vector2( 2989.96, 211.401 )
-
-[node name="Enemy2" parent="Level1/Enemies_saw" index="7" instance=ExtResource( 10 )]
-
-position = Vector2( 7229.9, 384.484 )
-
-[node name="Enemy3" parent="Level1/Enemies_saw" index="8" instance=ExtResource( 10 )]
-
-position = Vector2( 8237.79, 452.02 )
-
-[node name="Enemy4" parent="Level1/Enemies_saw" index="9" instance=ExtResource( 10 )]
-
-position = Vector2( 10350.4, 718.688 )
-
-[node name="Enemy5" parent="Level1/Enemies_saw" index="10" instance=ExtResource( 10 )]
-
-position = Vector2( 8014.01, 373.262 )
-
-[node name="Enemy7" parent="Level1/Enemies_saw" index="11" instance=ExtResource( 10 )]
-
-position = Vector2( 11649.3, 719.729 )
-
-[node name="Ground" type="Node2D" parent="Level1" index="7"]
-
-position = Vector2( 6.13867, 419.887 )
-
-[node name="floor" parent="Level1/Ground" index="0" instance=ExtResource( 11 )]
-
-position = Vector2( 387.485, 380 )
-
-[node name="floor2" parent="Level1/Ground" index="1" instance=ExtResource( 11 )]
-
-position = Vector2( 17.3707, 380 )
-
-[node name="floor3" parent="Level1/Ground" index="2" instance=ExtResource( 11 )]
-
-position = Vector2( 1124.83, 380 )
-
-[node name="floor4" parent="Level1/Ground" index="3" instance=ExtResource( 11 )]
-
-position = Vector2( 754.675, 380 )
-
-[node name="floor5" parent="Level1/Ground" index="4" instance=ExtResource( 11 )]
-
-position = Vector2( 1863.67, 380 )
-
-[node name="floor6" parent="Level1/Ground" index="5" instance=ExtResource( 11 )]
-
-position = Vector2( 1491.17, 380 )
-
-[node name="floor7" parent="Level1/Ground" index="6" instance=ExtResource( 11 )]
-
-position = Vector2( 2234.71, 380 )
-
-[node name="floor8" parent="Level1/Ground" index="7" instance=ExtResource( 11 )]
-
-position = Vector2( 2604.58, 380 )
-
-[node name="floor9" parent="Level1/Ground" index="8" instance=ExtResource( 11 )]
-
-position = Vector2( 2977.55, 380 )
-
-[node name="floor10" parent="Level1/Ground" index="9" instance=ExtResource( 11 )]
-
-position = Vector2( 4025.16, 380 )
-
-[node name="floor11" parent="Level1/Ground" index="10" instance=ExtResource( 11 )]
-
-position = Vector2( 3654.6, 380 )
-
-[node name="floor12" parent="Level1/Ground" index="11" instance=ExtResource( 11 )]
-
-position = Vector2( 4398.23, 380 )
-
-[node name="floor13" parent="Level1/Ground" index="12" instance=ExtResource( 11 )]
-
-position = Vector2( 4769.24, 380 )
-
-[node name="floor14" parent="Level1/Ground" index="13" instance=ExtResource( 11 )]
-
-position = Vector2( 5460.4, 380 )
-
-[node name="floor15" parent="Level1/Ground" index="14" instance=ExtResource( 11 )]
-
-position = Vector2( 5829.22, 380 )
-scale = Vector2( 3.13735, 3 )
-
-[node name="floor16" parent="Level1/Ground" index="15" instance=ExtResource( 11 )]
-
-position = Vector2( 6206.29, 380 )
-
-[node name="floor17" parent="Level1/Ground" index="16" instance=ExtResource( 11 )]
-
-position = Vector2( 6575.51, 380 )
-scale = Vector2( 2.75935, 3 )
-
-[node name="floor18" parent="Level1/Ground" index="17" instance=ExtResource( 11 )]
-
-position = Vector2( 6915.87, 380 )
-
-[node name="floor19" parent="Level1/Ground" index="18" instance=ExtResource( 11 )]
-
-position = Vector2( 7287.41, 380 )
-
-[node name="floor20" parent="Level1/Ground" index="19" instance=ExtResource( 11 )]
-
-position = Vector2( 7657.63, 380 )
-
-[node name="floor21" parent="Level1/Ground" index="20" instance=ExtResource( 11 )]
-
-position = Vector2( 8030.75, 380 )
-
-[node name="floor22" parent="Level1/Ground" index="21" instance=ExtResource( 11 )]
-
-position = Vector2( 8721.3, 380 )
-
-[node name="floor23" parent="Level1/Ground" index="22" instance=ExtResource( 11 )]
-
-position = Vector2( 9464.4, 380 )
-
-[node name="floor24" parent="Level1/Ground" index="23" instance=ExtResource( 11 )]
-
-position = Vector2( 9092.78, 380 )
-
-[node name="floor25" parent="Level1/Ground" index="24" instance=ExtResource( 11 )]
-
-position = Vector2( 9835.8, 380 )
-
-[node name="floor26" parent="Level1/Ground" index="25" instance=ExtResource( 11 )]
-
-position = Vector2( 10208.9, 380 )
-
-[node name="floor27" parent="Level1/Ground" index="26" instance=ExtResource( 11 )]
-
-position = Vector2( 10576.8, 380 )
-
-[node name="floor28" parent="Level1/Ground" index="27" instance=ExtResource( 11 )]
-
-position = Vector2( 10938.3, 380 )
-
-[node name="floor29" parent="Level1/Ground" index="28" instance=ExtResource( 11 )]
-
-position = Vector2( 11304.7, 380 )
-
-[node name="floor30" parent="Level1/Ground" index="29" instance=ExtResource( 11 )]
-
-position = Vector2( 11671.5, 380 )
-
-[node name="floor31" parent="Level1/Ground" index="30" instance=ExtResource( 11 )]
-
-position = Vector2( 12039.6, 380 )
-
-[node name="Pits" type="Node2D" parent="Level1" index="8"]
-
-editor/display_folded = true
+position = Vector2( 0, -3.57628e-006 )
 scale = Vector2( 3, 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Pit5" parent="Level1/Pits" index="0" instance=ExtResource( 12 )]
+[node name="Pit5" parent="Level1/Pits" index="0" instance=ExtResource( 11 )]
 
 position = Vector2( -290.697, 770.926 )
 scale = Vector2( 4.87685, 3.66598 )
 
-[node name="Pit2" parent="Level1/Pits" index="1" instance=ExtResource( 12 )]
+[node name="Pit2" parent="Level1/Pits" index="1" instance=ExtResource( 11 )]
 
 position = Vector2( 1122.35, 781.581 )
 scale = Vector2( 1.48894, 2.97888 )
 
-[node name="Pit4" parent="Level1/Pits" index="2" instance=ExtResource( 12 )]
+[node name="Pit4" parent="Level1/Pits" index="2" instance=ExtResource( 11 )]
 
 position = Vector2( 1720.19, 780.096 )
 scale = Vector2( 1.56905, 3.02917 )
 
-[node name="Pit7" parent="Level1/Pits" index="3" instance=ExtResource( 12 )]
+[node name="Pit7" parent="Level1/Pits" index="3" instance=ExtResource( 11 )]
 
 position = Vector2( 2806.5, 776.755 )
 scale = Vector2( 1.60847, 3.02917 )
 
-[node name="Pit6" parent="Level1/Pits" index="4" instance=ExtResource( 12 )]
+[node name="Pit6" parent="Level1/Pits" index="4" instance=ExtResource( 11 )]
 
 position = Vector2( 4164.4, 773.597 )
 scale = Vector2( 4.62355, 3.74944 )
+
+[node name="Ground" type="Node2D" parent="Level1" index="8"]
+
+position = Vector2( 6.13867, 419.887 )
+
+[node name="floor" parent="Level1/Ground" index="0" instance=ExtResource( 12 )]
+
+position = Vector2( 387.485, 380 )
+
+[node name="floor2" parent="Level1/Ground" index="1" instance=ExtResource( 12 )]
+
+position = Vector2( 17.3707, 380 )
+
+[node name="floor3" parent="Level1/Ground" index="2" instance=ExtResource( 12 )]
+
+position = Vector2( 1124.83, 380 )
+
+[node name="floor4" parent="Level1/Ground" index="3" instance=ExtResource( 12 )]
+
+position = Vector2( 754.675, 380 )
+
+[node name="floor5" parent="Level1/Ground" index="4" instance=ExtResource( 12 )]
+
+position = Vector2( 1863.67, 380 )
+
+[node name="floor6" parent="Level1/Ground" index="5" instance=ExtResource( 12 )]
+
+position = Vector2( 1491.17, 380 )
+
+[node name="floor7" parent="Level1/Ground" index="6" instance=ExtResource( 12 )]
+
+position = Vector2( 2234.71, 380 )
+
+[node name="floor8" parent="Level1/Ground" index="7" instance=ExtResource( 12 )]
+
+position = Vector2( 2604.58, 380 )
+
+[node name="floor9" parent="Level1/Ground" index="8" instance=ExtResource( 12 )]
+
+position = Vector2( 2977.55, 380 )
+
+[node name="floor10" parent="Level1/Ground" index="9" instance=ExtResource( 12 )]
+
+position = Vector2( 4025.16, 380 )
+
+[node name="floor11" parent="Level1/Ground" index="10" instance=ExtResource( 12 )]
+
+position = Vector2( 3654.6, 380 )
+
+[node name="floor12" parent="Level1/Ground" index="11" instance=ExtResource( 12 )]
+
+position = Vector2( 4398.23, 380 )
+
+[node name="floor13" parent="Level1/Ground" index="12" instance=ExtResource( 12 )]
+
+position = Vector2( 4769.24, 380 )
+
+[node name="floor14" parent="Level1/Ground" index="13" instance=ExtResource( 12 )]
+
+position = Vector2( 5460.4, 380 )
+
+[node name="floor15" parent="Level1/Ground" index="14" instance=ExtResource( 12 )]
+
+position = Vector2( 5829.22, 380 )
+scale = Vector2( 3.13735, 3 )
+
+[node name="floor16" parent="Level1/Ground" index="15" instance=ExtResource( 12 )]
+
+position = Vector2( 6206.29, 380 )
+
+[node name="floor17" parent="Level1/Ground" index="16" instance=ExtResource( 12 )]
+
+position = Vector2( 6575.51, 380 )
+scale = Vector2( 2.75935, 3 )
+
+[node name="floor18" parent="Level1/Ground" index="17" instance=ExtResource( 12 )]
+
+position = Vector2( 6915.87, 380 )
+
+[node name="floor19" parent="Level1/Ground" index="18" instance=ExtResource( 12 )]
+
+position = Vector2( 7287.41, 380 )
+
+[node name="floor20" parent="Level1/Ground" index="19" instance=ExtResource( 12 )]
+
+position = Vector2( 7657.63, 380 )
+
+[node name="floor21" parent="Level1/Ground" index="20" instance=ExtResource( 12 )]
+
+position = Vector2( 8030.75, 380 )
+
+[node name="floor22" parent="Level1/Ground" index="21" instance=ExtResource( 12 )]
+
+position = Vector2( 8721.3, 380 )
+
+[node name="floor23" parent="Level1/Ground" index="22" instance=ExtResource( 12 )]
+
+position = Vector2( 9464.4, 380 )
+
+[node name="floor24" parent="Level1/Ground" index="23" instance=ExtResource( 12 )]
+
+position = Vector2( 9092.78, 380 )
+
+[node name="floor25" parent="Level1/Ground" index="24" instance=ExtResource( 12 )]
+
+position = Vector2( 9835.8, 380 )
+
+[node name="floor26" parent="Level1/Ground" index="25" instance=ExtResource( 12 )]
+
+position = Vector2( 10208.9, 380 )
+
+[node name="floor27" parent="Level1/Ground" index="26" instance=ExtResource( 12 )]
+
+position = Vector2( 10576.8, 380 )
+
+[node name="floor28" parent="Level1/Ground" index="27" instance=ExtResource( 12 )]
+
+position = Vector2( 10938.3, 380 )
+
+[node name="floor29" parent="Level1/Ground" index="28" instance=ExtResource( 12 )]
+
+position = Vector2( 11304.7, 380 )
+
+[node name="floor30" parent="Level1/Ground" index="29" instance=ExtResource( 12 )]
+
+position = Vector2( 11671.5, 380 )
+
+[node name="floor31" parent="Level1/Ground" index="30" instance=ExtResource( 12 )]
+
+position = Vector2( 12039.6, 380 )
 
 [node name="Floats" type="Node2D" parent="Level1" index="9"]
 
@@ -580,7 +605,7 @@ position = Vector2( 3929.21, 430.188 )
 
 [node name="Float9" parent="Level1/Floats" index="6" instance=ExtResource( 13 )]
 
-position = Vector2( 5500.66, 393.702 )
+position = Vector2( 5716.74, 393.702 )
 
 [node name="Float17" parent="Level1/Floats" index="7" instance=ExtResource( 13 )]
 
@@ -600,7 +625,7 @@ position = Vector2( 6146.77, 419.475 )
 
 [node name="Float11" parent="Level1/Floats" index="11" instance=ExtResource( 13 )]
 
-position = Vector2( 6524.3, 351.002 )
+position = Vector2( 6458, 338.725 )
 
 [node name="Float12" parent="Level1/Floats" index="12" instance=ExtResource( 13 )]
 

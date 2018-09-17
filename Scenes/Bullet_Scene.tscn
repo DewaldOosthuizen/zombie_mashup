@@ -31,10 +31,10 @@ func _process(delta):
 	if (power == 0):
 		self.scale = Vector2(0.2, 0.2)
 	elif (power == 1):
-		self.scale = Vector2(0.3, 0.3)
+		self.scale = Vector2(0.22, 0.22)
 	elif (power == 2):
-		self.scale = Vector2(0.3, 0.3)
-		self.modulate = Color(\"#ff00c5\")
+		self.scale = Vector2(0.25, 0.25)
+		self.modulate = Color(\"#a300ff\")
 		
 	var collider1 = move_and_collide(Vector2(velocity.x, 0))
 	var collider2 = move_and_collide(Vector2(0, velocity.y))
@@ -91,6 +91,7 @@ func _check_collision_objects(delta):
 	if (area.size() != 0):
 		for body in area:
 			if (body.is_in_group(\"Enemy_drop\")):
+				print(\"enemy\")
 				body.queue_free()
 				self.visible = false
 				
@@ -117,12 +118,12 @@ func _check_collision_objects(delta):
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 8.24199, 13.5504 )
+extents = Vector2( 4.63811, 5.26883 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 12.7592, 8.29752 )
+extents = Vector2( 8.05301, 8.5176 )
 
 [node name="Bullet" type="KinematicBody2D"]
 
@@ -145,14 +146,14 @@ _sections_unfolded = [ "Animation", "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -6.46972, 4.55095 )
-scale = Vector2( 4.88204, 4.85901 )
+position = Vector2( 2.79862, -0.194689 )
+scale = Vector2( 4.88204, 12.9419 )
 shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="." index="2"]
 
-position = Vector2( -3.05157, 2.52981 )
-scale = Vector2( 2.8045, 2.28548 )
+position = Vector2( -10.3074, -5.49092 )
+scale = Vector2( 4.92382, 3.08256 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -163,8 +164,8 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" index="0"]
 
-position = Vector2( -0.679795, 1.32847 )
-scale = Vector2( 2.31469, 3.05057 )
+position = Vector2( 3.01247, 1.758 )
+scale = Vector2( 2.10163, 3.05057 )
 shape = SubResource( 3 )
 
 

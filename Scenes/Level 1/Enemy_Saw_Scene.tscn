@@ -19,16 +19,16 @@ func _ready():
 func _process(delta):
 	deltaTime = deltaTime + delta
 	
-	if(deltaTime > 0.01):
+	if(deltaTime > 0.02):
 		playerSprite.rotation += 5
 		deltaTime = 0
 	pass"
 _sections_unfolded = [ "Resource" ]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 16.6984
+extents = Vector2( 12.9924, 15.7173 )
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "Enemy_saw",

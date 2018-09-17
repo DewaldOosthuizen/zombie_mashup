@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/freetileset/png/Tiles/17.png" type="Texture" id=1]
+[ext_resource path="res://resources/freetileset/png/Tiles/18.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 27.6785, 10 )
+
+[node name="Pit" type="StaticBody2D" groups=[
+"Pits",
+]]
+
+scale = Vector2( 3, 3 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( 25.8194, 0.7738 )
+scale = Vector2( 1.25022, 1.22187 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+position = Vector2( 1.18523, -4.64908 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite2" type="Sprite" parent="." index="2"]
+
+position = Vector2( 17.8444, -4.58451 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite3" type="Sprite" parent="." index="3"]
+
+position = Vector2( 34.4391, -4.51995 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite5" type="Sprite" parent="." index="4"]
+
+position = Vector2( 51.0983, -4.45537 )
+scale = Vector2( 0.13, 0.13 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite6" type="Sprite" parent="." index="5"]
+
+position = Vector2( 26.1697, 8.5 )
+scale = Vector2( 0.5206, 0.13 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+

@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/freescifiplatform/png/Objects/Saw.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends KinematicBody2D
+
+# variables
+var playerSprite
+var deltaTime = 0
+
+func _ready():
+	playerSprite = get_node(\"Sprite\")
+	set_process(true)
+	pass
+	
+	
+func _process(delta):
+	deltaTime = deltaTime + delta
+	
+	if(deltaTime > 0.02):
+		playerSprite.rotation += 5
+		deltaTime = 0
+	pass"
+_sections_unfolded = [ "Resource" ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 12.9924, 15.7173 )
+
+[node name="Enemy" type="KinematicBody2D" groups=[
+"Enemy_saw",
+]]
+
+scale = Vector2( 2, 2 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+collision/safe_margin = 0.08
+script = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+position = Vector2( 0.35849, -7.62939e-006 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Offset", "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( 0, 0.118916 )
+shape = SubResource( 2 )
+
+
