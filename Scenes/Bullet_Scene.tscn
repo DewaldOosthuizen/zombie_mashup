@@ -118,7 +118,7 @@ func _check_collision_objects(delta):
 extents = Vector2( 2.6098, 5.26883 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 12.3044, 8.5176 )
+extents = Vector2( 14.3858, 8.5176 )
 
 [node name="Bullet" type="KinematicBody2D"]
 scale = Vector2( 0.3, 0.3 )
