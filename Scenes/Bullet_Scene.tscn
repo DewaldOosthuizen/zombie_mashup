@@ -35,11 +35,9 @@ func _process(delta):
 		self.scale = Vector2(0.25, 0.25)
 		self.modulate = Color(\"#a300ff\")
 		
-	var collider1 = move_and_collide(Vector2(velocity.x, 0))
-	var collider2 = move_and_collide(Vector2(0, velocity.y))
+	var collider1 = move_and_collide(Vector2(velocity.x, velocity.y))
 	_check_collision_objects(delta)
 	_remove_if_brick(collider1)
-	_remove_if_brick(collider2)
 	
 	# Ensures bullet disapears upon hitting invalid objects
 	if (noValidCollision.size() == 2 and noValidArea):

@@ -31,18 +31,20 @@ var moveFrame = 0;
 var slideFrame = 0;
 var shootFrame = 0;
 
+# Flag checks
 var sliding = false
 var blood = false
 var invincible = false;
 var shooting = false;
+var started = false
 
+# Timers
 var slidingTimer = 0
 var shootingTimer = 0
 var shootingFrameTimer = 0
 var invincibleTime = 0;
 var invincibleTimer = 0;
 var bloodParticleTimer = 0;
-var started = false
 
 # constants
 const MAXIMUMSPEED = 400
@@ -121,14 +123,14 @@ func _control(delta):
 	
 	pass
 
-
+# TODO: To implement later
 func _swap_character():
-	#if (Input.is_action_just_pressed(\"tab\")):
-		#	playerSprite.visible = false
-		#	var character = Dino_Character_Scene.instance()
-		#	character.position = self.get_position()
-		#	get_tree().root.add_child(character)
-		#	self.queue_free()
+#	if (Input.is_action_just_pressed(\"tab\")):
+#			playerSprite.visible = false
+#			var character = Dino_Character_Scene.instance()
+#			character.position = self.get_position()
+#			get_tree().root.add_child(character)
+#			self.queue_free()
 	
 	pass
 
