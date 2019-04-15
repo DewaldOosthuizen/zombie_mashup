@@ -3,7 +3,6 @@
 [ext_resource path="res://resources/robotfree/spritesheet.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=1]
-
 script/source = "extends KinematicBody2D
 
 # variables
@@ -55,7 +54,6 @@ const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bloodParticle_scene = preload(\"res://Scenes/Blood_Splash_Particle_Scene.tscn\")
 const bullet_scene = preload(\"res://Scenes/Bullet_Scene.tscn\")
 const muzzle_scene = preload(\"res://Scenes/Muzzle_Scene.tscn\")
-const spiral_scene = preload(\"res://Scenes/Spiral_Particle_Scene.tscn\")
 
 func _ready():
 	moveFrames = defaultMoveFrames
@@ -70,10 +68,6 @@ func _process(delta):
 	_check_invincibility(delta)
 	
 	if (!started):
-		var particleEffect = spiral_scene.instance()
-		particleEffect.get_node(\".\").set_emitting(true)
-		particleEffect.position = self.get_position()
-		get_tree().root.add_child(particleEffect)
 		started = true
 	pass
 
@@ -406,87 +400,41 @@ func _take_damage():
 	pass"
 
 [sub_resource type="RectangleShape2D" id=2]
-
-custom_solver_bias = 0.0
 extents = Vector2( 8.23116, 20.7507 )
 
 [sub_resource type="RectangleShape2D" id=3]
-
-custom_solver_bias = 0.0
 extents = Vector2( 19.8815, 20.7176 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" index="0" groups=[
+[node name="KinematicBody2D" type="KinematicBody2D" groups=[
 "Robot",
 ]]
-
 scale = Vector2( 2, 2 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-collision/safe_margin = 0.08
 script = SubResource( 1 )
-_sections_unfolded = [ "Collision", "Material", "Pickable", "Transform", "Visibility", "Z Index", "collision" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -2.27834, 1.80669 )
 scale = Vector2( 1, 0.980141 )
 shape = SubResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Camera2D" type="Camera2D" parent="." index="1"]
-
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 95.016, 115.858 )
-anchor_mode = 1
-rotating = false
 current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
 limit_top = 0
-limit_right = 10000000
 limit_bottom = 0
-limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
-_sections_unfolded = [ "Limit" ]
 
-[node name="Sprite" type="Sprite" parent="." index="2"]
-
+[node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
 vframes = 8
 hframes = 10
 region_rect = Rect2( 0, 0, 200, 100 )
-_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
 
-[node name="Area2D" type="Area2D" parent="." index="3"]
-
+[node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 0.756516, -1.60598 )
 scale = Vector2( 0.838769, 1.05019 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -3.97638, 1.96161 )
 scale = Vector2( 1, 1.11972 )
 shape = SubResource( 3 )
-_sections_unfolded = [ "Material", "Pause", "Transform", "Visibility", "Z Index" ]
-
 

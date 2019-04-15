@@ -4,53 +4,23 @@
 [ext_resource path="res://resources/graveyardtilesetnew/png/Tiles/Bone (4).png" type="Texture" id=2]
 
 [sub_resource type="SegmentShape2D" id=1]
-
-custom_solver_bias = 0.0
 a = Vector2( -0.629952, -8.34976 )
-b = Vector2( 0, 10 )
 
 [node name="RigidBody2D" type="RigidBody2D"]
 
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-mode = 0
-mass = 1.0
-friction = 1.0
-bounce = 0.0
-gravity_scale = 1.0
-custom_integrator = false
-continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
-sleeping = false
-can_sleep = true
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
-_sections_unfolded = [ "Transform" ]
-
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 rotation = -0.223402
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
 
-[node name="Sprite2" type="Sprite" parent="." index="1"]
-
+[node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( -8.63147, 44.6403 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
-_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -7.28756, -22.7446 )
 rotation = 1.5708
 scale = Vector2( 0.547508, 1.7858 )
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
 
