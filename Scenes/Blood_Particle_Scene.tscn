@@ -22,7 +22,7 @@ damping = 50.0
 scale = 4.5
 scale_random = 1.0
 
-[node name="BricksParticle" type="Particles2D"]
+[node name="BloodParticle" type="Particles2D"]
 pause_mode = 1
 light_mask = 0
 use_parent_material = true

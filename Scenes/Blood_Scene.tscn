@@ -19,6 +19,7 @@ animations = [ {
 } ]
 
 [node name="AnimatedSprite" type="AnimatedSprite"]
+scale = Vector2( 0.8, 0.8 )
 frames = SubResource( 1 )
 animation = "blood"
 frame = 1

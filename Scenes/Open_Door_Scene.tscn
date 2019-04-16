@@ -3,36 +3,20 @@
 [ext_resource path="res://resources/freescifiplatform/png/Objects/DoorOpen.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
 extents = Vector2( 14.002, 24.7784 )
 
 [node name="OpenDoor" type="Area2D" groups=[
 "End_Door",
 ]]
-
 position = Vector2( 1.00006, 0 )
 scale = Vector2( 2, 3 )
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
+[node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
-_sections_unfolded = [ "Animation", "Region", "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
-
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 0.285985 )
 scale = Vector2( 1, 0.789861 )
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
-
 
