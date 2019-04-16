@@ -26,6 +26,7 @@ position = Vector2( 0, -2.72073 )
 [node name="Level1" type="Node2D" parent="."]
 
 [node name="Backgrounds" type="Node2D" parent="Level1"]
+editor/display_folded = true
 
 [node name="BG6" type="Sprite" parent="Level1/Backgrounds"]
 position = Vector2( 6257.49, 416.254 )
@@ -88,6 +89,7 @@ position = Vector2( 11089.3, 90.7415 )
 position = Vector2( 4297.87, 100.513 )
 
 [node name="Bushes" type="Node2D" parent="Level1"]
+editor/display_folded = true
 
 [node name="Bush" parent="Level1/Bushes" instance=ExtResource( 4 )]
 position = Vector2( 1115.84, 688.872 )
@@ -174,6 +176,7 @@ position = Vector2( 10350.4, 718.688 )
 position = Vector2( 11649.3, 719.729 )
 
 [node name="Mushrooms" type="Node2D" parent="Level1"]
+editor/display_folded = true
 
 [node name="Mushroom1" parent="Level1/Mushrooms" instance=ExtResource( 7 )]
 position = Vector2( 3298.88, 680.693 )
@@ -197,6 +200,7 @@ position = Vector2( 5083.3, 684.023 )
 position = Vector2( 11159.9, 677.213 )
 
 [node name="Bricks" type="Node2D" parent="Level1"]
+editor/display_folded = true
 
 [node name="brick_power_up" parent="Level1/Bricks" instance=ExtResource( 9 )]
 position = Vector2( 1148.93, 694.055 )
@@ -303,6 +307,7 @@ scale = Vector2( 1.61456, 1 )
 shape = SubResource( 1 )
 
 [node name="Pits" type="Node2D" parent="Level1"]
+editor/display_folded = true
 position = Vector2( 0, -3.57628e-006 )
 scale = Vector2( 3, 1 )
 
@@ -327,6 +332,7 @@ position = Vector2( 4164.4, 773.597 )
 scale = Vector2( 4.62355, 3.74944 )
 
 [node name="Ground" type="Node2D" parent="Level1"]
+editor/display_folded = true
 position = Vector2( 6.13867, 419.887 )
 
 [node name="floor" parent="Level1/Ground" instance=ExtResource( 12 )]
@@ -479,6 +485,7 @@ position = Vector2( 7923.38, 347.301 )
 position = Vector2( 8333.27, 427.809 )
 
 [node name="Enemies" type="Node2D" parent="Level1"]
+editor/display_folded = true
 
 [node name="Enemy3" parent="Level1/Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3954.42, 685.933 )

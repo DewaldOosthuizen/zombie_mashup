@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bullet.png-4aa934159c786fa8edc7f481c7e34c0e.stex"
+path="res://.import/tile007.png-a7e02de2a217d0483bdfb83a47c63389.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/robotfree/Bullet.png"
-dest_files=[ "res://.import/Bullet.png-4aa934159c786fa8edc7f481c7e34c0e.stex" ]
+source_file="res://resources/blood/tile007.png"
+dest_files=[ "res://.import/tile007.png-a7e02de2a217d0483bdfb83a47c63389.stex" ]
 
 [params]
 

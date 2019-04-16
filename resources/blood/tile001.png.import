@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Muzzle.png-024ac987a4410e30df091dd9871473d9.stex"
+path="res://.import/tile001.png-f11df7c0168f88462020776f7c77f7a7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/robotfree/Muzzle.png"
-dest_files=[ "res://.import/Muzzle.png-024ac987a4410e30df091dd9871473d9.stex" ]
+source_file="res://resources/blood/tile001.png"
+dest_files=[ "res://.import/tile001.png-f11df7c0168f88462020776f7c77f7a7.stex" ]
 
 [params]
 

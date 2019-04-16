@@ -244,7 +244,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 107.767, 53.0637 )
+extents = Vector2( 127.873, 32.9578 )
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "Enemy_drop",
@@ -270,5 +270,6 @@ speed_scale = 1.5
 [node name="React - Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="React - Area2D"]
+position = Vector2( 0, -10.6946 )
 shape = SubResource( 4 )
 
