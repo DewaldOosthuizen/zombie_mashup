@@ -16,5 +16,5 @@ Retro Mashup created with Godot 3
 
 Power ups:
 
-1. Your bullets will go through boxes and only disperse on enemies or other non-breakable objects.
-2. Your bullets will increase in size and be able to distroy certain objects that you could not destry previousely. e.g. Saw's
+1. Your bullets will go through boxes and only disperse on enemies or non-breakable objects.
+2. Your bullets will increase in size and be able to destroy certain objects that you could not destroy previousely. e.g. Saw's
