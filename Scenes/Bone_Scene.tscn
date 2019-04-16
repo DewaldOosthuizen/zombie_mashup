@@ -9,12 +9,13 @@ a = Vector2( -0.629952, -8.34976 )
 [node name="RigidBody2D" type="RigidBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -2.58472, 3.87707 )
 rotation = -0.223402
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 1 )
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( -8.63147, 44.6403 )
+position = Vector2( -18.9703, 23.9626 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 

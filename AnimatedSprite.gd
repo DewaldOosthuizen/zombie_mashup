@@ -16,7 +16,6 @@ func _process(delta):
 	pass
 
 func _animate():
-	print("running: " + str(deltaTime))
 	if (deltaTime > 1):
 		if (self.frame == self.get_sprite_frames().get_frame_count(self.animation) - 1):
 			self.queue_free();

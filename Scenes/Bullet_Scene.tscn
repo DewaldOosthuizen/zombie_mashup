@@ -110,7 +110,7 @@ func _check_collision_objects(delta):
 				
 				#blood
 				var blood = blood_scene.instance()
-				blood.get_node(\".\")
+				blood.get_node(\".\").set_emitting(true)
 				blood.position = self.get_position()
 				get_tree().root.add_child(blood)
 				
