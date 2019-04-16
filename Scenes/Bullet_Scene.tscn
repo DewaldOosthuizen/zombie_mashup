@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://resources/robotfree/Bullet.png" type="Texture" id=1]
+[ext_resource path="res://resources/robotfree/png/Objects/Bullet_000.png" type="Texture" id=1]
+[ext_resource path="res://resources/robotfree/png/Objects/Bullet_001.png" type="Texture" id=2]
+[ext_resource path="res://resources/robotfree/png/Objects/Bullet_002.png" type="Texture" id=3]
+[ext_resource path="res://resources/robotfree/png/Objects/Bullet_003.png" type="Texture" id=4]
+[ext_resource path="res://resources/robotfree/png/Objects/Bullet_004.png" type="Texture" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -13,11 +17,12 @@ export var power = 0
 var velocity = Vector2(0, 0)
 var noValidCollision = []
 var noValidArea = false
+var deltaTime = 0
 
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bone_scene = preload(\"res://Scenes/Bone_Scene.tscn\")
-const blood_scene = preload(\"res://Scenes/Blood_Splash_Particle_Scene.tscn\")
+const blood_scene = preload(\"res://Scenes/Blood_Particle_Scene.tscn\")
 
 func _ready():
 	set_process(true)
@@ -25,7 +30,9 @@ func _ready():
 	
 	
 func _process(delta):
+	deltaTime += delta
 	_set_speed(delta)
+	_animate()
 	
 	if (power == 0):
 		self.scale = Vector2(0.2, 0.2)
@@ -51,6 +58,15 @@ func _set_speed(delta):
 	velocity.y = 0
 	pass
 	
+	
+func _animate():
+	if (deltaTime > 0.2):
+		if (get_node(\"AnimatedSprite\").frame < get_node(\"AnimatedSprite\").get_sprite_frames().get_frame_count(\"bullet\") - 1):
+			get_node(\"AnimatedSprite\").frame = get_node(\"AnimatedSprite\").frame + 1
+
+		deltaTime = 0
+		
+	pass	
 
 func _remove_if_brick(object):
 	if (object and object.collider):
@@ -118,13 +134,17 @@ extents = Vector2( 2.6098, 5.26883 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 14.3858, 8.5176 )
 
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "bullet",
+"speed": 5.0
+} ]
+
 [node name="Bullet" type="KinematicBody2D"]
 scale = Vector2( 0.3, 0.3 )
 script = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
-hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 2.79862, -0.194689 )
@@ -139,4 +159,10 @@ scale = Vector2( 4.92382, 3.08256 )
 position = Vector2( 3.01247, 1.758 )
 scale = Vector2( 2.10163, 3.05057 )
 shape = SubResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+animation = "bullet"
+frame = 1
+speed_scale = 2.0
 

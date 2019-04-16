@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+resource_local_to_scene = true
+render_priority = 4
+trail_divisor = 20
+flag_disable_z = true
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 249.43
+initial_velocity_random = 1.0
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 50.0
+radial_accel = 20.0
+damping = 50.0
+scale = 0.01
+scale_random = 1.0
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/blood.png-cbda7f40e2226f698033dc85755ef117.stex"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Particles2D
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[node name="BloodParticle" type="Particles2D"]
+pause_mode = 1
+use_parent_material = true
+position = Vector2( 0, -3.03984e-005 )
+scale = Vector2( 0.15, 0.15 )
+emitting = false
+amount = 100
+lifetime = 3.0
+one_shot = true
+speed_scale = 5.36
+explosiveness = 1.0
+process_material = SubResource( 1 )
+texture = SubResource( 2 )
+script = SubResource( 3 )
+

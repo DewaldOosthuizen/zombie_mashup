@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/Level 1/Pit_Scenet.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Level 1/Floor_Section_grass_Scene.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Level 1/Float_Scene.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Level 1/Enemy_Orc_Scene.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Level 1/Enemy_Zombie_scene.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Open_Door_Scene.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Robot_Character_Scene.tscn" type="PackedScene" id=16]
 

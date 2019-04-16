@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Mario_Mashup"
+config/name="Retro_Mashup"
 run/main_scene="res://Scenes/World_Scene.tscn"
 config/icon="res://icon.png"
 
