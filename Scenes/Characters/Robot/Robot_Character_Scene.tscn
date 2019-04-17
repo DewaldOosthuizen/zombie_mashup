@@ -114,7 +114,7 @@ var invincibleTimer = 0;
 var bloodParticleTimer = 0;
 
 # constants
-const MAXIMUMSPEED = 400
+const MAXIMUMSPEED = 350
 const MOVEMULTI = 800
 const JUMPFORCE = 450
 const GRAVITY = 800
@@ -215,7 +215,6 @@ func _control(delta):
 	
 	if (Input.is_action_just_pressed(\"action_1\") and !shooting and !sliding):
 		shooting = true
-		repeatFrames = false
 		var bullet = bullet_scene.instance()
 		var muzzle = muzzle_scene.instance()
 		bullet.speed = 800
@@ -237,14 +236,15 @@ func _control(delta):
 		get_tree().root.add_child(bullet)
 		get_tree().root.add_child(muzzle)
 		
+		repeatFrames = false
 		if (currentJumpCount > 0):
 			playerSprite.animation = \"robot_jump_shoot\"
 		elif (facingDirection != 0):
 			playerSprite.animation = \"robot_run_shoot\"
+			repeatFrames = true
 		elif (facingDirection == 0):
-			playerSprite.animation = \"robot_shoot\"
-		
-	elif (Input.is_action_just_pressed(\"action_2\") and velocity.x > 0 and !sliding and !shooting):
+			playerSprite.animation = \"robot_shoot\"	
+	elif (Input.is_action_just_pressed(\"action_2\") and velocity.x > 0 and !sliding):
 		sliding = true
 		playerSprite.animation = \"robot_slide\"
 		repeatFrames = true
@@ -253,6 +253,13 @@ func _control(delta):
 		currentJumpCount += 1
 		playerSprite.animation = \"robot_jump\"
 		repeatFrames = false
+	elif (Input.is_action_just_pressed(\"tab\")):
+#			playerSprite.visible = false
+#			var character = Dino_Character_Scene.instance()
+#			character.position = self.get_position()
+#			get_tree().root.add_child(character)
+#			self.queue_free()
+			pass	
 	elif (Input.is_action_pressed(\"move_left\")):
 		facingDirection = -1
 		movementDirection = facingDirection
@@ -261,23 +268,12 @@ func _control(delta):
 		facingDirection = 1
 		movementDirection = facingDirection
 		playerSprite.flip_h = false;
-	elif (Input.is_action_just_pressed(\"tab\")):
-#			playerSprite.visible = false
-#			var character = Dino_Character_Scene.instance()
-#			character.position = self.get_position()
-#			get_tree().root.add_child(character)
-#			self.queue_free()
-			pass
-	elif (sliding):
-		pass
 	else:
-		if (facingDirection != 0):
-			facingDirection = 0
-		
-		if (currentJumpCount == 0 and !shooting):
+		facingDirection = 0
+		if (currentJumpCount == 0 and !shooting and !sliding):	
 			playerSprite.animation = \"robot_idle\"
 			repeatFrames = true
-	
+			
 	_animate_player()
 	pass
 
@@ -323,7 +319,6 @@ func _handle_collision(collidedObject, resetJump):
 			 
 			if (currentJumpCount > 0):
 				currentJumpCount = 0
-				playerSprite.animation = \"robot_walk\"
 				repeatFrames = true;
 	
 		if (sliding):
@@ -453,8 +448,8 @@ limit_bottom = 0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 3 )
-animation = "robot_run_shoot"
-speed_scale = 2.0
+animation = "robot_idle"
+speed_scale = 3.0
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 0.756516, -1.60598 )
