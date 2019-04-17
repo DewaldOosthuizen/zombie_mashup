@@ -1,7 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://resources/freetileset/png/Tiles/17.png" type="Texture" id=1]
-[ext_resource path="res://resources/freetileset/png/Tiles/18.png" type="Texture" id=2]
+[ext_resource path="res://resources/Levels/freetileset/png/Tiles/17.png" type="Texture" id=1]
+[ext_resource path="res://resources/Levels/freetileset/png/Tiles/18.png" type="Texture" id=2]
+
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends StaticBody2D
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func _character_fell_into_pit():
+	pass # Replace with function body.
+"
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 27.6785, 4.43471 )
@@ -10,6 +26,7 @@ extents = Vector2( 27.6785, 4.43471 )
 "Pits",
 ]]
 scale = Vector2( 3, 3 )
+script = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 25.8194, 41.1012 )

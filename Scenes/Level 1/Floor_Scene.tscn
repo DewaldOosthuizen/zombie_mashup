@@ -1,0 +1,131 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/Levels/freetileset/png/Tiles/5.png" type="Texture" id=1]
+[ext_resource path="res://resources/Levels/freetileset/png/Tiles/2.png" type="Texture" id=2]
+
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 63.721, 16.8726 )
+
+[node name="floor" type="Node2D"]
+
+scale = Vector2( 3, 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+
+position = Vector2( 54.1686, -8.99505 )
+scale = Vector2( 1, 1.11917 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="StaticBody2D" index="1"]
+
+position = Vector2( 0.578466, 0 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite2" type="Sprite" parent="StaticBody2D" index="2"]
+
+position = Vector2( 18.2344, 0 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite3" type="Sprite" parent="StaticBody2D" index="3"]
+
+position = Vector2( 36.1538, 0 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite4" type="Sprite" parent="StaticBody2D" index="4"]
+
+position = Vector2( 53.8097, 0 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite5" type="Sprite" parent="StaticBody2D" index="5"]
+
+position = Vector2( 71.7291, 3.8147e-006 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite6" type="Sprite" parent="StaticBody2D" index="6"]
+
+position = Vector2( 89.1215, 3.8147e-006 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite7" type="Sprite" parent="StaticBody2D" index="7"]
+
+position = Vector2( 107.041, 3.8147e-006 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 1 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite8" type="Sprite" parent="StaticBody2D" index="8"]
+
+position = Vector2( 107.041, -17.9194 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite9" type="Sprite" parent="StaticBody2D" index="9"]
+
+position = Vector2( 89.385, -17.6559 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite10" type="Sprite" parent="StaticBody2D" index="10"]
+
+position = Vector2( 71.7291, -17.6559 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite11" type="Sprite" parent="StaticBody2D" index="11"]
+
+position = Vector2( 53.8097, -17.9194 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite12" type="Sprite" parent="StaticBody2D" index="12"]
+
+position = Vector2( 36.4173, -17.9194 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite13" type="Sprite" parent="StaticBody2D" index="13"]
+
+position = Vector2( 18.4979, -17.9194 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+[node name="Sprite14" type="Sprite" parent="StaticBody2D" index="14"]
+
+position = Vector2( 0.578453, -17.9194 )
+scale = Vector2( 0.14, 0.14 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Animation", "Transform" ]
+
+

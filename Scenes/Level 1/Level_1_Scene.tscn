@@ -1,0 +1,1023 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://resources/Levels/freetileset/png/BG/BG.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Level 1/Flora_5_scene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Level 1/Flora_6_scene.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Level 1/Flora_2_scene.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Level 1/Flora_1_scene.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Level 1/Flora_4_scene.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Level 1/Flora_3_scene.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Enemies/Enemy_Saw_Scene.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Brick_Power_Up_Scene.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Level 1/Brick_Scene.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Level 1/Pit_Scenet.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Level 1/Floor_Scene.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Level 1/Float_Scene.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Enemies/Enemy_Zombie_scene.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Open_Door_Scene.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Characters/Robot/Robot_Character_Scene.tscn" type="PackedScene" id=16]
+
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+# variables
+var playerSprite
+
+func _ready():
+	playerSprite = get_node(\"Sprite\")
+	set_process(true)
+	pass
+	
+	
+#warning-ignore:unused_argument
+func _process(delta):
+	playerSprite.rotation += 5
+	pass"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+# Declare member variables here.
+const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
+const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+#	set_process(true)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+#	nodeWithSignal.connect( String signal, Object target, String method)
+	pass
+
+func break_object():
+	var particleEffect = bricksParticle_scene.instance()
+	particleEffect.get_node(\".\").set_emitting(true)
+	particleEffect.position = self.get_position()  - Vector2(0, 20)
+	get_tree().root.add_child(particleEffect)
+	
+	# create actual power up
+	var powerUp = powerUp_scene.instance()
+	powerUp.position = self.position - Vector2(0, 50)
+	get_tree().root.add_child(powerUp)
+	
+	self.queue_free()
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Node2D
+
+# Declare member variables here.
+const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
+const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+#	set_process(true)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func break_object():
+	var particleEffect = bricksParticle_scene.instance()
+	particleEffect.get_node(\".\").set_emitting(true)
+	particleEffect.position = self.get_position()  - Vector2(0, 20)
+	get_tree().root.add_child(particleEffect)
+	self.queue_free()"
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 218.973, 9.32855 )
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends StaticBody2D
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func _character_fell_into_pit():
+	pass # Replace with function body.
+"
+
+[sub_resource type="GDScript" id=6]
+script/source = "extends KinematicBody2D
+
+# variables
+var playerSpeedY = 0
+var velocity = Vector2(0, 0)
+var movementDirection = -1
+var deathTime = 0
+var deltaTime = 0
+var speed_multiplier = 1
+
+var playerSprite
+var bubbleSpace
+
+var genders = ['female', 'male']
+var gender = genders[randi()%2]
+
+var death = false
+var attack = false
+
+const PLAYERSPEEDX = 200
+const PLAYERSPEEDX_MULTIPLIER = 1.1
+const GRAVITY = 800
+
+
+
+func _ready():
+	playerSprite = get_node(\"AnimatedSprite\")
+	bubbleSpace = get_node(\"React - Area2D\")
+	if (gender == 'female'):
+		playerSprite.scale = Vector2(0.13, 0.13)
+		
+	set_process(true)
+	pass
+	
+	
+func _process(delta):
+	deltaTime += delta
+	_animate_player()
+	_action1()
+	
+	playerSpeedY += GRAVITY * delta
+	var playerSpeedX = PLAYERSPEEDX
+	
+	if (attack): 
+		playerSpeedX = (playerSpeedX * speed_multiplier)
+		
+	
+	velocity.x = playerSpeedX * delta * movementDirection
+	velocity.y = playerSpeedY * delta
+	
+	if(get_node(\"CollisionShape2D\").disabled):
+		deathTime += delta
+		death = true
+		velocity.y = 0
+		velocity.x = 0
+	
+	#warning-ignore:return_value_discarded
+	move_and_collide(Vector2(0, velocity.y))
+	var collidedObject2 = move_and_collide(Vector2(velocity.x, 0))
+	
+	if (collidedObject2 and !death):
+		if (collidedObject2.normal == Vector2(0,-1)):
+			playerSpeedY = 0
+		if (collidedObject2.normal == Vector2(1,0)):
+			movementDirection = 1
+			playerSprite.flip_h = false
+		elif (collidedObject2.normal == Vector2(-1,0)):
+			movementDirection = -1
+			playerSprite.flip_h = true
+	
+	if(deathTime > 2):
+		self.free()
+	
+	pass
+
+
+func _animate_player():
+	if (death):
+		playerSprite.animation = gender+\"_dead\"
+	elif(attack):
+		playerSprite.animation = gender+\"_attack\"
+	else:
+		playerSprite.animation = gender+\"_walk\"
+		
+	if(deltaTime > 0.1):
+		if(playerSprite.frame == playerSprite.get_sprite_frames().get_frame_count(playerSprite.animation) - 1):
+			if (!death):
+				playerSprite.frame = 0
+		else:
+			playerSprite.frame = playerSprite.frame + 1
+		deltaTime = 0
+	pass
+	
+	
+func _action1():
+	if (!death):
+		var area = bubbleSpace.get_overlapping_bodies()
+		attack = false
+		if (area.size() != 0):
+			for body in area:
+				if (body.is_in_group(\"character\")):
+					attack = true
+		else:
+			attack = false
+	pass"
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends KinematicBody2D
+
+# variables
+var playerSpeedX = 0
+var playerSpeedY = 0
+var velocity = Vector2(0, 0)
+var facingDirection = 0
+var movementDirection = 0
+var maxJumpCount = 1
+var currentJumpCount = 0
+var deltaTime = 0
+var power = 0
+var playerSprite
+
+# Flag checks
+var sliding = false
+var blood = false
+var invincible = false;
+var shooting = false;
+var started = false
+var repeatFrames = true;
+
+# Timers
+var slidingTimer = 0
+var shootingTimer = 0
+var invincibleTime = 0;
+var invincibleTimer = 0;
+var areaCheckInterval = 0;
+
+# constants
+const MAXIMUMSPEED = 350
+const MOVEMULTI = 800
+const JUMPFORCE = 450
+const GRAVITY = 800
+const DELTA_TIME_REACT = 0.05
+const bloodParticle_scene = preload(\"res://Scenes/Blood_Particle_Scene.tscn\")
+const bullet_scene = preload(\"res://Scenes/Characters/Robot/Bullet_Scene.tscn\")
+
+func _ready():
+	playerSprite = get_node(\"AnimatedSprite\")
+	set_process(true)
+	pass
+
+
+func _process(delta):
+	deltaTime += delta
+	_areaChecks(delta)
+	_set_speed(delta)
+	_apply_gravity(delta)
+	
+	var collidedObject1 = move_and_collide(Vector2(0, velocity.y))
+	var collidedObject2 = move_and_collide(Vector2(velocity.x, 0))
+
+	_handle_collision(collidedObject1, true)
+	_handle_collision(collidedObject2, false)
+	
+	_handle_timers(delta)
+	_control(delta)
+	
+	if (!started):
+		started = true
+	pass
+
+
+func _handle_timers(delta):
+	# determines how long the player can slide for
+	if (sliding):
+		slidingTimer += delta
+		if (slidingTimer > 1):
+			sliding = false
+			slidingTimer = 0
+			
+	# creates a delay so that the player can not keep on firing
+	if (shooting):
+		shootingTimer += delta
+		if (shootingTimer > 1):
+			shooting = false
+			shootingTimer = 0
+	
+	# Gives some time for showing blood, and taking damage
+	if (blood):
+		blood = false
+		if (!invincible):
+			var particleEffect = bloodParticle_scene.instance()
+			particleEffect.get_node(\".\").set_emitting(true)
+			particleEffect.position = self.get_position()
+			get_tree().root.add_child(particleEffect)
+				
+			power -= 1
+			invincible = true
+			if (power < 0):
+				self.queue_free()
+				#warning-ignore:return_value_discarded
+				get_tree().reload_current_scene()
+			
+	
+	# Create flickering effect to indicate damage
+	if (invincible):
+		invincibleTime += delta
+		invincibleTimer += delta
+		
+		if (invincibleTimer > 3):
+			playerSprite.visible = true
+			invincible = false
+			invincibleTimer = 0
+			
+		if(invincibleTime > 0.1):
+			if(playerSprite.visible):
+				playerSprite.visible = false
+			else:
+				playerSprite.visible = true
+			
+			invincibleTime = 0
+	elif (!playerSprite.visible):
+		playerSprite.visible = true
+		
+
+	
+	pass
+
+func _control(delta):
+	# Reset character animation to default when no action is being performed
+	if (currentJumpCount == 0 and !shooting and !sliding and facingDirection != 0):
+		playerSprite.animation = \"robot_walk\"
+		repeatFrames = true
+	
+	# Check interuption movements when shooting frames are active
+	if (shooting and playerSprite.animation == \"robot_shoot\" and facingDirection != 0):
+		playerSprite.animation = \"robot_walk\"
+		shooting = false
+	elif (shooting and playerSprite.animation == \"robot_run_shoot\" and facingDirection == 0):
+		playerSprite.animation = \"robot_idle\"
+		shooting = false
+	elif (shooting and playerSprite.animation == \"robot_jump_shoot\" and currentJumpCount == 0):
+		if (facingDirection == 0):
+			playerSprite.animation = \"robot_idle\"
+		else: 
+			playerSprite.animation = \"robot_walk\"
+		shooting = false
+	
+	# Handle input events
+	if (Input.is_action_just_pressed(\"action_1\") and !shooting and !sliding):
+		shooting = true
+		var bullet = bullet_scene.instance()
+		bullet.speed = 800
+		bullet.power = power
+		var bulletSprite = bullet.get_node(\"AnimatedSprite\")
+		
+		if (!playerSprite.flip_h):
+			bulletSprite.flip_h = false
+			bullet.movementDirection = 1
+			bullet.position = self.get_position()  - Vector2(-40, 5)
+		else:
+			bulletSprite.flip_h = true;
+			bullet.movementDirection = -1
+			bullet.position = self.get_position()  - Vector2(40, 5)
+			
+		#	Add the nodes to the current scene
+		get_tree().root.add_child(bullet)
+		
+		repeatFrames = false
+		if (currentJumpCount > 0):
+			playerSprite.animation = \"robot_jump_shoot\"
+		elif (facingDirection != 0):
+			playerSprite.animation = \"robot_run_shoot\"
+			repeatFrames = true
+		elif (facingDirection == 0):
+			playerSprite.animation = \"robot_shoot\"
+			
+	elif (Input.is_action_just_pressed(\"action_2\") and facingDirection != 0 and !sliding):
+		sliding = true
+		playerSprite.animation = \"robot_slide\"
+		repeatFrames = true
+	elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount and !sliding):
+		playerSpeedY = -JUMPFORCE
+		currentJumpCount += 1
+		playerSprite.animation = \"robot_jump\"
+		repeatFrames = false
+	elif (Input.is_action_just_pressed(\"tab\")):
+#			playerSprite.visible = false
+#			var character = Dino_Character_Scene.instance()
+#			character.position = self.get_position()
+#			get_tree().root.add_child(character)
+#			self.queue_free()
+			pass	
+	elif (Input.is_action_pressed(\"move_left\")):
+		facingDirection = -1
+		movementDirection = facingDirection
+		playerSprite.flip_h = true;
+	elif (Input.is_action_pressed(\"move_right\")):
+		facingDirection = 1
+		movementDirection = facingDirection
+		playerSprite.flip_h = false;
+	else:
+		if (!sliding):
+			facingDirection = 0
+			if (currentJumpCount == 0 and !shooting and !sliding):	
+				playerSprite.animation = \"robot_idle\"
+				repeatFrames = true
+			
+	_animate_player()
+	pass
+
+
+func _set_speed(delta):
+	# control speed
+	if (facingDirection != 0):
+		playerSpeedX += MOVEMULTI * delta
+	else:
+		playerSpeedX -= MOVEMULTI * 2 * delta
+	pass
+	
+
+func _apply_gravity(delta):
+	#apply gravity to jump
+	playerSpeedY += GRAVITY * delta
+	#stop player from keeping on increasing speed
+	playerSpeedX = clamp(playerSpeedX, 0, MAXIMUMSPEED)
+	#set player speed
+	velocity.x = playerSpeedX * delta * movementDirection
+	velocity.y = playerSpeedY * delta
+	
+	pass
+
+
+func _animate_player():
+	if (deltaTime > DELTA_TIME_REACT):
+		if (playerSprite.frame == playerSprite.get_sprite_frames().get_frame_count(playerSprite.animation) - 1):
+			if (repeatFrames):
+				playerSprite.frame = 0
+		else:
+			playerSprite.frame = playerSprite.frame + 1
+			
+		deltaTime = 0
+	pass
+
+
+func _handle_collision(collidedObject, resetJump):
+	if (collidedObject):
+		#if character is on the floor
+		if (resetJump):
+			playerSpeedY= 0
+			 
+			if (currentJumpCount > 0):
+				currentJumpCount = 0
+				repeatFrames = true;
+	
+		if (sliding and !resetJump):
+			var objectParent = collidedObject.collider.get_parent()
+			if (objectParent.is_in_group(\"Bricks\")):
+				objectParent.break_object()
+			elif (objectParent.is_in_group(\"PowerUpBrick\")):
+				objectParent.break_object()
+	pass
+
+	
+func _areaChecks(delta):
+	var area = get_node(\"Area2D\").get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body):
+				if (body.is_in_group(\"PowerUp\")):
+					power += 1
+					body.queue_free()
+				elif (body.is_in_group(\"Pits\")):
+					power = 0
+					#warning-ignore:return_value_discarded
+					get_tree().reload_current_scene()
+				elif (body.is_in_group(\"Enemy_character\")):
+					if (sliding):
+						body.get_node(\"CollisionShape2D\").disabled = true
+					else:
+						blood = true;
+				elif (body.is_in_group(\"Enemy_saw\")):
+					blood = true
+	pass"
+
+[node name="Level1" type="Node2D"]
+
+[node name="Backgrounds" type="Node2D" parent="."]
+
+[node name="BG1" type="Sprite" parent="Backgrounds"]
+position = Vector2( 6257.49, 416.254 )
+scale = Vector2( 2.07082, 1.10369 )
+texture = ExtResource( 1 )
+
+[node name="BG2" type="Sprite" parent="Backgrounds"]
+position = Vector2( 49.3848, 416.347 )
+scale = Vector2( 2.07082, 1.10345 )
+texture = ExtResource( 1 )
+
+[node name="BG3" type="Sprite" parent="Backgrounds"]
+position = Vector2( 2117.35, 416.26 )
+scale = Vector2( 2.07082, 1.10163 )
+texture = ExtResource( 1 )
+
+[node name="BG4" type="Sprite" parent="Backgrounds"]
+position = Vector2( 4188.15, 416.585 )
+scale = Vector2( 2.07082, 1.10369 )
+texture = ExtResource( 1 )
+
+[node name="BG6" type="Sprite" parent="Backgrounds"]
+position = Vector2( 8326.86, 416.254 )
+scale = Vector2( 2.07082, 1.10369 )
+texture = ExtResource( 1 )
+
+[node name="BG7" type="Sprite" parent="Backgrounds"]
+position = Vector2( 10379.1, 415.954 )
+scale = Vector2( 2.10832, 1.10449 )
+texture = ExtResource( 1 )
+
+[node name="BG8" type="Sprite" parent="Backgrounds"]
+position = Vector2( 12457.1, 416.254 )
+scale = Vector2( 2.08779, 1.10369 )
+texture = ExtResource( 1 )
+
+[node name="Flora" type="Node2D" parent="."]
+position = Vector2( 196.122, 361.219 )
+
+[node name="Tree1" parent="Flora" instance=ExtResource( 2 )]
+position = Vector2( -42.5196, 153.835 )
+
+[node name="Tree2" parent="Flora" instance=ExtResource( 2 )]
+position = Vector2( 2645.63, 157.955 )
+
+[node name="Tree3" parent="Flora" instance=ExtResource( 2 )]
+position = Vector2( 7398.81, 156.727 )
+
+[node name="Tree4" parent="Flora" instance=ExtResource( 3 )]
+position = Vector2( 5865.03, 88.755 )
+
+[node name="Tree5" parent="Flora" instance=ExtResource( 3 )]
+position = Vector2( 9296.89, 86.3874 )
+
+[node name="Tree6" parent="Flora" instance=ExtResource( 3 )]
+position = Vector2( 11089.3, 90.7415 )
+
+[node name="Tree7" parent="Flora" instance=ExtResource( 3 )]
+position = Vector2( 4297.87, 100.513 )
+
+[node name="Bush1" parent="Flora" instance=ExtResource( 4 )]
+position = Vector2( 919.718, 327.653 )
+
+[node name="Bush2" parent="Flora" instance=ExtResource( 4 )]
+position = Vector2( 1378.76, 324.672 )
+flip_h = true
+
+[node name="Bush3" parent="Flora" instance=ExtResource( 4 )]
+position = Vector2( 1865.57, 326.522 )
+
+[node name="Bush4" parent="Flora" instance=ExtResource( 4 )]
+position = Vector2( 4074.93, 324.672 )
+flip_h = true
+
+[node name="Bush5" parent="Flora" instance=ExtResource( 4 )]
+position = Vector2( 4498.18, 329.036 )
+
+[node name="Bush6" parent="Flora" instance=ExtResource( 4 )]
+position = Vector2( 6003.45, 325.334 )
+flip_h = true
+
+[node name="Bush7" parent="Flora" instance=ExtResource( 5 )]
+position = Vector2( 2746.43, 335.971 )
+
+[node name="Bush8" parent="Flora" instance=ExtResource( 5 )]
+position = Vector2( 3535.9, 336.87 )
+
+[node name="Bush9" parent="Flora" instance=ExtResource( 5 )]
+position = Vector2( 7319.18, 333.87 )
+
+[node name="Bush10" parent="Flora" instance=ExtResource( 5 )]
+position = Vector2( 9824.98, 340.072 )
+
+[node name="Bush11" parent="Flora" instance=ExtResource( 5 )]
+position = Vector2( 9991.08, 338.022 )
+
+[node name="Bush12" parent="Flora" instance=ExtResource( 5 )]
+position = Vector2( 10456.6, 335.971 )
+
+[node name="Bush13" parent="Flora" instance=ExtResource( 5 )]
+position = Vector2( 10924.1, 335.971 )
+
+[node name="Bush14" parent="Flora" instance=ExtResource( 5 )]
+position = Vector2( 11492.1, 335.971 )
+
+[node name="Mushroom1" parent="Flora" instance=ExtResource( 6 )]
+position = Vector2( 3102.76, 319.474 )
+
+[node name="Mushroom2" parent="Flora" instance=ExtResource( 6 )]
+position = Vector2( 5270.67, 318.66 )
+
+[node name="Mushroom3" parent="Flora" instance=ExtResource( 7 )]
+position = Vector2( 3472.71, 322.361 )
+
+[node name="Mushroom4" parent="Flora" instance=ExtResource( 7 )]
+position = Vector2( 8162.85, 323.618 )
+
+[node name="Mushroom5" parent="Flora" instance=ExtResource( 6 )]
+position = Vector2( 8533.92, 315.551 )
+
+[node name="Mushroom6" parent="Flora" instance=ExtResource( 7 )]
+position = Vector2( 4887.18, 322.804 )
+
+[node name="Mushroom7" parent="Flora" instance=ExtResource( 6 )]
+position = Vector2( 10963.8, 315.994 )
+
+[node name="Enemies_saw" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 6773.13, 472.226 )
+script = SubResource( 1 )
+
+[node name="Enemy2" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 7229.9, 384.484 )
+script = SubResource( 1 )
+
+[node name="Enemy3" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 8237.79, 452.02 )
+script = SubResource( 1 )
+
+[node name="Enemy4" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 10350.4, 718.688 )
+script = SubResource( 1 )
+
+[node name="Enemy5" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 6914.61, 720.557 )
+script = SubResource( 1 )
+
+[node name="Enemy6" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 1877.16, 502.523 )
+script = SubResource( 1 )
+
+[node name="Enemy7" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 11649.3, 719.729 )
+script = SubResource( 1 )
+
+[node name="Enemy8" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 2501.58, 313.43 )
+script = SubResource( 1 )
+
+[node name="Enemy9" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 2989.96, 211.401 )
+script = SubResource( 1 )
+
+[node name="Enemy10" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 6460.81, 337.995 )
+script = SubResource( 1 )
+
+[node name="Enemy11" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 5502.27, 410.301 )
+script = SubResource( 1 )
+
+[node name="Enemy12" parent="Enemies_saw" instance=ExtResource( 8 )]
+position = Vector2( 6156.53, 460.945 )
+script = SubResource( 1 )
+
+[node name="Bricks" type="Node2D" parent="."]
+
+[node name="brick_power_up1" parent="Bricks" instance=ExtResource( 9 )]
+position = Vector2( 1149.7, 693.474 )
+script = SubResource( 2 )
+
+[node name="brick_power_up2" parent="Bricks" instance=ExtResource( 9 )]
+position = Vector2( 4027.77, 381.607 )
+script = SubResource( 2 )
+
+[node name="brick1" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 2073.48, 430.465 )
+script = SubResource( 3 )
+
+[node name="brick2" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 5326.66, 744.822 )
+script = SubResource( 3 )
+
+[node name="brick3" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 2279.63, 331.54 )
+script = SubResource( 3 )
+
+[node name="brick4" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 5326.89, 695.287 )
+script = SubResource( 3 )
+
+[node name="brick5" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 1713.92, 643.705 )
+script = SubResource( 3 )
+
+[node name="brick6" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 1713.85, 592.752 )
+script = SubResource( 3 )
+
+[node name="brick7" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 1664.42, 643.238 )
+script = SubResource( 3 )
+
+[node name="brick8" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 1713.76, 694.585 )
+script = SubResource( 3 )
+
+[node name="brick9" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 1664.46, 694.258 )
+script = SubResource( 3 )
+
+[node name="brick10" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 4447.43, 280.472 )
+script = SubResource( 3 )
+
+[node name="brick11" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 3485.79, 750.765 )
+script = SubResource( 3 )
+
+[node name="brick12" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 5278.18, 745.321 )
+script = SubResource( 3 )
+
+[node name="brick13" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 1199.54, 642.76 )
+script = SubResource( 3 )
+
+[node name="brick14" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 1199.54, 693.419 )
+script = SubResource( 3 )
+
+[node name="brick15" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 1149.75, 642.771 )
+script = SubResource( 3 )
+
+[node name="brick16" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 5326.99, 645.563 )
+script = SubResource( 3 )
+
+[node name="brick17" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 5278.28, 695.829 )
+script = SubResource( 3 )
+
+[node name="brick18" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 6527.18, 694.941 )
+script = SubResource( 3 )
+
+[node name="brick19" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 5278.44, 645.483 )
+script = SubResource( 3 )
+
+[node name="brick20" parent="Bricks" instance=ExtResource( 10 )]
+position = Vector2( 6259.85, 369.477 )
+script = SubResource( 3 )
+
+[node name="Wall" type="Node2D" parent="."]
+position = Vector2( -9.47479, 345.345 )
+rotation = 1.5708
+
+[node name="wall1" type="Node2D" parent="Wall"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall/wall1"]
+position = Vector2( -0.365601, -1.45453 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/wall1/StaticBody2D"]
+position = Vector2( 25.9671, 3.52137 )
+scale = Vector2( 1.68695, 1 )
+shape = SubResource( 4 )
+
+[node name="wall2" type="Node2D" parent="Wall"]
+position = Vector2( 1.53003, -4284.61 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall/wall2"]
+position = Vector2( -0.365601, -1.45453 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/wall2/StaticBody2D"]
+position = Vector2( 11.8882, -8109.9 )
+scale = Vector2( 1.61456, 1 )
+shape = SubResource( 4 )
+
+[node name="Pits" type="Node2D" parent="."]
+position = Vector2( 0, -3.57628e-006 )
+scale = Vector2( 3, 1 )
+
+[node name="Pit1" parent="Pits" instance=ExtResource( 11 )]
+position = Vector2( -290.697, 770.926 )
+scale = Vector2( 4.87685, 3.66598 )
+script = SubResource( 5 )
+
+[node name="Pit2" parent="Pits" instance=ExtResource( 11 )]
+position = Vector2( 1122.35, 781.581 )
+scale = Vector2( 1.48894, 2.97888 )
+script = SubResource( 5 )
+
+[node name="Pit3" parent="Pits" instance=ExtResource( 11 )]
+position = Vector2( 1720.19, 780.096 )
+scale = Vector2( 1.56905, 3.02917 )
+script = SubResource( 5 )
+
+[node name="Pit4" parent="Pits" instance=ExtResource( 11 )]
+position = Vector2( 2806.5, 776.755 )
+scale = Vector2( 1.60847, 3.02917 )
+script = SubResource( 5 )
+
+[node name="Pit5" parent="Pits" instance=ExtResource( 11 )]
+position = Vector2( 4164.4, 773.597 )
+scale = Vector2( 4.62355, 3.74944 )
+script = SubResource( 5 )
+
+[node name="Ground" type="Node2D" parent="."]
+position = Vector2( 6.13867, 419.887 )
+
+[node name="floor1" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 387.485, 380 )
+
+[node name="floor2" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 17.3707, 380 )
+
+[node name="floor3" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 1124.83, 380 )
+
+[node name="floor4" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 754.675, 380 )
+
+[node name="floor5" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 1863.67, 380 )
+
+[node name="floor6" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 1491.17, 380 )
+
+[node name="floor7" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 2234.71, 380 )
+
+[node name="floor8" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 2604.58, 380 )
+
+[node name="floor9" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 2977.55, 380 )
+
+[node name="floor10" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 4025.16, 380 )
+
+[node name="floor11" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 3654.6, 380 )
+
+[node name="floor12" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 4398.23, 380 )
+
+[node name="floor13" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 4769.24, 380 )
+
+[node name="floor14" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 5460.4, 380 )
+
+[node name="floor15" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 5829.22, 380 )
+scale = Vector2( 3.13735, 3 )
+
+[node name="floor16" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 6206.29, 380 )
+
+[node name="floor17" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 6575.51, 380 )
+scale = Vector2( 2.75935, 3 )
+
+[node name="floor18" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 6915.87, 380 )
+
+[node name="floor19" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 7287.41, 380 )
+
+[node name="floor20" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 7657.63, 380 )
+
+[node name="floor21" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 8030.75, 380 )
+
+[node name="floor22" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 8721.3, 380 )
+
+[node name="floor23" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 9464.4, 380 )
+
+[node name="floor24" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 9092.78, 380 )
+
+[node name="floor25" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 9835.8, 380 )
+
+[node name="floor26" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 10208.9, 380 )
+
+[node name="floor27" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 10576.8, 380 )
+
+[node name="floor28" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 10938.3, 380 )
+
+[node name="floor29" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 11304.7, 380 )
+
+[node name="floor30" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 11671.5, 380 )
+
+[node name="floor31" parent="Ground" instance=ExtResource( 12 )]
+position = Vector2( 12039.6, 380 )
+
+[node name="Floats" type="Node2D" parent="."]
+
+[node name="Float1" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 1966.45, 477.131 )
+
+[node name="Float2" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 2274.66, 379.937 )
+
+[node name="Float3" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 2593.8, 294.748 )
+
+[node name="Float4" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 2991.72, 231.725 )
+
+[node name="Float5" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 3455.24, 298.955 )
+
+[node name="Float6" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 3929.21, 430.188 )
+
+[node name="Float9" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 5579.79, 375.33 )
+
+[node name="Float10" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 6146.77, 419.475 )
+
+[node name="Float11" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 6538.17, 303.651 )
+
+[node name="Float12" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 6888.29, 476.81 )
+
+[node name="Float13" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 7241.85, 405.758 )
+
+[node name="Float14" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 7596.16, 417.735 )
+
+[node name="Float15" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 7923.38, 347.301 )
+
+[node name="Float16" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 8333.27, 427.809 )
+
+[node name="Float17" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 5068.06, 388.261 )
+
+[node name="Float18" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 4700.75, 468.523 )
+
+[node name="Float19" parent="Floats" instance=ExtResource( 13 )]
+position = Vector2( 4340.25, 329.764 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 1908, 684.733 )
+script = SubResource( 6 )
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 11831.6, 688.792 )
+script = SubResource( 6 )
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 3954.42, 685.933 )
+script = SubResource( 6 )
+
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 4658.24, 690.009 )
+script = SubResource( 6 )
+
+[node name="Enemy5" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 6061.43, 363.607 )
+script = SubResource( 6 )
+
+[node name="Enemy6" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 6138.62, 685.118 )
+script = SubResource( 6 )
+
+[node name="Enemy7" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 8179.65, 688.82 )
+script = SubResource( 6 )
+
+[node name="Enemy8" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 7893.42, 300.16 )
+script = SubResource( 6 )
+
+[node name="Enemy9" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 9573.79, 683.24 )
+script = SubResource( 6 )
+
+[node name="Enemy10" parent="Enemies" instance=ExtResource( 14 )]
+position = Vector2( 10665.7, 685.091 )
+script = SubResource( 6 )
+
+[node name="OpenDoor" parent="." instance=ExtResource( 15 )]
+position = Vector2( 12347, 654.984 )
+
+[node name="KinematicBody2D" parent="." groups=[
+"Player",
+] instance=ExtResource( 16 )]
+position = Vector2( 104.578, 670.533 )
+script = SubResource( 7 )
+

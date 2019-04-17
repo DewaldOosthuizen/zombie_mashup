@@ -1,87 +1,88 @@
 [gd_scene load_steps=87 format=2]
 
-[ext_resource path="res://resources/robotfree/png/JumpMelee (1).png" type="Texture" id=1]
-[ext_resource path="res://resources/robotfree/png/JumpMelee (2).png" type="Texture" id=2]
-[ext_resource path="res://resources/robotfree/png/JumpMelee (3).png" type="Texture" id=3]
-[ext_resource path="res://resources/robotfree/png/JumpMelee (4).png" type="Texture" id=4]
-[ext_resource path="res://resources/robotfree/png/JumpMelee (5).png" type="Texture" id=5]
-[ext_resource path="res://resources/robotfree/png/JumpMelee (6).png" type="Texture" id=6]
-[ext_resource path="res://resources/robotfree/png/JumpMelee (7).png" type="Texture" id=7]
-[ext_resource path="res://resources/robotfree/png/JumpMelee (8).png" type="Texture" id=8]
-[ext_resource path="res://resources/robotfree/png/RunShoot (1).png" type="Texture" id=9]
-[ext_resource path="res://resources/robotfree/png/RunShoot (2).png" type="Texture" id=10]
-[ext_resource path="res://resources/robotfree/png/RunShoot (3).png" type="Texture" id=11]
-[ext_resource path="res://resources/robotfree/png/RunShoot (4).png" type="Texture" id=12]
-[ext_resource path="res://resources/robotfree/png/RunShoot (5).png" type="Texture" id=13]
-[ext_resource path="res://resources/robotfree/png/RunShoot (6).png" type="Texture" id=14]
-[ext_resource path="res://resources/robotfree/png/RunShoot (7).png" type="Texture" id=15]
-[ext_resource path="res://resources/robotfree/png/RunShoot (8).png" type="Texture" id=16]
-[ext_resource path="res://resources/robotfree/png/RunShoot (9).png" type="Texture" id=17]
-[ext_resource path="res://resources/robotfree/png/Slide (1).png" type="Texture" id=18]
-[ext_resource path="res://resources/robotfree/png/Slide (2).png" type="Texture" id=19]
-[ext_resource path="res://resources/robotfree/png/Slide (3).png" type="Texture" id=20]
-[ext_resource path="res://resources/robotfree/png/Slide (4).png" type="Texture" id=21]
-[ext_resource path="res://resources/robotfree/png/Slide (5).png" type="Texture" id=22]
-[ext_resource path="res://resources/robotfree/png/Slide (6).png" type="Texture" id=23]
-[ext_resource path="res://resources/robotfree/png/Slide (7).png" type="Texture" id=24]
-[ext_resource path="res://resources/robotfree/png/Slide (8).png" type="Texture" id=25]
-[ext_resource path="res://resources/robotfree/png/Slide (9).png" type="Texture" id=26]
-[ext_resource path="res://resources/robotfree/png/Slide (10).png" type="Texture" id=27]
-[ext_resource path="res://resources/robotfree/png/Melee (1).png" type="Texture" id=28]
-[ext_resource path="res://resources/robotfree/png/Melee (2).png" type="Texture" id=29]
-[ext_resource path="res://resources/robotfree/png/Melee (3).png" type="Texture" id=30]
-[ext_resource path="res://resources/robotfree/png/Melee (4).png" type="Texture" id=31]
-[ext_resource path="res://resources/robotfree/png/Melee (5).png" type="Texture" id=32]
-[ext_resource path="res://resources/robotfree/png/Melee (6).png" type="Texture" id=33]
-[ext_resource path="res://resources/robotfree/png/Melee (7).png" type="Texture" id=34]
-[ext_resource path="res://resources/robotfree/png/Melee (8).png" type="Texture" id=35]
-[ext_resource path="res://resources/robotfree/png/Jump (1).png" type="Texture" id=36]
-[ext_resource path="res://resources/robotfree/png/Jump (2).png" type="Texture" id=37]
-[ext_resource path="res://resources/robotfree/png/Jump (3).png" type="Texture" id=38]
-[ext_resource path="res://resources/robotfree/png/Jump (4).png" type="Texture" id=39]
-[ext_resource path="res://resources/robotfree/png/Jump (5).png" type="Texture" id=40]
-[ext_resource path="res://resources/robotfree/png/Jump (6).png" type="Texture" id=41]
-[ext_resource path="res://resources/robotfree/png/Jump (7).png" type="Texture" id=42]
-[ext_resource path="res://resources/robotfree/png/Jump (8).png" type="Texture" id=43]
-[ext_resource path="res://resources/robotfree/png/Jump (9).png" type="Texture" id=44]
-[ext_resource path="res://resources/robotfree/png/Jump (10).png" type="Texture" id=45]
-[ext_resource path="res://resources/robotfree/png/Idle (1).png" type="Texture" id=46]
-[ext_resource path="res://resources/robotfree/png/Idle (2).png" type="Texture" id=47]
-[ext_resource path="res://resources/robotfree/png/Idle (3).png" type="Texture" id=48]
-[ext_resource path="res://resources/robotfree/png/Idle (4).png" type="Texture" id=49]
-[ext_resource path="res://resources/robotfree/png/Idle (5).png" type="Texture" id=50]
-[ext_resource path="res://resources/robotfree/png/Idle (6).png" type="Texture" id=51]
-[ext_resource path="res://resources/robotfree/png/Idle (7).png" type="Texture" id=52]
-[ext_resource path="res://resources/robotfree/png/Idle (8).png" type="Texture" id=53]
-[ext_resource path="res://resources/robotfree/png/Idle (9).png" type="Texture" id=54]
-[ext_resource path="res://resources/robotfree/png/Idle (10).png" type="Texture" id=55]
-[ext_resource path="res://resources/robotfree/png/Shoot (1).png" type="Texture" id=56]
-[ext_resource path="res://resources/robotfree/png/Shoot (2).png" type="Texture" id=57]
-[ext_resource path="res://resources/robotfree/png/Shoot (3).png" type="Texture" id=58]
-[ext_resource path="res://resources/robotfree/png/Shoot (4).png" type="Texture" id=59]
-[ext_resource path="res://resources/robotfree/png/JumpShoot (1).png" type="Texture" id=60]
-[ext_resource path="res://resources/robotfree/png/JumpShoot (2).png" type="Texture" id=61]
-[ext_resource path="res://resources/robotfree/png/JumpShoot (3).png" type="Texture" id=62]
-[ext_resource path="res://resources/robotfree/png/JumpShoot (4).png" type="Texture" id=63]
-[ext_resource path="res://resources/robotfree/png/JumpShoot (5).png" type="Texture" id=64]
-[ext_resource path="res://resources/robotfree/png/Run (1).png" type="Texture" id=65]
-[ext_resource path="res://resources/robotfree/png/Run (2).png" type="Texture" id=66]
-[ext_resource path="res://resources/robotfree/png/Run (3).png" type="Texture" id=67]
-[ext_resource path="res://resources/robotfree/png/Run (4).png" type="Texture" id=68]
-[ext_resource path="res://resources/robotfree/png/Run (5).png" type="Texture" id=69]
-[ext_resource path="res://resources/robotfree/png/Run (6).png" type="Texture" id=70]
-[ext_resource path="res://resources/robotfree/png/Run (7).png" type="Texture" id=71]
-[ext_resource path="res://resources/robotfree/png/Run (8).png" type="Texture" id=72]
-[ext_resource path="res://resources/robotfree/png/Dead (1).png" type="Texture" id=73]
-[ext_resource path="res://resources/robotfree/png/Dead (2).png" type="Texture" id=74]
-[ext_resource path="res://resources/robotfree/png/Dead (3).png" type="Texture" id=75]
-[ext_resource path="res://resources/robotfree/png/Dead (4).png" type="Texture" id=76]
-[ext_resource path="res://resources/robotfree/png/Dead (5).png" type="Texture" id=77]
-[ext_resource path="res://resources/robotfree/png/Dead (6).png" type="Texture" id=78]
-[ext_resource path="res://resources/robotfree/png/Dead (7).png" type="Texture" id=79]
-[ext_resource path="res://resources/robotfree/png/Dead (8).png" type="Texture" id=80]
-[ext_resource path="res://resources/robotfree/png/Dead (9).png" type="Texture" id=81]
-[ext_resource path="res://resources/robotfree/png/Dead (10).png" type="Texture" id=82]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (1).png" type="Texture" id=1]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (2).png" type="Texture" id=2]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (3).png" type="Texture" id=3]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (4).png" type="Texture" id=4]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (5).png" type="Texture" id=5]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (6).png" type="Texture" id=6]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (7).png" type="Texture" id=7]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (8).png" type="Texture" id=8]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (1).png" type="Texture" id=9]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (2).png" type="Texture" id=10]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (3).png" type="Texture" id=11]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (4).png" type="Texture" id=12]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (5).png" type="Texture" id=13]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (6).png" type="Texture" id=14]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (7).png" type="Texture" id=15]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (8).png" type="Texture" id=16]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (9).png" type="Texture" id=17]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (1).png" type="Texture" id=18]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (2).png" type="Texture" id=19]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (3).png" type="Texture" id=20]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (4).png" type="Texture" id=21]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (5).png" type="Texture" id=22]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (6).png" type="Texture" id=23]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (7).png" type="Texture" id=24]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (8).png" type="Texture" id=25]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (9).png" type="Texture" id=26]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (10).png" type="Texture" id=27]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (1).png" type="Texture" id=28]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (2).png" type="Texture" id=29]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (3).png" type="Texture" id=30]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (4).png" type="Texture" id=31]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (5).png" type="Texture" id=32]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (6).png" type="Texture" id=33]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (7).png" type="Texture" id=34]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (8).png" type="Texture" id=35]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (1).png" type="Texture" id=36]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (2).png" type="Texture" id=37]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (3).png" type="Texture" id=38]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (4).png" type="Texture" id=39]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (5).png" type="Texture" id=40]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (6).png" type="Texture" id=41]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (7).png" type="Texture" id=42]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (8).png" type="Texture" id=43]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (9).png" type="Texture" id=44]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (10).png" type="Texture" id=45]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (1).png" type="Texture" id=46]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (2).png" type="Texture" id=47]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (3).png" type="Texture" id=48]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (4).png" type="Texture" id=49]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (5).png" type="Texture" id=50]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (6).png" type="Texture" id=51]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (7).png" type="Texture" id=52]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (8).png" type="Texture" id=53]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (9).png" type="Texture" id=54]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (10).png" type="Texture" id=55]
+[ext_resource path="res://resources/Characters/robotfree/png/Shoot (1).png" type="Texture" id=56]
+[ext_resource path="res://resources/Characters/robotfree/png/Shoot (2).png" type="Texture" id=57]
+[ext_resource path="res://resources/Characters/robotfree/png/Shoot (3).png" type="Texture" id=58]
+[ext_resource path="res://resources/Characters/robotfree/png/Shoot (4).png" type="Texture" id=59]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (1).png" type="Texture" id=60]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (2).png" type="Texture" id=61]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (3).png" type="Texture" id=62]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (4).png" type="Texture" id=63]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (5).png" type="Texture" id=64]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (1).png" type="Texture" id=65]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (2).png" type="Texture" id=66]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (3).png" type="Texture" id=67]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (4).png" type="Texture" id=68]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (5).png" type="Texture" id=69]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (6).png" type="Texture" id=70]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (7).png" type="Texture" id=71]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (8).png" type="Texture" id=72]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (1).png" type="Texture" id=73]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (2).png" type="Texture" id=74]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (3).png" type="Texture" id=75]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (4).png" type="Texture" id=76]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (5).png" type="Texture" id=77]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (6).png" type="Texture" id=78]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (7).png" type="Texture" id=79]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (8).png" type="Texture" id=80]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (9).png" type="Texture" id=81]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (10).png" type="Texture" id=82]
+
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
@@ -139,6 +140,8 @@ func _process(delta):
 
 	_handle_collision(collidedObject1, true)
 	_handle_collision(collidedObject2, false)
+	
+	_handle_timers(delta)
 	_control(delta)
 	
 	if (!started):
@@ -147,7 +150,6 @@ func _process(delta):
 
 
 func _handle_timers(delta):
-	
 	# determines how long the player can slide for
 	if (sliding):
 		slidingTimer += delta
@@ -204,8 +206,6 @@ func _handle_timers(delta):
 	pass
 
 func _control(delta):
-	_handle_timers(delta)
-	
 	# Reset character animation to default when no action is being performed
 	if (currentJumpCount == 0 and !shooting and !sliding and facingDirection != 0):
 		playerSprite.animation = \"robot_walk\"
@@ -217,6 +217,12 @@ func _control(delta):
 		shooting = false
 	elif (shooting and playerSprite.animation == \"robot_run_shoot\" and facingDirection == 0):
 		playerSprite.animation = \"robot_idle\"
+		shooting = false
+	elif (shooting and playerSprite.animation == \"robot_jump_shoot\" and currentJumpCount == 0):
+		if (facingDirection == 0):
+			playerSprite.animation = \"robot_idle\"
+		else: 
+			playerSprite.animation = \"robot_walk\"
 		shooting = false
 	
 	# Handle input events

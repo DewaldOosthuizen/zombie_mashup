@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://resources/freetileset/png/Tiles/13.png" type="Texture" id=1]
-[ext_resource path="res://resources/freetileset/png/Tiles/14.png" type="Texture" id=2]
-[ext_resource path="res://resources/freetileset/png/Tiles/15.png" type="Texture" id=3]
+[ext_resource path="res://resources/Levels/freetileset/png/Tiles/13.png" type="Texture" id=1]
+[ext_resource path="res://resources/Levels/freetileset/png/Tiles/14.png" type="Texture" id=2]
+[ext_resource path="res://resources/Levels/freetileset/png/Tiles/15.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 

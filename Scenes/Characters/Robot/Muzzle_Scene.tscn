@@ -1,10 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://resources/robotfree/png/Objects/Muzzle_000.png" type="Texture" id=1]
-[ext_resource path="res://resources/robotfree/png/Objects/Muzzle_001.png" type="Texture" id=2]
-[ext_resource path="res://resources/robotfree/png/Objects/Muzzle_002.png" type="Texture" id=3]
-[ext_resource path="res://resources/robotfree/png/Objects/Muzzle_003.png" type="Texture" id=4]
-[ext_resource path="res://resources/robotfree/png/Objects/Muzzle_004.png" type="Texture" id=5]
+[ext_resource path="res://resources/Characters/robotfree/png/Objects/Muzzle_000.png" type="Texture" id=1]
+[ext_resource path="res://resources/Characters/robotfree/png/Objects/Muzzle_001.png" type="Texture" id=2]
+[ext_resource path="res://resources/Characters/robotfree/png/Objects/Muzzle_002.png" type="Texture" id=3]
+[ext_resource path="res://resources/Characters/robotfree/png/Objects/Muzzle_003.png" type="Texture" id=4]
+[ext_resource path="res://resources/Characters/robotfree/png/Objects/Muzzle_004.png" type="Texture" id=5]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
