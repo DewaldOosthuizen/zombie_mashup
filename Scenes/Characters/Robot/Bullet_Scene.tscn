@@ -16,7 +16,6 @@ export var power = 0
 
 var velocity = Vector2(0, 0)
 var noValidCollision = []
-var noValidArea = false
 var deltaTime = 0
 
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
@@ -47,7 +46,7 @@ func _process(delta):
 	_remove_if_brick(collider1)
 	
 	# Ensures bullet disapears upon hitting invalid objects
-	if (noValidCollision.size() == 2 and noValidArea):
+	if (noValidCollision.size() == 2):
 		self.queue_free()
 		
 	pass
@@ -103,10 +102,8 @@ func _check_collision_objects(delta):
 	var area = get_node(\"Area2D\").get_overlapping_bodies()
 	if (area.size() != 0):
 		for body in area:
-			if (body.is_in_group(\"Enemy_drop\")):
-				print(\"enemy\")
+			if (body.is_in_group(\"Enemy_character\")):
 				body.queue_free()
-				self.visible = false
 				
 				#blood
 				var blood = blood_scene.instance()
@@ -123,8 +120,6 @@ func _check_collision_objects(delta):
 				if (power > 1):
 					body.queue_free()
 				self.queue_free()
-			else:
-				noValidArea = true
 	
 	pass"
 

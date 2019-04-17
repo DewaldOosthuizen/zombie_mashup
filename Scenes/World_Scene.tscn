@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Level 1/Tree_2_Scene.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Level 1/Bush_Scene.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Level 1/Bush_2_Scene.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Level 1/Enemy_Saw_Scene.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Enemies/Enemy_Saw_Scene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Level 1/Mushroom_Scene.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Level 1/Mushroom_2_Scene.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Brick_Power_Up_Scene.tscn" type="PackedScene" id=9]
@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/Level 1/Pit_Scenet.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Level 1/Floor_Section_grass_Scene.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Level 1/Float_Scene.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Scenes/Level 1/Enemy_Zombie_scene.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Enemies/Enemy_Zombie_scene.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Scenes/Open_Door_Scene.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Scenes/Characters/Robot/Robot_Character_Scene.tscn" type="PackedScene" id=16]
 
