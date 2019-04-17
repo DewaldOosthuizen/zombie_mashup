@@ -140,8 +140,8 @@ func _process(delta):
 	var collidedObject1 = move_and_collide(Vector2(0, velocity.y))
 	var collidedObject2 = move_and_collide(Vector2(velocity.x, 0))
 
-	_handle_collision(collidedObject1)
-	_handle_collision(collidedObject2)
+	_handle_collision(collidedObject1, true)
+	_handle_collision(collidedObject2, false)
 	
 	_check_for_power_up()
 	_check_if_player_has_fallen_in_pit()
@@ -221,6 +221,7 @@ func _control(delta):
 			bullet.position = self.get_position()  - Vector2(40, 5)
 			muzzle.position = self.get_position()  - Vector2(40, 5)
 		
+		#	Add the nodes to the current scene
 		get_tree().root.add_child(bullet)
 		get_tree().root.add_child(muzzle)
 		
@@ -255,10 +256,11 @@ func _control(delta):
 #			get_tree().root.add_child(character)
 #			self.queue_free()
 			pass
-	elif (currentJumpCount == 0 and !sliding and !shooting):
+	elif (!sliding and !shooting):
 		facingDirection = 0
-		playerSprite.animation = \"robot_idle\"
-		repeatFrames = true
+		if (currentJumpCount == 0):
+			playerSprite.animation = \"robot_idle\"
+			repeatFrames = true
 	
 	_animate_player()
 	
@@ -298,10 +300,10 @@ func _animate_player():
 	pass
 
 
-func _handle_collision(collidedObject):
+func _handle_collision(collidedObject, resetJump):
 	if (collidedObject):
 		#if character is on the floor
-		if (collidedObject.normal == Vector2(0, -1)):
+		if (resetJump):
 			playerSpeedY= 0
 			 
 			if (currentJumpCount > 0):
