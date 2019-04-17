@@ -293,7 +293,7 @@ shape = SubResource( 1 )
 
 [node name="Pits" type="Node2D" parent="Level1"]
 editor/display_folded = true
-position = Vector2( 0, -3.57628e-06 )
+position = Vector2( 0, -3.57628e-006 )
 scale = Vector2( 3, 1 )
 
 [node name="Pit5" parent="Level1/Pits" instance=ExtResource( 11 )]
