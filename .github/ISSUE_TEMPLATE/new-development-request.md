@@ -1,7 +1,7 @@
 ---
 name: New Development Request
 about: Describe work to be done for new development
-title: 'New Development:'
+title: 'DEVELOPMENT:'
 labels: ''
 assignees: ''
 
