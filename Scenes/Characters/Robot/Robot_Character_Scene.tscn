@@ -111,7 +111,7 @@ var slidingTimer = 0
 var shootingTimer = 0
 var invincibleTime = 0;
 var invincibleTimer = 0;
-var bloodParticleTimer = 0;
+var areaCheckInterval = 0;
 
 # constants
 const MAXIMUMSPEED = 350
@@ -119,11 +119,8 @@ const MOVEMULTI = 800
 const JUMPFORCE = 450
 const GRAVITY = 800
 const DELTA_TIME_REACT = 0.05
-const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
-const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bloodParticle_scene = preload(\"res://Scenes/Blood_Particle_Scene.tscn\")
 const bullet_scene = preload(\"res://Scenes/Characters/Robot/Bullet_Scene.tscn\")
-const muzzle_scene = preload(\"res://Scenes/Characters/Robot/Muzzle_Scene.tscn\")
 
 func _ready():
 	playerSprite = get_node(\"AnimatedSprite\")
@@ -133,6 +130,7 @@ func _ready():
 
 func _process(delta):
 	deltaTime += delta
+	_areaChecks(delta)
 	_set_speed(delta)
 	_apply_gravity(delta)
 	
@@ -141,8 +139,6 @@ func _process(delta):
 
 	_handle_collision(collidedObject1, true)
 	_handle_collision(collidedObject2, false)
-	
-	_areaChecks()
 	_control(delta)
 	
 	if (!started):
@@ -166,18 +162,34 @@ func _handle_timers(delta):
 			shooting = false
 			shootingTimer = 0
 	
+	# Gives some time for showing blood, and taking damage
+	if (blood):
+		blood = false
+		if (!invincible):
+			var particleEffect = bloodParticle_scene.instance()
+			particleEffect.get_node(\".\").set_emitting(true)
+			particleEffect.position = self.get_position()
+			get_tree().root.add_child(particleEffect)
+				
+			power -= 1
+			invincible = true
+			if (power < 0):
+				self.queue_free()
+				#warning-ignore:return_value_discarded
+				get_tree().reload_current_scene()
+			
+	
 	# Create flickering effect to indicate damage
 	if (invincible):
 		invincibleTime += delta
 		invincibleTimer += delta
 		
-		if (invincibleTimer > (DELTA_TIME_REACT * 3)):
+		if (invincibleTimer > 3):
 			playerSprite.visible = true
 			invincible = false
-			if(power < 0):
-				power = 0
+			invincibleTimer = 0
 			
-		if(invincibleTime > DELTA_TIME_REACT):
+		if(invincibleTime > 0.1):
 			if(playerSprite.visible):
 				playerSprite.visible = false
 			else:
@@ -187,21 +199,7 @@ func _handle_timers(delta):
 	elif (!playerSprite.visible):
 		playerSprite.visible = true
 		
-		
-	# Gives some time for showing blood, and taking damage
-	if (blood):
-		bloodParticleTimer += delta
-		if(bloodParticleTimer and bloodParticleTimer > 0.3):
-			bloodParticleTimer = 0
-			blood = false
-		
-		# Check if player can die
-		if(!invincible):
-			power -= 1
-			invincible = true
-			if (power < 0):
-				self.queue_free()
-				get_tree().reload_current_scene()
+
 	
 	pass
 
@@ -225,7 +223,6 @@ func _control(delta):
 	if (Input.is_action_just_pressed(\"action_1\") and !shooting and !sliding):
 		shooting = true
 		var bullet = bullet_scene.instance()
-		var muzzle = muzzle_scene.instance()
 		bullet.speed = 800
 		bullet.power = power
 		var bulletSprite = bullet.get_node(\"AnimatedSprite\")
@@ -234,16 +231,13 @@ func _control(delta):
 			bulletSprite.flip_h = false
 			bullet.movementDirection = 1
 			bullet.position = self.get_position()  - Vector2(-40, 5)
-			muzzle.position = self.get_position()  - Vector2(-40, 5)
 		else:
 			bulletSprite.flip_h = true;
 			bullet.movementDirection = -1
 			bullet.position = self.get_position()  - Vector2(40, 5)
-			muzzle.position = self.get_position()  - Vector2(40, 5)
-		
+			
 		#	Add the nodes to the current scene
 		get_tree().root.add_child(bullet)
-		get_tree().root.add_child(muzzle)
 		
 		repeatFrames = false
 		if (currentJumpCount > 0):
@@ -332,52 +326,34 @@ func _handle_collision(collidedObject, resetJump):
 				currentJumpCount = 0
 				repeatFrames = true;
 	
-		if (sliding):
+		if (sliding and !resetJump):
 			var objectParent = collidedObject.collider.get_parent()
 			if (objectParent.is_in_group(\"Bricks\")):
-					#add the particle effect of the brick breaking
-					var particleEffect = bricksParticle_scene.instance()
-					particleEffect.get_node(\".\").set_emitting(true)
-					particleEffect.position = self.get_position()  - Vector2(0, 20)
-					get_tree().root.add_child(particleEffect)
-					#remove the brick
-					objectParent.queue_free()
+				objectParent.break_object()
 			elif (objectParent.is_in_group(\"PowerUpBrick\")):
-					var particleEffect = bricksParticle_scene.instance()
-					particleEffect.get_node(\".\").set_emitting(true)
-					particleEffect.position = self.get_position()  - Vector2(0, 20)
-					get_tree().root.add_child(particleEffect)
-					#remove the brick
-					objectParent.queue_free()
-				
-					# create actual power up
-					var powerUp = powerUp_scene.instance()
-					powerUp.position = objectParent.position - Vector2(0, 50)
-					get_tree().root.add_child(powerUp)
+				objectParent.break_object()
 	pass
 
 	
-func _areaChecks():
+func _areaChecks(delta):
 	var area = get_node(\"Area2D\").get_overlapping_bodies()
 	if (area.size() != 0):
 		for body in area:
-			if (body.is_in_group(\"PowerUp\")):
-				power += 1
-				body.queue_free()
-			elif (body.is_in_group(\"Pits\")):
-				power = 0
-				get_tree().reload_current_scene()
-			elif (body.is_in_group(\"Enemy_character\")):
-				if (sliding):
-					body.get_node(\"CollisionShape2D\").disabled = true
-				else:
-					blood = true;
-			elif (body.is_in_group(\"Enemy_saw\")):
-				var particleEffect = bloodParticle_scene.instance()
-				particleEffect.get_node(\".\").set_emitting(true)
-				particleEffect.position = self.get_position()
-				get_tree().root.add_child(particleEffect)
-				blood = true
+			if (body):
+				if (body.is_in_group(\"PowerUp\")):
+					power += 1
+					body.queue_free()
+				elif (body.is_in_group(\"Pits\")):
+					power = 0
+					#warning-ignore:return_value_discarded
+					get_tree().reload_current_scene()
+				elif (body.is_in_group(\"Enemy_character\")):
+					if (sliding):
+						body.get_node(\"CollisionShape2D\").disabled = true
+					else:
+						blood = true;
+				elif (body.is_in_group(\"Enemy_saw\")):
+					blood = true
 	pass"
 
 [sub_resource type="RectangleShape2D" id=2]

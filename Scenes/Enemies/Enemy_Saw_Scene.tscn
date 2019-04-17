@@ -7,7 +7,6 @@ script/source = "extends KinematicBody2D
 
 # variables
 var playerSprite
-var deltaTime = 0
 
 func _ready():
 	playerSprite = get_node(\"Sprite\")
@@ -15,6 +14,7 @@ func _ready():
 	pass
 	
 	
+#warning-ignore:unused_argument
 func _process(delta):
 	playerSprite.rotation += 5
 	pass"

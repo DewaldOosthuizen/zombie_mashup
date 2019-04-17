@@ -23,9 +23,11 @@ const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bone_scene = preload(\"res://Scenes/Bone_Scene.tscn\")
 const blood_scene = preload(\"res://Scenes/Blood_Particle_Scene.tscn\")
+const muzzle_scene = preload(\"res://Scenes/Characters/Robot/Muzzle_Scene.tscn\")
 
 func _ready():
 	sprite = get_node(\"AnimatedSprite\")
+	create_muzzle()
 	set_process(true)
 	pass
 	
@@ -44,7 +46,7 @@ func _process(delta):
 		self.modulate = Color(\"#a300ff\")
 		
 	var collider1 = move_and_collide(Vector2(velocity.x, velocity.y))
-	_check_collision_objects(delta)
+	_check_collision_objects()
 	_remove_if_brick(collider1)
 	
 	# Ensures bullet disapears upon hitting invalid objects
@@ -58,7 +60,11 @@ func _set_speed(delta):
 	velocity.x = speed * delta * movementDirection
 	velocity.y = 0
 	pass
-	
+
+func create_muzzle():
+	var muzzle = muzzle_scene.instance()
+	muzzle.position = self.position
+	get_tree().root.add_child(muzzle)
 	
 func _animate():
 	if (deltaTime > 0.05):
@@ -73,26 +79,11 @@ func _remove_if_brick(object):
 	if (object and object.collider):
 		var objectParent = object.collider.get_parent()
 		if (objectParent.is_in_group(\"Bricks\")):
-			#add the particle effect of the brick breaking
-			var particleEffect = bricksParticle_scene.instance()
-			particleEffect.get_node(\".\").set_emitting(true)
-			particleEffect.position = self.get_position()  - Vector2(0, 20)
-			get_tree().root.add_child(particleEffect)
-			#remove the brick
-			objectParent.queue_free()
+			objectParent.break_object()
 			if (power < 2):
 				self.queue_free()
 		elif (objectParent.is_in_group(\"PowerUpBrick\")):
-			var particleEffect = bricksParticle_scene.instance()
-			particleEffect.get_node(\".\").set_emitting(true)
-			particleEffect.position = self.get_position()  - Vector2(0, 20)
-			get_tree().root.add_child(particleEffect)
-			#remove the brick
-			objectParent.queue_free()
-			# create actual power up
-			var powerUp = powerUp_scene.instance()
-			powerUp.position = objectParent.position - Vector2(0, 50)
-			get_tree().root.add_child(powerUp)
+			objectParent.break_object()
 			if (power < 2):
 				self.queue_free()
 		else:
@@ -100,7 +91,7 @@ func _remove_if_brick(object):
 	pass
 
 	
-func _check_collision_objects(delta):
+func _check_collision_objects():
 	var area = get_node(\"Area2D\").get_overlapping_bodies()
 	if (area.size() != 0):
 		for body in area:
