@@ -200,7 +200,7 @@ position = Vector2( 11159.9, 677.213 )
 [node name="Bricks" type="Node2D" parent="Level1"]
 
 [node name="brick_power_up" parent="Level1/Bricks" instance=ExtResource( 9 )]
-position = Vector2( 1148.93, 694.055 )
+position = Vector2( 1149.7, 693.474 )
 
 [node name="brick_power_up2" parent="Level1/Bricks" instance=ExtResource( 9 )]
 position = Vector2( 4027.77, 381.607 )
@@ -215,7 +215,7 @@ position = Vector2( 5326.66, 744.822 )
 position = Vector2( 5326.89, 695.287 )
 
 [node name="brick20" parent="Level1/Bricks" instance=ExtResource( 10 )]
-position = Vector2( 5326.99, 645.337 )
+position = Vector2( 5326.99, 645.563 )
 
 [node name="brick22" parent="Level1/Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5278.28, 695.829 )
@@ -224,7 +224,7 @@ position = Vector2( 5278.28, 695.829 )
 position = Vector2( 5278.44, 645.483 )
 
 [node name="brick3" parent="Level1/Bricks" instance=ExtResource( 10 )]
-position = Vector2( 2279.63, 329.321 )
+position = Vector2( 2279.63, 331.54 )
 
 [node name="brick5" parent="Level1/Bricks" instance=ExtResource( 10 )]
 position = Vector2( 1713.92, 643.705 )
@@ -251,16 +251,16 @@ position = Vector2( 3485.79, 750.765 )
 position = Vector2( 5278.18, 745.321 )
 
 [node name="brick13" parent="Level1/Bricks" instance=ExtResource( 10 )]
-position = Vector2( 1198.96, 642.566 )
+position = Vector2( 1199.54, 642.76 )
 
 [node name="brick14" parent="Level1/Bricks" instance=ExtResource( 10 )]
-position = Vector2( 1199.35, 693.032 )
+position = Vector2( 1199.54, 693.419 )
 
 [node name="brick15" parent="Level1/Bricks" instance=ExtResource( 10 )]
-position = Vector2( 1148.59, 642.771 )
+position = Vector2( 1149.75, 642.771 )
 
 [node name="brick25" parent="Level1/Bricks" instance=ExtResource( 10 )]
-position = Vector2( 6276.79, 368.45 )
+position = Vector2( 6259.85, 369.477 )
 
 [node name="brick18" parent="Level1/Bricks" instance=ExtResource( 10 )]
 position = Vector2( 6527.18, 694.941 )
@@ -477,7 +477,7 @@ position = Vector2( 3954.42, 685.933 )
 position = Vector2( 4658.24, 690.009 )
 
 [node name="Enemy5" parent="Level1/Enemies" instance=ExtResource( 14 )]
-position = Vector2( 6212.87, 369.254 )
+position = Vector2( 6061.43, 363.607 )
 
 [node name="Enemy6" parent="Level1/Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6138.62, 685.118 )
@@ -501,7 +501,7 @@ position = Vector2( 11831.6, 688.792 )
 position = Vector2( 1908, 684.733 )
 
 [node name="OpenDoor" parent="Level1" instance=ExtResource( 15 )]
-position = Vector2( 12347.4, 649.13 )
+position = Vector2( 12347, 654.984 )
 
 [node name="KinematicBody2D" parent="Level1" groups=[
 "Player",

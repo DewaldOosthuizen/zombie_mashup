@@ -104,11 +104,11 @@ var blood = false
 var invincible = false;
 var shooting = false;
 var started = false
+var repeatFrames = true;
 
 # Timers
 var slidingTimer = 0
 var shootingTimer = 0
-var shootingFrameTimer = 0
 var invincibleTime = 0;
 var invincibleTimer = 0;
 var bloodParticleTimer = 0;
@@ -118,6 +118,7 @@ const MAXIMUMSPEED = 400
 const MOVEMULTI = 800
 const JUMPFORCE = 450
 const GRAVITY = 800
+const DELTA_TIME_REACT = 0.07
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bloodParticle_scene = preload(\"res://Scenes/Blood_Particle_Scene.tscn\")
@@ -132,8 +133,20 @@ func _ready():
 
 func _process(delta):
 	deltaTime += delta
-	_control(delta)
+	_set_speed(delta)
+	_apply_gravity(delta)
 	_check_invincibility(delta)
+	
+	var collidedObject1 = move_and_collide(Vector2(0, velocity.y))
+	var collidedObject2 = move_and_collide(Vector2(velocity.x, 0))
+
+	_handle_collision(collidedObject1)
+	_handle_collision(collidedObject2)
+	
+	_check_for_power_up()
+	_check_if_player_has_fallen_in_pit()
+	_check_if_enemy_has_killed_player(delta)
+	_control(delta)
 	
 	if (!started):
 		started = true
@@ -145,13 +158,13 @@ func _check_invincibility(delta):
 		invincibleTime += delta
 		invincibleTimer += delta
 		
-		if (invincibleTimer > 2):
+		if (invincibleTimer > (DELTA_TIME_REACT * 3)):
 			playerSprite.visible = true
 			invincible = false
 			if(power < 0):
 				power = 0
 			
-		if(invincibleTime > 0.05):
+		if(invincibleTime > DELTA_TIME_REACT):
 			if(playerSprite.visible):
 				playerSprite.visible = false
 			else:
@@ -163,59 +176,34 @@ func _check_invincibility(delta):
 	pass
 
 
+func _handle_timers(delta):
+	if (sliding):
+		slidingTimer += delta
+	
+		# determines how long the player can slide for
+		if (slidingTimer > 1):
+			sliding = false
+			slidingTimer = 0
+			
+	elif (shooting):
+		shootingTimer += delta
+		
+		# creates a delay so that the player can not keep on firing
+		if (shootingTimer > 1):
+			shooting = false
+			shootingTimer = 0
+
 func _control(delta):
-	_jump()
-	_move()
-	_action_1(delta)
-	_action_2(delta)
+	_handle_timers(delta)
 	
-	_set_speed(delta)
-	_apply_gravity(delta)
-		
-	var collidedObject1 = move_and_collide(Vector2(0, velocity.y))
-	var collidedObject2 = move_and_collide(Vector2(velocity.x, 0))
+	# reset character animation to default when no action is being performed
+	if (currentJumpCount == 0 and !shooting and !sliding and facingDirection != 0):
+		playerSprite.animation = \"robot_walk\"
+		repeatFrames = true
 	
-	_handle_collision(collidedObject1)
-	_handle_collision(collidedObject2)
-	_check_for_power_up()
-	_check_if_player_has_fallen_in_pit()
-	_check_if_enemy_has_killed_player(delta)
-	
-	pass
-
-# TODO: To implement later
-func _swap_character():
-#	if (Input.is_action_just_pressed(\"tab\")):
-#			playerSprite.visible = false
-#			var character = Dino_Character_Scene.instance()
-#			character.position = self.get_position()
-#			get_tree().root.add_child(character)
-#			self.queue_free()
-
-	pass
-
-
-func _jump():
-	# control jump
-	if (sliding == false):
-		if (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount):
-			playerSpeedY = -JUMPFORCE
-			currentJumpCount += 1
-			playerSprite.animation = \"robot_jump\"
-
-		if (deltaTime > 0.08 and currentJumpCount >= maxJumpCount):
-			if (playerSprite.frame < playerSprite.get_sprite_frames().get_frame_count(playerSprite.animation) - 1):
-				playerSprite.frame = playerSprite.frame + 1
-
-			deltaTime = 0
-		
-	pass
-	
-	
-func _action_1(delta):
-	# action 2
 	if (Input.is_action_just_pressed(\"action_1\") and !shooting and !sliding):
 		shooting = true
+		repeatFrames = false
 		var bullet = bullet_scene.instance()
 		var muzzle = muzzle_scene.instance()
 		bullet.speed = 800
@@ -235,85 +223,45 @@ func _action_1(delta):
 		
 		get_tree().root.add_child(bullet)
 		get_tree().root.add_child(muzzle)
-	
-	if (shooting):
-		shootingTimer += delta
-		shootingFrameTimer += delta
 		
-		if (shootingFrameTimer > 0.1 and !sliding):
-			if (facingDirection != 0  and currentJumpCount == 0):
-				playerSprite.animation = \"robot_run_shoot\"
-			elif (facingDirection == 0 and currentJumpCount == 0):
-				playerSprite.animation = \"robot_shoot\"
-			elif (currentJumpCount > 0):
-				playerSprite.animation = \"robot_jump_shoot\"
-			
+		if (currentJumpCount > 0):
+			playerSprite.animation = \"robot_jump_shoot\"
+		elif (facingDirection != 0):
+			playerSprite.animation = \"robot_run_shoot\"
+		elif (facingDirection == 0):
+			playerSprite.animation = \"robot_shoot\"
 		
-			if (playerSprite.frame < playerSprite.get_sprite_frames().get_frame_count(playerSprite.animation) - 1):
-				playerSprite.frame = playerSprite.frame + 1
-			
-			shootingFrameTimer = 0
-			deltaTime = 0
-		
-		if (shootingTimer > 1):
-			shooting = false
-			shootingTimer = 0
-			playerSprite.animation = \"robot_walk\"
-
-	pass
-	
-	
-func _action_2(delta):
-	# action 2
-	if (Input.is_action_just_pressed(\"action_2\") and velocity.x != 0):
+	elif (Input.is_action_just_pressed(\"action_2\") and velocity.x != 0 and !sliding and !shooting):
 		sliding = true
 		playerSprite.animation = \"robot_slide\"
-
-	if (sliding):
-		slidingTimer += delta
-		if (slidingTimer > 1):
-			sliding = false
-			slidingTimer = 0
-			playerSprite.animation = \"robot_walk\"
-
-	if (slidingTimer > 0.3):
-		if (playerSprite.frame < playerSprite.get_sprite_frames().get_frame_count(playerSprite.animation) - 1):
-				playerSprite.frame = playerSprite.frame + 1
-
-		deltaTime = 0
-
-	pass
-
-
-func _move():
-	# control facing direction
-	if (currentJumpCount == 0 and !shooting and !sliding and facingDirection != 0):
-		playerSprite.animation = \"robot_walk\"
+		repeatFrames = true
+	elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount and !sliding):
+		playerSpeedY = -JUMPFORCE
+		currentJumpCount += 1
+		playerSprite.animation = \"robot_jump\"
+		repeatFrames = false
+	elif (Input.is_action_pressed(\"move_left\")):
+		facingDirection = -1
+		movementDirection = facingDirection
+		playerSprite.flip_h = true;
+	elif (Input.is_action_pressed(\"move_right\")):
+		facingDirection = 1
+		movementDirection = facingDirection
+		playerSprite.flip_h = false;
+	elif (Input.is_action_just_pressed(\"tab\")):
+#			playerSprite.visible = false
+#			var character = Dino_Character_Scene.instance()
+#			character.position = self.get_position()
+#			get_tree().root.add_child(character)
+#			self.queue_free()
+			pass
+	elif (currentJumpCount == 0 and !sliding and !shooting):
+		facingDirection = 0
+		playerSprite.animation = \"robot_idle\"
+		repeatFrames = true
 	
-	if (sliding == false):
-		if (Input.is_action_pressed(\"move_left\")):
-			facingDirection = -1
-			movementDirection = facingDirection
-			playerSprite.flip_h = true;
-			_animate_player()
-		elif (Input.is_action_pressed(\"move_right\")):
-			facingDirection = 1
-			movementDirection = facingDirection
-			playerSprite.flip_h = false;
-			_animate_player()
-		else:
-			facingDirection = 0
-			if (currentJumpCount == 0 and !sliding and !shooting):
-				playerSprite.animation = \"robot_idle\"
-				
-				if (deltaTime > 0.1):
-					if (playerSprite.frame == playerSprite.get_sprite_frames().get_frame_count(playerSprite.animation) - 1):
-						playerSprite.frame = 0
-					else:
-						playerSprite.frame = playerSprite.frame + 1
-					
-					deltaTime = 0
-		
+	_animate_player()
+	
 	pass
 
 
@@ -323,7 +271,6 @@ func _set_speed(delta):
 		playerSpeedX += MOVEMULTI * delta
 	else:
 		playerSpeedX -= MOVEMULTI * 2 * delta
-		
 	pass
 	
 
@@ -340,15 +287,14 @@ func _apply_gravity(delta):
 
 
 func _animate_player():
-	if (deltaTime > 0.065 and currentJumpCount == 0):
-#		playerSprite.animation = \"robot_walk\"
+	if (deltaTime > DELTA_TIME_REACT):
 		if (playerSprite.frame == playerSprite.get_sprite_frames().get_frame_count(playerSprite.animation) - 1):
-			playerSprite.frame = 0
+			if (repeatFrames):
+				playerSprite.frame = 0
 		else:
 			playerSprite.frame = playerSprite.frame + 1
-	
+			
 		deltaTime = 0
-	
 	pass
 
 
@@ -360,43 +306,31 @@ func _handle_collision(collidedObject):
 			 
 			if (currentJumpCount > 0):
 				currentJumpCount = 0
+				playerSprite.animation = \"robot_walk\"
+				repeatFrames = true;
 	
-		#if character collides with an object
-		_remove_if_brick(collidedObject);
-		_check_if_power_up_brick(collidedObject)
-	pass
-
-	
-func _remove_if_brick(object):
-	var objectParent = object.collider.get_parent()
-	if (objectParent.is_in_group(\"Bricks\")):
 		if (sliding):
-			#add the particle effect of the brick breaking
-			var particleEffect = bricksParticle_scene.instance()
-			particleEffect.get_node(\".\").set_emitting(true)
-			particleEffect.position = self.get_position()  - Vector2(0, 20)
-			get_tree().root.add_child(particleEffect)
-			#remove the brick
-			objectParent.queue_free()
-		
-	pass
-	
-	
-func _check_if_power_up_brick(object):
-	var objectParent = object.collider.get_parent()
-	if (objectParent.is_in_group(\"PowerUpBrick\")):
-		if (sliding):
-			var particleEffect = bricksParticle_scene.instance()
-			particleEffect.get_node(\".\").set_emitting(true)
-			particleEffect.position = self.get_position()  - Vector2(0, 20)
-			get_tree().root.add_child(particleEffect)
-			#remove the brick
-			objectParent.queue_free()
-		
-			# create actual power up
-			var powerUp = powerUp_scene.instance()
-			powerUp.position = objectParent.position - Vector2(0, 50)
-			get_tree().root.add_child(powerUp)
+			var objectParent = collidedObject.collider.get_parent()
+			if (objectParent.is_in_group(\"Bricks\")):
+					#add the particle effect of the brick breaking
+					var particleEffect = bricksParticle_scene.instance()
+					particleEffect.get_node(\".\").set_emitting(true)
+					particleEffect.position = self.get_position()  - Vector2(0, 20)
+					get_tree().root.add_child(particleEffect)
+					#remove the brick
+					objectParent.queue_free()
+			if (objectParent.is_in_group(\"PowerUpBrick\")):
+					var particleEffect = bricksParticle_scene.instance()
+					particleEffect.get_node(\".\").set_emitting(true)
+					particleEffect.position = self.get_position()  - Vector2(0, 20)
+					get_tree().root.add_child(particleEffect)
+					#remove the brick
+					objectParent.queue_free()
+				
+					# create actual power up
+					var powerUp = powerUp_scene.instance()
+					powerUp.position = objectParent.position - Vector2(0, 50)
+					get_tree().root.add_child(powerUp)
 	pass
 
 	
