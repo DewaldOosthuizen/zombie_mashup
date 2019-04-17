@@ -17,6 +17,7 @@ export var power = 0
 var velocity = Vector2(0, 0)
 var noValidCollision = []
 var deltaTime = 0
+var sprite
 
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
@@ -24,6 +25,7 @@ const bone_scene = preload(\"res://Scenes/Bone_Scene.tscn\")
 const blood_scene = preload(\"res://Scenes/Blood_Particle_Scene.tscn\")
 
 func _ready():
+	sprite = get_node(\"AnimatedSprite\")
 	set_process(true)
 	pass
 	
@@ -59,9 +61,9 @@ func _set_speed(delta):
 	
 	
 func _animate():
-	if (deltaTime > 0.2):
-		if (get_node(\"AnimatedSprite\").frame < get_node(\"AnimatedSprite\").get_sprite_frames().get_frame_count(\"bullet\") - 1):
-			get_node(\"AnimatedSprite\").frame = get_node(\"AnimatedSprite\").frame + 1
+	if (deltaTime > 0.05):
+		if (sprite.frame < sprite.get_sprite_frames().get_frame_count(\"bullet\") - 1):
+			sprite.frame = sprite.frame + 1
 
 		deltaTime = 0
 		

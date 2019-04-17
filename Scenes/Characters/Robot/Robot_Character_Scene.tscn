@@ -118,7 +118,7 @@ const MAXIMUMSPEED = 400
 const MOVEMULTI = 800
 const JUMPFORCE = 450
 const GRAVITY = 800
-const DELTA_TIME_REACT = 0.09
+const DELTA_TIME_REACT = 0.05
 const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
 const bloodParticle_scene = preload(\"res://Scenes/Blood_Particle_Scene.tscn\")
@@ -244,7 +244,7 @@ func _control(delta):
 		elif (facingDirection == 0):
 			playerSprite.animation = \"robot_shoot\"
 		
-	elif (Input.is_action_just_pressed(\"action_2\") and velocity.x != 0 and !sliding and !shooting):
+	elif (Input.is_action_just_pressed(\"action_2\") and velocity.x > 0 and !sliding and !shooting):
 		sliding = true
 		playerSprite.animation = \"robot_slide\"
 		repeatFrames = true
@@ -271,13 +271,14 @@ func _control(delta):
 	elif (sliding):
 		pass
 	else:
-		facingDirection = 0
-		if (currentJumpCount == 0):
+		if (facingDirection != 0):
+			facingDirection = 0
+		
+		if (currentJumpCount == 0 and !shooting):
 			playerSprite.animation = \"robot_idle\"
 			repeatFrames = true
 	
 	_animate_player()
-	
 	pass
 
 
