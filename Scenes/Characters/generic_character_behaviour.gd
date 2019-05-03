@@ -11,7 +11,6 @@ var currentJumpCount = 0 # checks if the character is busy jumping, the count be
 var maxSpeed = 350 # character max speed, defaulted to 350 
 var movementMultiplier = 800 # character movement multiplier
 var health = 3 # character starts with 3 lives
-var type = "" # reference the character scene
 
 var ammo = 0 # default starting ammo for characters
 var ammoIncrease = 0 # default ammo increase when picking up more ammo 
@@ -35,11 +34,13 @@ var invincible = false
 var action1 = false # mapped to z
 var action2 = false # mapped to x
 var action3 = false # mapped to control
+var canReload = false
 
 # Constants
 const GRAVITY = 800
 const JUMPFORCE = 400
 
+signal reload(character)
 
 const bloodParticle_scene = preload("res://Scenes/Blood_Particle_Scene.tscn")
 
@@ -114,8 +115,7 @@ func _handle_timers(delta):
 			# check if player is dead
 			if (health < 0):
 				#warning-ignore:return_value_discarded
-				get_tree().reload_current_scene()
-				self.queue_free()
+				_emit_reload()
 					
 	# Create flickering effect to indicate damage
 	if (invincible):
@@ -148,3 +148,10 @@ func _move_right():
 	facingDirection = 1
 	movementDirection = facingDirection
 	playerSprite.flip_h = false
+	
+
+func _emit_reload():
+	if(canReload):
+		emit_signal("reload", self)
+	else:
+		self.queue_free()

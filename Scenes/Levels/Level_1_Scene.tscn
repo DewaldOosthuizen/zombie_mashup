@@ -441,7 +441,7 @@ scale = Vector2( 1.61456, 1 )
 shape = SubResource( 5 )
 
 [node name="Pits" type="Node2D" parent="."]
-position = Vector2( 0, -3.57628e-006 )
+position = Vector2( 0, -3.57628e-06 )
 scale = Vector2( 3, 1 )
 
 [node name="Pit1" parent="Pits" instance=ExtResource( 11 )]

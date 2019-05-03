@@ -11,7 +11,7 @@
 script/source = "extends Node2D
 
 var level = 0 # starting level
-var character = {\"health\": 3, \"power\": 0, \"ammo\": 10, \"type\": \"Robot\"} # player character attributes
+var characterStats = {\"health\": 3, \"power\": 0, \"ammo\": 10, \"type\": \"Robot\"} # player character attributes
 
 
 # Called when the node enters the scene tree for the first time.
@@ -52,54 +52,70 @@ func advance_to_next_level():
 	
 	# increment level and add next level as active scene
 	level += 1;
-	var nextLevel_scene = load(\"res://Scenes/Levels/Level_\" + str(level) + \"_Scene.tscn\")
-	if (nextLevel_scene):
-		# create next level scene
-		var nextLevel = nextLevel_scene.instance()
-		# add next level to world
-		if (nextLevel):
-			nextLevel.connect(\"exit_level\", self, \"load_character_and_attributes\")
-			nextLevel.connect(\"entered_level\", self, \"setup_level\")
-				
-	#		get_tree().change_scene_to(nextLevel_scene)
-			get_tree().root.call_deferred(\"add_child\", nextLevel)
-			# set the next level as the current scene
-			get_tree().call_deferred(\"set_current_scene\", nextLevel)
-			print(\":: started level \" + str(level) + \" ::\")
+	create_level()
 	pass
-	
+
+
+func create_level():
+	var level_scene = load(\"res://Scenes/Levels/Level_\" + str(level) + \"_Scene.tscn\")
+	if (level_scene):
+		level_scene = level_scene.instance()
+		# create next level scene
+		connect_to_level_signals(level_scene)
+				
+		# set the next level as the current scene
+		get_tree().root.call_deferred(\"add_child\", level_scene)
+		get_tree().call_deferred(\"set_current_scene\", level_scene)
+		print(\":: started level \" + str(level) + \" ::\")
+
+
+func connect_to_level_signals(level):
+	if (level):
+		if (!level.is_connected(\"entered_level\", self, \"setup_level\")):
+			level.connect(\"entered_level\", self, \"setup_level\")
+#		if (!level.is_connected(\"exit_level\", self, \"reset_current_scene\")):
+#			level.connect(\"exit_level\", self, \"setup_level\")
+
+
+func reset_current_scene(character):
+	# remove level
+	var currentLevel = get_tree().get_nodes_in_group(\"level\").front()
+	if (currentLevel):
+		get_tree().root.remove_child(currentLevel)
+		currentLevel.free()
+		
+	# recreate level
+	create_level()
+
 
 func setup_level():
 	# get the end door for current level and listen for events, if main character enters the door
 	# the signal will emit and the next level will be created
 	var end_door = get_tree().get_nodes_in_group(\"end_door\").front()
-	if (end_door):
+	if (end_door and !end_door.is_connected(\"enteredEndDoor\", self, \"advance_to_next_level\")):
 		end_door.connect(\"enteredEndDoor\", self, \"advance_to_next_level\")
 		print(\":: end door connected ::\")
 	
-	if (!get_tree().get_nodes_in_group(\"character\").front()):
-		var playerCharacter = load(\"res://Scenes/Characters/\" + character[\"type\"] + \"/Character_Scene.tscn\").instance()
-		playerCharacter.ammo = character[\"ammo\"]
-		playerCharacter.health = character[\"health\"]
-		playerCharacter.power = character[\"power\"]
-		playerCharacter.type = character[\"type\"]
-		playerCharacter.position.x = 550
-		playerCharacter.position.y = 0
-		get_tree().root.add_child(playerCharacter)
+	var character = get_tree().get_nodes_in_group(\"character\").front()
+	if (!character):
+		character = load(\"res://Scenes/Characters/\" + characterStats[\"type\"] + \"/Character_Scene.tscn\").instance()
+		character.position.x = 300
+		character.position.y = 0
+		get_tree().root.add_child(character)
 	else:
-		get_tree().get_nodes_in_group(\"character\").front().position.x = 550
-		get_tree().get_nodes_in_group(\"character\").front().position.y = 0
-	pass
-
-
-func load_character_and_attributes():
-	var playerCharacter = get_tree().get_nodes_in_group(\"character\").front()
-	if (playerCharacter):
-		character.health = playerCharacter.health
-		character.power = playerCharacter.power
-		character.ammo = playerCharacter.ammo
-		character.type = playerCharacter.type
+		# reset character position to start of level
+		if (character.health < 0):
+			print(\"character died, respawning...\")
+			character._ready()
 		
+		character.position.x = 300
+		character.position.y = 0
+	
+	if (character and !character.is_connected(\"reload\", self, \"reset_current_scene\")):
+		character.connect(\"reload\", self, \"reset_current_scene\")
+	
+	pass
+	
 "
 
 [node name="World" type="Node2D"]
