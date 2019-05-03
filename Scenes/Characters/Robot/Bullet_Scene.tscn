@@ -17,16 +17,16 @@ export var power = 0
 var velocity = Vector2(0, 0)
 var noValidCollision = []
 var deltaTime = 0
-var sprite
 
-const bricksParticle_scene = preload(\"res://Scenes/Brick_Particle_Scene.tscn\")
+const bricksParticle_scene = preload(\"res://Scenes/Environment/Brick_1_Particle_Scene.tscn\")
 const powerUp_scene = preload(\"res://Scenes/Power_Up_Scene.tscn\")
-const bone_scene = preload(\"res://Scenes/Bone_Scene.tscn\")
+const bone_scene = preload(\"res://Scenes/Environment/Bone_Scene.tscn\")
 const blood_scene = preload(\"res://Scenes/Blood_Particle_Scene.tscn\")
 const muzzle_scene = preload(\"res://Scenes/Characters/Robot/Muzzle_Scene.tscn\")
 
+onready var sprite = get_node(\"AnimatedSprite\")
+
 func _ready():
-	sprite = get_node(\"AnimatedSprite\")
 	create_muzzle()
 	set_process(true)
 	pass
@@ -67,22 +67,17 @@ func create_muzzle():
 	get_tree().root.add_child(muzzle)
 	
 func _animate():
-	if (deltaTime > 0.05):
-		if (sprite.frame < sprite.get_sprite_frames().get_frame_count(\"bullet\") - 1):
-			sprite.frame = sprite.frame + 1
-
-		deltaTime = 0
-		
+	sprite.play()
 	pass	
 
 func _remove_if_brick(object):
 	if (object and object.collider):
 		var objectParent = object.collider.get_parent()
-		if (objectParent.is_in_group(\"Bricks\")):
+		if (objectParent.is_in_group(\"brick\")):
 			objectParent.break_object()
 			if (power < 2):
 				self.queue_free()
-		elif (objectParent.is_in_group(\"PowerUpBrick\")):
+		elif (objectParent.is_in_group(\"power_up_brick\")):
 			objectParent.break_object()
 			if (power < 2):
 				self.queue_free()
@@ -95,7 +90,7 @@ func _check_collision_objects():
 	var area = get_node(\"Area2D\").get_overlapping_bodies()
 	if (area.size() != 0):
 		for body in area:
-			if (body.is_in_group(\"Enemy_character\")):
+			if (body.is_in_group(\"enemy_character\")):
 				body.queue_free()
 				
 				#blood
@@ -109,7 +104,7 @@ func _check_collision_objects():
 				bones.position = self.get_position()  - Vector2(0, -70)
 				get_tree().root.add_child(bones)
 				self.queue_free()
-			if (body.is_in_group(\"Enemy_saw\")):
+			if (body.is_in_group(\"enemy_saw\")):
 				if (power > 1):
 					body.queue_free()
 				self.queue_free()
@@ -151,6 +146,4 @@ shape = SubResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 4 )
 animation = "bullet"
-frame = 1
-speed_scale = 2.0
-
+speed_scale = 1.5

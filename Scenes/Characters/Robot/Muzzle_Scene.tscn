@@ -6,7 +6,6 @@
 [ext_resource path="res://resources/Characters/robotfree/png/Objects/Muzzle_003.png" type="Texture" id=4]
 [ext_resource path="res://resources/Characters/robotfree/png/Objects/Muzzle_004.png" type="Texture" id=5]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
@@ -18,8 +17,6 @@ animations = [ {
 [sub_resource type="GDScript" id=2]
 script/source = "extends AnimatedSprite
 
-var deltaTime = 0
-
 func _ready():
 	set_process(true)
 	self.animation = \"muzzle\"
@@ -27,21 +24,11 @@ func _ready():
 	
 	
 func _process(delta):
-	deltaTime = deltaTime + delta
-	
 	if (self.frame == self.get_sprite_frames().get_frame_count(self.animation) - 1):
 		self.queue_free()
 	
-	if (deltaTime > 0.1):
-		# after all frames have been played, remove muzzle
-		if (self.frame < self.get_sprite_frames().get_frame_count(self.animation) - 1):
-			self.frame += 1
-		else:
-			self.queue_free()
-			
-		deltaTime = 0
-		
-	
+	self.play()
+
 	pass
 "
 
@@ -49,5 +36,6 @@ func _process(delta):
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "muzzle"
+speed_scale = 1.5
 script = SubResource( 2 )
 

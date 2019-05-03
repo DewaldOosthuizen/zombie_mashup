@@ -2,7 +2,6 @@
 
 [ext_resource path="res://resources/Levels/freescifiplatform/png/Objects/Saw.png" type="Texture" id=1]
 
-
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D
 
@@ -24,7 +23,7 @@ func _process(delta):
 extents = Vector2( 12.9924, 15.7173 )
 
 [node name="Enemy" type="KinematicBody2D" groups=[
-"Enemy_saw",
+"enemy_saw",
 ]]
 scale = Vector2( 2, 2 )
 script = SubResource( 1 )

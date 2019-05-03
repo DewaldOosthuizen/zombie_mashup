@@ -6,7 +6,7 @@
 extents = Vector2( 28.4362, 28.035 )
 
 [node name="PowerUp" type="RigidBody2D" groups=[
-"PowerUp",
+"power_up",
 ]]
 
 [node name="Sprite" type="Sprite" parent="."]
