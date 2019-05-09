@@ -2,8 +2,6 @@
 
 [ext_resource path="res://resources/Levels/deserttileset/png/Objects/Bush (2).png" type="Texture" id=1]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 48.0145, 5.56767 )
 
@@ -12,7 +10,7 @@ extents = Vector2( 48.0145, 5.56767 )
 ]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.631119, 0 )
+position = Vector2( -0.724869, 48.6216 )
 shape = SubResource( 1 )
 
 [node name="Sprite1" type="Sprite" parent="."]
@@ -29,4 +27,3 @@ texture = ExtResource( 1 )
 position = Vector2( 32.2608, -3.94324 )
 scale = Vector2( 0.2, 0.291682 )
 texture = ExtResource( 1 )
-

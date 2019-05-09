@@ -72,6 +72,7 @@ action_3={
 
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+threads/thread_model=2
 quality/subsurface_scattering/quality=2
 environment/default_clear_color=Color( 0.284546, 0.286839, 0.289063, 1 )
 quality/filters/msaa=4

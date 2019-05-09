@@ -1,115 +1,118 @@
-[gd_scene load_steps=87 format=2]
+[gd_scene load_steps=90 format=2]
 
-[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (1).png" type="Texture" id=1]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (2).png" type="Texture" id=2]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (3).png" type="Texture" id=3]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (4).png" type="Texture" id=4]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (5).png" type="Texture" id=5]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (1).png" type="Texture" id=6]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (2).png" type="Texture" id=7]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (3).png" type="Texture" id=8]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (4).png" type="Texture" id=9]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (5).png" type="Texture" id=10]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (6).png" type="Texture" id=11]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (7).png" type="Texture" id=12]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (8).png" type="Texture" id=13]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (9).png" type="Texture" id=14]
-[ext_resource path="res://resources/Characters/robotfree/png/Jump (10).png" type="Texture" id=15]
-[ext_resource path="res://resources/Characters/robotfree/png/Run (1).png" type="Texture" id=16]
-[ext_resource path="res://resources/Characters/robotfree/png/Run (2).png" type="Texture" id=17]
-[ext_resource path="res://resources/Characters/robotfree/png/Run (3).png" type="Texture" id=18]
-[ext_resource path="res://resources/Characters/robotfree/png/Run (4).png" type="Texture" id=19]
-[ext_resource path="res://resources/Characters/robotfree/png/Run (5).png" type="Texture" id=20]
-[ext_resource path="res://resources/Characters/robotfree/png/Run (6).png" type="Texture" id=21]
-[ext_resource path="res://resources/Characters/robotfree/png/Run (7).png" type="Texture" id=22]
-[ext_resource path="res://resources/Characters/robotfree/png/Run (8).png" type="Texture" id=23]
-[ext_resource path="res://resources/Characters/robotfree/png/Melee (1).png" type="Texture" id=24]
-[ext_resource path="res://resources/Characters/robotfree/png/Melee (2).png" type="Texture" id=25]
-[ext_resource path="res://resources/Characters/robotfree/png/Melee (3).png" type="Texture" id=26]
-[ext_resource path="res://resources/Characters/robotfree/png/Melee (4).png" type="Texture" id=27]
-[ext_resource path="res://resources/Characters/robotfree/png/Melee (5).png" type="Texture" id=28]
-[ext_resource path="res://resources/Characters/robotfree/png/Melee (6).png" type="Texture" id=29]
-[ext_resource path="res://resources/Characters/robotfree/png/Melee (7).png" type="Texture" id=30]
-[ext_resource path="res://resources/Characters/robotfree/png/Melee (8).png" type="Texture" id=31]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (1).png" type="Texture" id=32]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (2).png" type="Texture" id=33]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (3).png" type="Texture" id=34]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (4).png" type="Texture" id=35]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (5).png" type="Texture" id=36]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (6).png" type="Texture" id=37]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (7).png" type="Texture" id=38]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (8).png" type="Texture" id=39]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (9).png" type="Texture" id=40]
-[ext_resource path="res://resources/Characters/robotfree/png/Slide (10).png" type="Texture" id=41]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (1).png" type="Texture" id=42]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (2).png" type="Texture" id=43]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (3).png" type="Texture" id=44]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (4).png" type="Texture" id=45]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (5).png" type="Texture" id=46]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (6).png" type="Texture" id=47]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (7).png" type="Texture" id=48]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (8).png" type="Texture" id=49]
-[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (9).png" type="Texture" id=50]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (1).png" type="Texture" id=51]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (2).png" type="Texture" id=52]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (3).png" type="Texture" id=53]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (4).png" type="Texture" id=54]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (5).png" type="Texture" id=55]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (6).png" type="Texture" id=56]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (7).png" type="Texture" id=57]
-[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (8).png" type="Texture" id=58]
-[ext_resource path="res://resources/Characters/robotfree/png/Shoot (1).png" type="Texture" id=59]
-[ext_resource path="res://resources/Characters/robotfree/png/Shoot (2).png" type="Texture" id=60]
-[ext_resource path="res://resources/Characters/robotfree/png/Shoot (3).png" type="Texture" id=61]
-[ext_resource path="res://resources/Characters/robotfree/png/Shoot (4).png" type="Texture" id=62]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (1).png" type="Texture" id=63]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (2).png" type="Texture" id=64]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (3).png" type="Texture" id=65]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (4).png" type="Texture" id=66]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (5).png" type="Texture" id=67]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (6).png" type="Texture" id=68]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (7).png" type="Texture" id=69]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (8).png" type="Texture" id=70]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (9).png" type="Texture" id=71]
-[ext_resource path="res://resources/Characters/robotfree/png/Dead (10).png" type="Texture" id=72]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (1).png" type="Texture" id=73]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (2).png" type="Texture" id=74]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (3).png" type="Texture" id=75]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (4).png" type="Texture" id=76]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (5).png" type="Texture" id=77]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (6).png" type="Texture" id=78]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (7).png" type="Texture" id=79]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (8).png" type="Texture" id=80]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (9).png" type="Texture" id=81]
-[ext_resource path="res://resources/Characters/robotfree/png/Idle (10).png" type="Texture" id=82]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (1).png" type="Texture" id=1]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (2).png" type="Texture" id=2]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (3).png" type="Texture" id=3]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (4).png" type="Texture" id=4]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (5).png" type="Texture" id=5]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (6).png" type="Texture" id=6]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (7).png" type="Texture" id=7]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (8).png" type="Texture" id=8]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (9).png" type="Texture" id=9]
+[ext_resource path="res://resources/Characters/robotfree/png/Jump (10).png" type="Texture" id=10]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (1).png" type="Texture" id=11]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (2).png" type="Texture" id=12]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (3).png" type="Texture" id=13]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (4).png" type="Texture" id=14]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (5).png" type="Texture" id=15]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (6).png" type="Texture" id=16]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (7).png" type="Texture" id=17]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (8).png" type="Texture" id=18]
+[ext_resource path="res://resources/Characters/robotfree/png/RunShoot (9).png" type="Texture" id=19]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (1).png" type="Texture" id=20]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (2).png" type="Texture" id=21]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (3).png" type="Texture" id=22]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (4).png" type="Texture" id=23]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpShoot (5).png" type="Texture" id=24]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (1).png" type="Texture" id=25]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (2).png" type="Texture" id=26]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (3).png" type="Texture" id=27]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (4).png" type="Texture" id=28]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (5).png" type="Texture" id=29]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (6).png" type="Texture" id=30]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (7).png" type="Texture" id=31]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (8).png" type="Texture" id=32]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (9).png" type="Texture" id=33]
+[ext_resource path="res://resources/Characters/robotfree/png/Slide (10).png" type="Texture" id=34]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (1).png" type="Texture" id=35]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (2).png" type="Texture" id=36]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (3).png" type="Texture" id=37]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (4).png" type="Texture" id=38]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (5).png" type="Texture" id=39]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (6).png" type="Texture" id=40]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (7).png" type="Texture" id=41]
+[ext_resource path="res://resources/Characters/robotfree/png/JumpMelee (8).png" type="Texture" id=42]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (1).png" type="Texture" id=43]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (2).png" type="Texture" id=44]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (3).png" type="Texture" id=45]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (4).png" type="Texture" id=46]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (5).png" type="Texture" id=47]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (6).png" type="Texture" id=48]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (7).png" type="Texture" id=49]
+[ext_resource path="res://resources/Characters/robotfree/png/Run (8).png" type="Texture" id=50]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (1).png" type="Texture" id=51]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (2).png" type="Texture" id=52]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (3).png" type="Texture" id=53]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (4).png" type="Texture" id=54]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (5).png" type="Texture" id=55]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (6).png" type="Texture" id=56]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (7).png" type="Texture" id=57]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (8).png" type="Texture" id=58]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (9).png" type="Texture" id=59]
+[ext_resource path="res://resources/Characters/robotfree/png/Dead (10).png" type="Texture" id=60]
+[ext_resource path="res://resources/Characters/robotfree/png/Shoot (1).png" type="Texture" id=61]
+[ext_resource path="res://resources/Characters/robotfree/png/Shoot (2).png" type="Texture" id=62]
+[ext_resource path="res://resources/Characters/robotfree/png/Shoot (3).png" type="Texture" id=63]
+[ext_resource path="res://resources/Characters/robotfree/png/Shoot (4).png" type="Texture" id=64]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (1).png" type="Texture" id=65]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (2).png" type="Texture" id=66]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (3).png" type="Texture" id=67]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (4).png" type="Texture" id=68]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (5).png" type="Texture" id=69]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (6).png" type="Texture" id=70]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (7).png" type="Texture" id=71]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (8).png" type="Texture" id=72]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (9).png" type="Texture" id=73]
+[ext_resource path="res://resources/Characters/robotfree/png/Idle (10).png" type="Texture" id=74]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (1).png" type="Texture" id=75]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (2).png" type="Texture" id=76]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (3).png" type="Texture" id=77]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (4).png" type="Texture" id=78]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (5).png" type="Texture" id=79]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (6).png" type="Texture" id=80]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (7).png" type="Texture" id=81]
+[ext_resource path="res://resources/Characters/robotfree/png/Melee (8).png" type="Texture" id=82]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://Scenes/Characters/generic_character_behaviour.gd\"
 
 const bullet_scene = preload(\"res://Scenes/Characters/Robot/Bullet_Scene.tscn\")
-onready var tweenNode = get_node(\"Tween\")
-
-var velocity = Vector2(0, 0)
-var tweeining = false
+onready var AreaStandCollisionShape2D = get_node(\"CharacterArea2D/StandCollisionShape2D\")
+onready var AreaSlideCollisionShape2D = get_node(\"AttackArea2D/SlideAttackCollisionShape2D\")
+onready var AreaLeftAttackCollisionShape2D = get_node(\"AttackArea2D/LeftAttackCollisionShape2D\")
+onready var AreaRightAttackCollisionShape2D = get_node(\"AttackArea2D/RightAttackCollisionShape2D\")
+onready var StandCollisionShape2D = get_node(\"StandCollisionShape2D\")
+onready var SlideCollisionShape2D = get_node(\"SlideCollisionShape2D\")
 
 func _ready():
-	playerSprite = .get_node(\"AnimatedSprite\")
-	ammo = 10 # starting ammo
-	ammoIncrease = 10 # ammo will increase by 10 when picking up more ammo
-	power = 0 # starting power
-	powerIncrease = 1 # power will increase by 1 when picking up more power
-	health = 3
-	canReload = true
-	print(\":: Robot character spawed ::\")
-	set_process(true)
+	if (!get_tree().root.is_queued_for_deletion()):
+		default_collision()
+		playerSprite = get_node(\"AnimatedSprite\")
+		ammo = 10 # starting ammo
+		power = 0 # starting power
+		health = 100
+		mainCharacter = true
+		type = \"Robot\"
+		velocity = Vector2(0, 0)
+		print(\":: robot character spawed ::\")
+		set_process(true)
 	pass
-
 
 func _process(delta):
 	area_checks()
 	
 	# set player speed, gravity and animate sprite
-	velocity = ._animate_player(delta)
+	._animate_player(delta)
 	
 	# handle collision on the x-axis
 	var collidedObject1 = move_and_collide(Vector2(velocity.x, 0))
@@ -117,7 +120,7 @@ func _process(delta):
 
 	# handle collision on the y-axis
 	var collidedObject2 = move_and_collide(Vector2(0, velocity.y))
-	handle_collision(collidedObject2, true)
+	handle_collision(collidedObject2, velocity.y > stationaryVelocity)
 	
 	# check for character control
 	control_character()
@@ -128,90 +131,83 @@ func control_character():
 	# reset default behaviour
 	reset_character_sprite_states()
 	
-	# Handle input events
-	if (Input.is_action_just_pressed(\"action_1\") and !action1 and !action2 and !action3 and ammo > 0):
-		action1 = true
-		var bullet = bullet_scene.instance()
-		bullet.speed = 800
-		bullet.power = power
-		var bulletSprite = bullet.get_node(\"AnimatedSprite\")
-		ammo -= 1
-		
-		if (!playerSprite.flip_h):
-			bulletSprite.flip_h = false
-			bullet.movementDirection = 1
-			bullet.position = self.get_position()  - Vector2(-40, 5)
-		else:
-			bulletSprite.flip_h = true;
-			bullet.movementDirection = -1
-			bullet.position = self.get_position()  - Vector2(40, 5)
+	if (!dazed):
+		# Handle input events
+		if (Input.is_action_just_pressed(\"action_1\") and !action1 and !action2 and !action3 and ammo > 0):
+			action1 = true
+			var bullet = bullet_scene.instance()
+			bullet.speed = 800
+			var bulletSprite = bullet.get_node(\"AnimatedSprite\")
+			ammo -= 1
 			
-		#	Add the nodes to the current scene
-		get_tree().root.add_child(bullet)
-		
-		if (currentJumpCount > 0):
-			playerSprite.animation = \"robot_jump_shoot\"
-		elif (facingDirection != 0):
-			playerSprite.animation = \"robot_run_shoot\"
-		elif (facingDirection == 0):
-			playerSprite.animation = \"robot_shoot\"
-	
-	elif (Input.is_action_just_pressed(\"action_2\") and !action1 and !action2 and !action3):
-		action2 = true
-		var collision = get_node(\"Area2D/CollisionShape2D\")
-		collision.position.x += (15 * movementDirection)
-		collision.scale.x = 1.3
-		
-		if (currentJumpCount > 0):
-			playerSprite.animation = \"robot_jump_melee\"
-		else:
-			playerSprite.animation = \"robot_melee\"
+			if (!playerSprite.flip_h):
+				bulletSprite.flip_h = false
+				bullet.movementDirection = 1
+				bullet.position = self.get_position()  - Vector2(-20, 5)
+			else:
+				bulletSprite.flip_h = true;
+				bullet.movementDirection = -1
+				bullet.position = self.get_position()  - Vector2(20, 5)
+				
+			#	Add the nodes to the current scene
+			get_tree().root.add_child(bullet)
 			
-	elif (Input.is_action_just_pressed(\"action_3\") and facingDirection != 0 and !action3):
-		action3 = true
-		playerSprite.animation = \"robot_slide\"
-	elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount and !action2):
-		playerSpeedY = -JUMPFORCE
-		currentJumpCount += 1
-		playerSprite.animation = \"robot_jump\"
-		playerSprite.frame = 0
-		repeatFrames = false
-	elif (Input.is_action_just_pressed(\"tab\")):
-#			playerSprite.visible = false
-#			var character = Dino_Character_Scene.instance()
-#			character.position = self.get_position()
-#			get_tree().root.add_child(character)
-#			self.queue_free()
-			pass	
-	elif (Input.is_action_pressed(\"move_left\")):
-		._move_left()
-		stop_tweening()
-	elif (Input.is_action_pressed(\"move_right\")):
-		._move_right()
-		stop_tweening()
-	else:
-		if (!action2):
-			facingDirection = 0
-			if (currentJumpCount == 0 and !action1 and !action2):
-				playerSprite.animation = \"robot_idle\"
-				repeatFrames = true
-	pass
+			if (currentJumpCount > 0):
+				playerSprite.animation = \"robot_jump_shoot\"
+			elif (facingDirection != 0):
+				playerSprite.animation = \"robot_run_shoot\"
+			elif (facingDirection == 0):
+				playerSprite.animation = \"robot_shoot\"
+		
+			._emit_refresh_hud()
+		elif (Input.is_action_just_pressed(\"action_2\") and !action1 and !action2 and !action3):
+			action2 = true
+			melee_attack_collision()
+			if (currentJumpCount > 0):
+				playerSprite.animation = \"robot_jump_melee\"
+			else:
+				playerSprite.animation = \"robot_melee\"
+				
+		elif (Input.is_action_just_pressed(\"action_3\") and facingDirection != 0 and !action3):
+			action3 = true
+			playerSprite.animation = \"robot_slide\"
+			slide_attack_collision()
+		elif (Input.is_action_just_pressed(\"move_jump\") and currentJumpCount < maxJumpCount and !action3):
+			playerSpeedY = -JUMPFORCE
+			currentJumpCount += 1
+			playerSprite.animation = \"robot_jump\"
+			playerSprite.frame = 0
+			repeatFrames = false
+			action1 = false
+			action2 = false
+			action3 = false
+		elif (Input.is_action_pressed(\"move_left\")):
+			._move_left()
+		elif (Input.is_action_pressed(\"move_right\")):
+			._move_right()
+		elif (Input.is_action_pressed(\"respawn\")):
+			._emit_reposition()
+		else:
+			if (!action2):
+				facingDirection = 0
+				if (currentJumpCount == 0 and !action1 and !action2 and !action3):
+					playerSprite.animation = \"robot_idle\"
+					repeatFrames = true
+		pass
 
 
 func reset_character_sprite_states():
-	# Reset character animation to default when no action is being performed
-	if (currentJumpCount == 0 and (action1 or action2 or action3)):
+	if (dazed):
+		playerSprite.animation = \"robot_idle\"
+	elif (currentJumpCount == 0 and (action1 or action2 or action3)):
 		if (!playerSprite.is_playing()):
 			repeatFrames = true
 			if (facingDirection == 0):
 				playerSprite.animation = \"robot_idle\"
 			else: 
 				playerSprite.animation = \"robot_walk\"
-	elif (currentJumpCount == 0):
-		var collision = get_node(\"Area2D/CollisionShape2D\")
-		collision.position.x = playerSprite.position.x
-		collision.scale.x = 1
-		
+	elif (!action1 and !action2 and !action3 and currentJumpCount == 0):
+		default_collision()
 		repeatFrames = true
 		if (facingDirection == 0):
 			playerSprite.animation = \"robot_idle\"
@@ -219,128 +215,154 @@ func reset_character_sprite_states():
 			playerSprite.animation = \"robot_walk\"
 		
 		
+		
 func area_checks():
-	var area = get_node(\"Area2D\").get_overlapping_bodies()
-	if (area.size() != 0):
-		for body in area:
-			if (body):
-				if ((body.get_parent().is_in_group(\"brick\") or body.get_parent().is_in_group(\"power_up_brick\")) and action2):
-					body.get_parent().break_object()
+	var objectsInCharacterArea = get_node(\"CharacterArea2D\").get_overlapping_bodies()
+	if (objectsInCharacterArea.size() != 0):
+		for body in objectsInCharacterArea:
+			if (body and health > 0):
+				var parent = body.get_parent()
+				if (parent.is_in_group(\"barrier\")):
+					get_node(\"CollisionShape2D\").disabled = false
+					disableGravity = false
 				elif (body.is_in_group(\"ammo_pack\")):
 					power += powerIncrease
 					body.queue_free()
+					._emit_refresh_hud()
 				elif (body.is_in_group(\"power_up\")):
 					power += powerIncrease
 					body.queue_free()
+					._emit_refresh_hud()
 				elif (body.is_in_group(\"pit\")):
 					power = 0
 					ammo = 0
-					health = -1
+					health -= 100
 					._emit_reload()
 				elif (body.is_in_group(\"enemy_character\")):
-					if (action2 or action3):
-						body.get_node(\"CollisionShape2D\").disabled = true
-					else:
-						blood = true;
+					if (body.health > 0 and (body.action1 or body.action2 or body.action3) and !dazed):
+						._take_damage(20)
 				elif (body.is_in_group(\"enemy_saw\")):
-					blood = true
-				
-
-func stop_tweening():
-	if (tweeining):
-		tweenNode.stop(self, \"position\")
-		tweeining = false
+					._take_damage(10)
 		
-		
-func start_tweening(movementPosition, tweenDuration, trans_type, ease_type):
-	if (!tweeining):
-		tweeining = true
-		# tween properties
-		tweenNode.interpolate_property(self, \"position\", self.position, movementPosition, tweenDuration, trans_type, ease_type)
-		#start tween
-		tweenNode.start()
-
+		var objectsInAttackArea = get_node(\"AttackArea2D\").get_overlapping_bodies()
+		if (objectsInAttackArea.size() != 0):
+			for body in objectsInAttackArea:
+				if (body and health > 0):
+					var parent = body.get_parent()
+					if (body.is_in_group(\"enemy_character\")):
+						if (action2):
+							body._take_damage(20)
+							body._daze()
+						elif (action3):
+							body._take_damage(10)
+							body._daze()
+					if ((parent.is_in_group(\"brick\") or parent.is_in_group(\"power_up_brick\"))):
+						parent.break_object()
+	pass						
+							
 
 func handle_collision(collidedObject, resetJump):
 	if (collidedObject):
 		#if character is on the floor
 		if (resetJump):
 			playerSpeedY = 0
-			 
-			if (currentJumpCount > 0):
-				currentJumpCount = 0
-				repeatFrames = true;
+			currentJumpCount = 0
+			repeatFrames = true;
 	
-		var objectParent = collidedObject.collider.get_parent()
-		if (action3 and !resetJump):
-			if (objectParent.is_in_group(\"brick\")):
-				objectParent.break_object()
-			elif (objectParent.is_in_group(\"power_up_brick\")):
-				objectParent.break_object()
-		if (objectParent.is_in_group(\"float\") && resetJump):
-			if (objectParent.canTween and facingDirection == 0):
-				self.position.x += (objectParent.position.x - self.position.x)
-#				start_tweening(objectParent.movementPosition, objectParent.tweenDuration, objectParent.trans_type, objectParent.ease_type)
-	pass"
+#		var objectParent = collidedObject.collider.get_parent()
+#		if (objectParent.is_in_group(\"float\")):
+#			if (objectParent.canTween and currentJumpCount == 0 and facingDirection == 0):
+#				self.position.x += (collidedObject.position.x - self.position.x)
+	pass
+	
+func default_collision():
+	AreaStandCollisionShape2D.disabled = false
+	AreaSlideCollisionShape2D.disabled = true
+	AreaLeftAttackCollisionShape2D.disabled = true
+	AreaRightAttackCollisionShape2D.disabled = true
+	StandCollisionShape2D.disabled = false
+	SlideCollisionShape2D.disabled = true
+	
+func melee_attack_collision():
+	if (movementDirection == 1):
+		AreaRightAttackCollisionShape2D.disabled = false
+	else:
+		AreaLeftAttackCollisionShape2D.disabled = false
+
+func slide_attack_collision():
+	SlideCollisionShape2D.disabled = false
+	AreaSlideCollisionShape2D.disabled = false
+	StandCollisionShape2D.disabled = true
+	AreaStandCollisionShape2D.disabled = true"
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 12.0227
+height = 24.2472
+
+[sub_resource type="CapsuleShape2D" id=5]
+height = 9.31621
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 11.1301, 10 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8.23116, 19.3849 )
+extents = Vector2( 3.3516, 20.3995 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 2.32689, 10 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "robot_jump_shoot",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "robot_jump",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ) ],
-"loop": true,
-"name": "robot_walk",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ) ],
-"loop": true,
-"name": "robot_melee",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ) ],
-"loop": true,
-"name": "robot_slide",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
 "loop": true,
 "name": "robot_run_shoot",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ) ],
+"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "robot_jump_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
+"loop": true,
+"name": "robot_slide",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ) ],
 "loop": true,
 "name": "robot_jump_melee",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 59 ), ExtResource( 60 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 62 ), ExtResource( 62 ), ExtResource( 62 ) ],
+"frames": [ ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ) ],
 "loop": true,
-"name": "robot_shoot",
+"name": "robot_walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 63 ), ExtResource( 64 ), ExtResource( 65 ), ExtResource( 66 ), ExtResource( 67 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ) ],
+"frames": [ ExtResource( 51 ), ExtResource( 52 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 58 ), ExtResource( 59 ), ExtResource( 60 ) ],
 "loop": true,
 "name": "robot_dead",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 73 ), ExtResource( 74 ), ExtResource( 75 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ), ExtResource( 80 ), ExtResource( 81 ), ExtResource( 82 ) ],
+"frames": [ ExtResource( 61 ), ExtResource( 62 ), ExtResource( 62 ), ExtResource( 63 ), ExtResource( 64 ), ExtResource( 64 ), ExtResource( 64 ) ],
+"loop": true,
+"name": "robot_shoot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 65 ), ExtResource( 66 ), ExtResource( 67 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 72 ), ExtResource( 73 ), ExtResource( 74 ) ],
 "loop": true,
 "name": "robot_idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 75 ), ExtResource( 76 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ), ExtResource( 80 ), ExtResource( 81 ), ExtResource( 82 ) ],
+"loop": true,
+"name": "robot_melee",
+"speed": 5.0
 } ]
-
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 16.1284, 18.9469 )
 
 [node name="Robot_Character_Scene" type="KinematicBody2D" groups=[
 "character",
@@ -349,10 +371,41 @@ scale = Vector2( 2, 2 )
 z_index = 10
 script = SubResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -3.4703, 3.16893 )
-scale = Vector2( 1, 0.980141 )
+[node name="CharacterArea2D" type="Area2D" parent="."]
+position = Vector2( 1.26428, -2.04825 )
+scale = Vector2( 0.838769, 1.05019 )
+
+[node name="StandCollisionShape2D" type="CollisionShape2D" parent="CharacterArea2D"]
+position = Vector2( -3.44696, 2.78102 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 4 )
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+position = Vector2( 1.26428, -2.04825 )
+scale = Vector2( 0.838769, 1.05019 )
+
+[node name="LeftAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+position = Vector2( -23.8752, -2.7241 )
+shape = SubResource( 5 )
+disabled = true
+
+[node name="RightAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+position = Vector2( 17.5785, -2.7241 )
+shape = SubResource( 5 )
+disabled = true
+
+[node name="SlideAttackCollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
+position = Vector2( -4.19786, 10.6869 )
+shape = SubResource( 8 )
+disabled = true
+
+[node name="StandCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2.15635, 1.41699 )
 shape = SubResource( 2 )
+
+[node name="SlideCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3.08087, 11.6634 )
+shape = SubResource( 7 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 95.016, 115.858 )
@@ -361,18 +414,11 @@ limit_top = 0
 limit_bottom = 0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.0317154, 0 )
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 3 )
-animation = "robot_walk"
+animation = "robot_idle"
 speed_scale = 3.0
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2( 0.756516, -1.60598 )
-scale = Vector2( 0.838769, 1.05019 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -3.97638, 1.96161 )
-scale = Vector2( 1, 1.11972 )
-shape = SubResource( 4 )
-
-[node name="Tween" type="Tween" parent="."]
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -3.88801, -8.7262 )

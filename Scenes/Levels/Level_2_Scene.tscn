@@ -16,41 +16,15 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://Scenes/Levels/generic_level_script.gd\"
 
-# Tween foating object perameters
-var tweenFloats = [
-    {\"name\": 8, \"moveDirectionX\": 1, \"moveDirectionY\": 0, \"moveDistanceX\": 1000, \"moveDistanceY\": 0, \"tweenDuration\": 4}, 	# y-axis tween
-	{\"name\": 9, \"moveDirectionX\": -1, \"moveDirectionY\": 0, \"moveDistanceX\": 500, \"moveDistanceY\": 0, \"tweenDuration\": 4}, 	# x-axis tween
-	{\"name\": 10, \"moveDirectionX\": 1, \"moveDirectionY\": -1, \"moveDistanceX\": 800, \"moveDistanceY\": 200, \"tweenDuration\": 4}, 	# x-axis tween
-]
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_activate_tween_floats()
-	pass
-
-
-func _activate_tween_floats():
-	var floats = get_tree().get_nodes_in_group(\"float\")
-	# loop through all floats
-	for f in floats:
-		# start tweening on selected float objects
-		for v in tweenFloats:
-			if (f.name == (\"Float\" + str(v[\"name\"]))):
-				f.moveDirectionX = v[\"moveDirectionX\"]
-				f.moveDirectionY = v[\"moveDirectionY\"]
-				f.moveDistanceX = v[\"moveDistanceX\"]
-				f.moveDistanceY = v[\"moveDistanceY\"]
-				f.tweenDuration = v[\"tweenDuration\"]
-				f._set_can_tween(true)
-	
-	# reset object in attempt so free memory
-	tweenFloats = []
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-"
+	tweenFloats = [
+	    {\"name\": 8, \"moveDirectionX\": 1, \"moveDirectionY\": 0, \"moveDistanceX\": 1000, \"moveDistanceY\": 0, \"tweenDuration\": 4}, 	# y-axis tween
+		{\"name\": 9, \"moveDirectionX\": -1, \"moveDirectionY\": 0, \"moveDistanceX\": 500, \"moveDistanceY\": 0, \"tweenDuration\": 4}, 	# x-axis tween
+		{\"name\": 10, \"moveDirectionX\": 1, \"moveDirectionY\": -1, \"moveDistanceX\": 800, \"moveDistanceY\": 200, \"tweenDuration\": 4}, 	# x-axis tween
+	]
+	._activate_tween_floats()
+	pass"
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 289.4, 18.2363 )
@@ -63,42 +37,42 @@ script = SubResource( 1 )
 [node name="Backgrounds" type="Node2D" parent="."]
 
 [node name="BG1" type="Sprite" parent="Backgrounds"]
-position = Vector2( 7989.28, 416.254 )
+position = Vector2( 7989.28, 414 )
 scale = Vector2( 2.07082, 0.868507 )
 texture = ExtResource( 1 )
 
 [node name="BG2" type="Sprite" parent="Backgrounds"]
-position = Vector2( 49.3848, 416.464 )
+position = Vector2( 49.3848, 414 )
 scale = Vector2( 2.07082, 0.868308 )
 texture = ExtResource( 1 )
 
 [node name="BG3" type="Sprite" parent="Backgrounds"]
-position = Vector2( 2693.96, 416.929 )
+position = Vector2( 2693.96, 414 )
 scale = Vector2( 2.07082, 0.86784 )
 texture = ExtResource( 1 )
 
 [node name="BG4" type="Sprite" parent="Backgrounds"]
-position = Vector2( 5343.33, 416.585 )
+position = Vector2( 5343.33, 414 )
 scale = Vector2( 2.07082, 0.868507 )
 texture = ExtResource( 1 )
 
 [node name="BG5" type="Sprite" parent="Backgrounds"]
-position = Vector2( 10639.2, 416.254 )
+position = Vector2( 10639.2, 414 )
 scale = Vector2( 2.07082, 0.868507 )
 texture = ExtResource( 1 )
 
 [node name="BG6" type="Sprite" parent="Backgrounds"]
-position = Vector2( 13297.2, 416.977 )
+position = Vector2( 13297.2, 414 )
 scale = Vector2( 2.10832, 0.86738 )
 texture = ExtResource( 1 )
 
 [node name="BG7" type="Sprite" parent="Backgrounds"]
-position = Vector2( 15976.2, 416.977 )
+position = Vector2( 15976.2, 414 )
 scale = Vector2( 2.10832, 0.86738 )
 texture = ExtResource( 1 )
 
 [node name="BG8" type="Sprite" parent="Backgrounds"]
-position = Vector2( 18662.9, 416.977 )
+position = Vector2( 18662.9, 414 )
 scale = Vector2( 2.10832, 0.86738 )
 texture = ExtResource( 1 )
 
@@ -177,8 +151,7 @@ scale = Vector2( 1.61456, 1 )
 shape = SubResource( 2 )
 
 [node name="Pits" type="Node2D" parent="."]
-editor/display_folded = true
-position = Vector2( 0, -3.57628e-006 )
+position = Vector2( 0, -3.57628e-06 )
 scale = Vector2( 3, 1 )
 
 [node name="Pit1" parent="Pits" instance=ExtResource( 6 )]

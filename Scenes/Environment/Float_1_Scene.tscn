@@ -74,7 +74,7 @@ func _on_tween_completed(object, key):
 	pass"
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 186.259, 36.2517 )
+extents = Vector2( 190.643, 44.3316 )
 
 [node name="Float" type="Node2D" groups=[
 "float",
@@ -98,8 +98,7 @@ texture = ExtResource( 3 )
 position = Vector2( -25.8726, 12.6355 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 33.3926, -2.70749 )
+position = Vector2( 31.1818, -2.70749 )
 shape = SubResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
-
