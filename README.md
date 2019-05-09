@@ -9,12 +9,12 @@ retro game styles.
 
 ## ROBOT CONTROLS
 * MOVEMENTS
-  * A, LEFT ARROW: move left
-  * D, RIGHT ARROW: move right
-  * W, SPACE, UP ARROW: jump 
+  * A, LEFT ARROW        - move left
+  * D, RIGHT ARROW:      - move right
+  * W, SPACE, UP ARROW:  - jump 
 * ATTACKS
-  * CTRL: slide
-  * Z: shoot
-  * X: melee
+  * CTRL:    - slide
+  * Z:       - shoot
+  * X:       - melee
       
 
