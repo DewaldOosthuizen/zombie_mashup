@@ -8,8 +8,11 @@
 script/source = "extends Node2D
 
 var level = 0 # starting level
-var characterStats = {\"health\": 100, \"power\": 0, \"ammo\": 10, \"type\": \"Robot\"} # player character attributes
+var characterStats = {\"health\": 100, \"maxHealth\": 100, \"power\": 0, \"ammo\": 10, \"type\": \"robot\", \"character_folder_name\": \"Robot\"} # player character attributes
 
+onready var healthIndication = get_node(\"CanvasLayer/HealthProgress\")
+onready var powerIndication = get_node(\"CanvasLayer/PowerProgress\")
+onready var ammoIndication = get_node(\"CanvasLayer/BulletCount\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,6 +39,8 @@ func handle_events():
 			self.queue_free()
 		else:
 			OS.window_fullscreen = false
+	elif (Input.is_action_just_pressed(\"respawn\")):
+		setup_character()
 	# TODO puase game
 	# get_tree().paused = true
 	pass
@@ -101,7 +106,7 @@ func setup_character():
 		character.position.x = 300
 		character.position.y = 100
 	else: 
-		character = load(\"res://Scenes/Characters/\" + characterStats[\"type\"] + \"/Character_Scene.tscn\").instance()
+		character = load(\"res://Scenes/Characters/\" + characterStats[\"character_folder_name\"] + \"/Character_Scene.tscn\").instance()
 		character.position.x = 300
 		character.position.y = 100
 		get_tree().root.add_child(character)
@@ -150,13 +155,16 @@ func refresh_hud(character):
 	# the HUD is the display area where players can see their character's 
 	# vital statistics such as current health, bonus attributes, armor level, ammunition count, and more.
 	characterStats[\"health\"] = character.health
+	characterStats[\"maxHealth\"] = character.maxHealth
 	characterStats[\"power\"] = character.power
 	characterStats[\"ammo\"] = character.ammo
 	characterStats[\"type\"] = character.type
+	characterStats[\"character_folder_name\"] = character.character_folder_name
 	
-	get_node(\"CanvasLayer/HealthProgress\").value = character.health
-	get_node(\"CanvasLayer/PowerProgress\").value = character.power
-	get_node(\"CanvasLayer/BulletCount\").text = \"x\" + str(character.ammo)
+	healthIndication.value = character.health
+	healthIndication.max_value = character.maxHealth
+	powerIndication.value = character.power
+	ammoIndication.text = \"x\" + str(character.ammo)
 	print(characterStats)
 	pass
 "

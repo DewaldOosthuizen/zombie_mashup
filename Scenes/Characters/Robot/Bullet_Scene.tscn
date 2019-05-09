@@ -120,7 +120,7 @@ animations = [ {
 extents = Vector2( 1.02742, 5.26883 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 13.7491, 5.28616 )
+extents = Vector2( 15.6892, 5.28616 )
 
 [node name="Bullet" type="KinematicBody2D"]
 scale = Vector2( 0.3, 0.3 )

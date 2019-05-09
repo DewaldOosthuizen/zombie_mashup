@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 
 var playerSprite # set this from within the script that extends this script
-var velocity = Vector2(0, 0)
+var character_folder_name = ""
 
 # variables defaults, values can be changed from within script extending this script
 var playerSpeedX = 0 # controlled by this script, speed on x-axis
@@ -14,7 +14,7 @@ var currentJumpCount = 0 # checks if the character is busy jumping, the count be
 var maxSpeed = 350 # character max speed, defaulted to 350 
 var movementMultiplier = 800 # character movement multiplier
 var stationaryVelocity = 0.2 # default velocity on ground with gravity sits at 0.22, anything under means the character is in the air
-
+var velocity = Vector2(0, 0)
 
 var ammo = 0 # default starting ammo for characters
 var ammoIncrease = 10 # default ammo increase when picking up more ammo 
@@ -40,27 +40,26 @@ var action2TimerDelay = 0.5  # for how long does the character do action2, can b
 var action3TimerDelay = 1  # for how long does the character do action3, can be changed
 
 # Flags
-var repeatFrames = true
-var blood = false
-var invincible = false
+var blood = false # set to true to display blood and automatically reset to false afterwards
+var dazed = false # character cannot move when set dazed to true, will be driven by dazed time and timer
+var invincible = false # indicate whether the character can be hurt or not
+var repeatFrames = true # indicate whether current sprite frames should be repeated or not
+var mainCharacter = false # indicate whether the character should have mainCharacter features
+var disableGravity = false  # disable character gravity when set to true
 var action1 = false # mapped to z
 var action2 = false # mapped to x
 var action3 = false # mapped to control
-var mainCharacter = false
-var dazed = false
-var disableGravity = false
 
 # Constants
 const GRAVITY = 800
 const JUMPFORCE = 400
+const bloodParticle_scene = preload("res://Scenes/Blood_Particle_Scene.tscn")
+const bone_scene = preload("res://Scenes/Environment/Bone_Scene.tscn")
 
+#signals
 signal reload(character)
 signal reposition()
 signal refresh_hud(character)
-	
-
-const bloodParticle_scene = preload("res://Scenes/Blood_Particle_Scene.tscn")
-const bone_scene = preload("res://Scenes/Environment/Bone_Scene.tscn")
 
 func _animate_player(delta):
 	# control speed
@@ -117,16 +116,12 @@ func _handle_timers(delta):
 			action3 = false
 			action3Timer = 0
 			
-	
 	# creates a delay that the character remains dazed
 	if (dazed):
 		dazedTimer += delta
 		if (dazedTimer > dazedTime):
 			dazed = false
 			dazedTimer = 0
-			if (!mainCharacter):
-				_move_right()
-
 
 	# set blood to true to take damage
 	if (blood):
@@ -153,7 +148,6 @@ func _handle_timers(delta):
 			deathTimer = 0
 			_emit_reload()
 					
-					
 	# Create flickering effect to indicate damage
 	if (invincible):
 		flickerTimer += delta
@@ -164,12 +158,12 @@ func _handle_timers(delta):
 			invincible = false
 			invincibleTimer = 0
 			
-		if(flickerTimer > 0.1):
+		if(flickerTimer > 0.1 and health > 0):
 			if(playerSprite.visible):
 				playerSprite.visible = false
 			else:
 				playerSprite.visible = true
-			
+
 			flickerTimer = 0
 	elif (!playerSprite.visible):
 		playerSprite.visible = true
