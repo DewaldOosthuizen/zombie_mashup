@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://resources/characters/male_ninja/png/objects/Bullet_000.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://scenes/characters/generic_bullet_behaviour.gd\"
+
+func _ready():
+	sprite = get_node(\"AnimatedSprite\")
+	set_process(true)
+	get_node(\"VisibilityNotifier2D\").connect(\"screen_exited\", self, \"_screen_exited\")
+	pass
+
+func _screen_exited():
+	self.queue_free()
+	
+func _process(delta):
+	._animate_bullet(delta)
+	pass"
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "bullet",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1.02742, 2.0077 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 15.6892, 1.57776 )
+
+[node name="Bullet" type="KinematicBody2D"]
+scale = Vector2( 0.3, 0.3 )
+script = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+rotation = 1.5708
+frames = SubResource( 2 )
+animation = "bullet"
+speed_scale = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.274958, 0.829837 )
+scale = Vector2( 4.88204, 12.9419 )
+shape = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -10.3074, -5.49092 )
+scale = Vector2( 4.92382, 3.08256 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 3.01247, 1.758 )
+scale = Vector2( 2.10163, 3.05057 )
+shape = SubResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
