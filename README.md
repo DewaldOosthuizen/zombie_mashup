@@ -16,5 +16,15 @@ retro game styles.
   * CTRL:    - slide
   * Z:       - shoot
   * X:       - melee
-      
+
+## MALE NINJA CONTROLS
+* MOVEMENTS
+  * A, LEFT ARROW                                 - move left
+  * D, RIGHT ARROW:                               - move right
+  * W, SPACE, UP ARROW:                           - jump 
+  * (W, SPACE, UP ARROW) + (W, SPACE, UP ARROW):  - GLIDE 
+* ATTACKS
+  * CTRL:    - slide
+  * Z:       - shoot
+  * X:       - melee
 
