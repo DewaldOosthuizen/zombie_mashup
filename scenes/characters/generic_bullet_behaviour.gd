@@ -23,10 +23,9 @@ func _animate_bullet(delta):
 	if (power == 0):
 		self.scale = Vector2(0.2, 0.2)
 	elif (power == 1):
-		self.scale = Vector2(0.22, 0.22)
+		self.scale = Vector2(0.21, 0.22)
 	elif (power == 2):
-		self.scale = Vector2(0.22, 0.22)
-		self.modulate = Color("#a300ff")
+		self.scale = Vector2(0.22, 0.23)
 		
 	var collider1 = move_and_collide(Vector2(velocity.x, velocity.y))
 	_check_collision_objects()
@@ -44,7 +43,7 @@ func _set_speed(delta):
 	pass
 
 
-func create_muzzle(muzzle_scene):
+func _create_muzzle(muzzle_scene):
 	var muzzle = muzzle_scene.instance()
 	
 	if (movementDirection == 1):
@@ -82,6 +81,7 @@ func _check_collision_objects():
 	if (area.size() != 0):
 		for body in area:
 			if (body.is_in_group("enemy_character")):
+				get_node("CollisionShape2D").disabled = true
 				body._take_damage(damage + (5 * power)) #take damage and increase damage based on power level of bullet
 				self.queue_free()
 			if (body.is_in_group("enemy_saw")):

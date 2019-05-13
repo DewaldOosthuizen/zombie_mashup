@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://resources/characters/robot/png/objects/Bullet_000.png" type="Texture" id=1]
+[ext_resource path="res://resources/characters/robot/png/objects/Bullet_001.png" type="Texture" id=2]
+[ext_resource path="res://resources/characters/robot/png/objects/Bullet_002.png" type="Texture" id=3]
+[ext_resource path="res://resources/characters/robot/png/objects/Bullet_003.png" type="Texture" id=4]
+[ext_resource path="res://resources/characters/robot/png/objects/Bullet_004.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://scenes/characters/generic_bullet_behaviour.gd\"
+
+func _ready():
+	sprite = get_node(\"AnimatedSprite\")
+	._create_muzzle(load(\"res://scenes/characters/robot/Muzzle_Scene.tscn\"))
+	set_process(true)
+	get_node(\"VisibilityNotifier2D\").connect(\"screen_exited\", self, \"_screen_exited\")
+	pass
+
+func _screen_exited():
+	self.queue_free()
+	
+func _process(delta):
+	._animate_bullet(delta)"
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "bullet",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 1.02742, 5.26883 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 15.6892, 5.28616 )
+
+[node name="Bullet" type="KinematicBody2D"]
+scale = Vector2( 0.3, 0.3 )
+script = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "bullet"
+speed_scale = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.25592, 0.049439 )
+scale = Vector2( 4.88204, 12.9419 )
+shape = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( -10.3074, -5.49092 )
+scale = Vector2( 4.92382, 3.08256 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 3.01247, 1.758 )
+scale = Vector2( 2.10163, 3.05057 )
+shape = SubResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

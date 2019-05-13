@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+# Declare member variables here. Examples:
+var barrierReact
+
+signal touchedBarrier(enemy, barrier)
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	barrierReact = get_node(\"Area2D\")
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	_area_check()
+	pass
+
+func _area_check():
+	var area = barrierReact.get_overlapping_bodies()
+	if (area.size() != 0):
+		for body in area:
+			if (body.is_in_group(\"enemy_character\")):
+				emit_signal(\"touchedBarrier\", body, self)
+
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 165.569, 98.9367 )
+
+[node name="Enemy_barrier" type="Node2D" groups=[
+"barrier",
+]]
+script = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )

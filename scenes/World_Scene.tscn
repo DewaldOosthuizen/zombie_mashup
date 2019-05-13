@@ -1,0 +1,261 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/hud/health/Health1.png" type="Texture" id=1]
+[ext_resource path="res://resources/hud/power/Power1.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var level = 0 # starting level
+var characterStats = {\"health\": 100, \"maxHealth\": 100, \"energy\": 0, \"ammo\": 10, \"type\": \"ninja\", \"gender\": \"male\"} # player character attributes
+
+onready var healthIndication = get_node(\"CanvasLayer/HealthProgress\")
+onready var energyIndication = get_node(\"CanvasLayer/EnergyProgress\")
+onready var ammoIndication = get_node(\"CanvasLayer/BulletCount\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	# set the game to full screen
+	OS.window_fullscreen = true
+	OS.keep_screen_on = true
+	# start the first level
+	advance_to_next_level()
+	pass
+	
+	
+#Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	# get player input
+	handle_events()
+	pass
+
+
+func handle_events():
+	# check if the user quits the game
+	if (Input.is_action_just_pressed(\"ui_cancel\")):
+		if (!OS.window_fullscreen): 
+			get_tree().quit()
+			self.queue_free()
+		else:
+			OS.window_fullscreen = false
+	elif (Input.is_action_just_pressed(\"respawn\")):
+		if (characterStats[\"health\"] > 0):
+			setup_character()
+	# TODO puase game
+	# get_tree().paused = true
+	pass
+
+
+func advance_to_next_level():
+	print(\"== start next level ==\")
+	# remove previous level if exists
+	var theseLevels = get_tree().get_nodes_in_group(\"level\")
+	for l in theseLevels:
+		if (l):
+			l.queue_free()
+	
+	# increment level and add next level as active scene
+	level += 1;
+	create_level()
+	pass
+
+
+func create_level():
+	print(\"== create level ==\")
+	var level_scene = load(\"res://scenes/levels/Level_\" + str(level) + \"_Scene.tscn\")
+	if (level_scene):
+		level_scene = level_scene.instance()
+		if (!level_scene.is_connected(\"entered_level\", self, \"setup_level\")):
+			level_scene.connect(\"entered_level\", self, \"setup_level\")
+#		if (!level_scene.is_connected(\"exit_level\", self, \"reset_current_scene\")):
+#			level_scene.connect(\"exit_level\", self, \"reset_current_scene\")
+				
+		# set the next level as the current scene
+		get_tree().root.call_deferred(\"add_child\", level_scene)
+		print(\":: started level \" + str(level) + \" ::\")
+	pass
+
+
+func reset_current_scene(character):
+	print(\"== resetting the current scene ==\")
+	# remove level
+	var currentLevel = get_tree().get_nodes_in_group(\"level\")
+	if (!currentLevel.empty()):
+		currentLevel = currentLevel.front()
+		get_tree().root.remove_child(currentLevel)
+		currentLevel.queue_free()
+
+	# recreate level
+	create_level()
+	pass
+
+
+func setup_character():
+	print(\"== setup character ==\")
+	var character = get_tree().get_nodes_in_group(\"character\")
+	
+	if (!character.empty()):
+		character = character.back()
+		
+		if (character.health <= 0):
+			print(\"character died, respawning...\")
+			# reconstruct character
+			character._ready()
+
+		# reset character position to start of level
+		character.position.x = 300
+		character.position.y = 100
+	else: 
+		character = load(\"res://scenes/characters/\" + characterStats[\"type\"] + \"/Character_Scene.tscn\").instance()
+		character.position.x = 300
+		character.position.y = 100
+		character.gender = characterStats[\"gender\"]
+		get_tree().root.add_child(character)
+		
+	# connect character signals
+	if (!character.is_connected(\"reload\", self, \"reset_current_scene\")):
+		character.connect(\"reload\", self, \"reset_current_scene\")
+	if (!character.is_connected(\"reposition\", self, \"setup_character\")):
+		character.connect(\"reposition\", self, \"setup_character\")
+	if (!character.is_connected(\"refresh_hud\", self, \"refresh_hud\")):
+		character.connect(\"refresh_hud\", self, \"refresh_hud\")
+	
+	character._subscribe_to_signals()
+	refresh_hud(character)
+	pass
+
+
+func setup_level():
+	print(\"== setup level ==\")
+	if (!self.is_queued_for_deletion()):
+		# get the end door for current level and listen for events, if main character enters the door
+		# the signal will emit and the next level will be created
+		var end_door = get_tree().get_nodes_in_group(\"end_door\")
+		
+		if (!end_door.empty()):
+			end_door = end_door.back()
+			# connect end door signals
+			if(!end_door.is_connected(\"enteredEndDoor\", self, \"advance_to_next_level\")):
+				end_door.connect(\"enteredEndDoor\", self, \"advance_to_next_level\")
+				print(\":: end door connected ::\")
+			
+		var levelNode = get_tree().get_nodes_in_group(\"level\")
+		
+		if (!levelNode.empty()):
+			levelNode = levelNode.back()
+			get_tree().call_deferred(\"set_current_scene\", levelNode)
+	
+		# setup character for connected level
+		setup_character()
+	pass
+	
+
+func refresh_hud(character):
+	print(\"== refreshing the HUD values ==\")
+	# get character attributes for HUD - 
+	# HUD is short for Heads Up Display. In video and computer games, 
+	# the HUD is the display area where players can see their character's 
+	# vital statistics such as current health, bonus attributes, armor level, ammunition count, and more.
+	characterStats[\"health\"] = character.health
+	characterStats[\"maxHealth\"] = character.maxHealth
+	characterStats[\"energy\"] = character.energy
+	characterStats[\"ammo\"] = character.ammo
+	characterStats[\"type\"] = character.type
+	characterStats[\"gender\"] = character.gender
+	
+	healthIndication.value = character.health
+	healthIndication.max_value = character.maxHealth
+	energyIndication.value = character.energy
+	ammoIndication.text = \"x\" + str(character.ammo)
+	
+	var characterBulletImage = load(\"res://resources/characters/\" + characterStats[\"type\"] + \"/png/objects/Bullet_000.png\")
+	var bulletImage = get_node(\"CanvasLayer/BulletImage\")
+	
+	bulletImage.texture = characterBulletImage
+	
+	print(characterStats)
+	pass
+"
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.866667, 0.0901961, 0.0901961, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.537255, 0.541176, 0.580392, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.113725, 0.223529, 0.647059, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.537255, 0.541176, 0.580392, 1 )
+
+[sub_resource type="ImageTexture" id=6]
+
+[node name="World" type="Node2D"]
+position = Vector2( 0, -2.72073 )
+script = SubResource( 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." groups=[
+"status_bar",
+]]
+
+[node name="HealthImage" type="TextureRect" parent="CanvasLayer"]
+margin_left = 2.88602
+margin_top = 731.025
+margin_right = 32.886
+margin_bottom = 761.025
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 1
+
+[node name="HealthProgress" type="ProgressBar" parent="CanvasLayer"]
+margin_left = 48.386
+margin_top = 731.025
+margin_right = 248.386
+margin_bottom = 761.025
+rect_min_size = Vector2( 200, 0 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+
+[node name="EnergyImage" type="TextureRect" parent="CanvasLayer"]
+margin_left = 2.88602
+margin_top = 767.025
+margin_right = 32.886
+margin_bottom = 797.025
+texture = ExtResource( 2 )
+expand = true
+
+[node name="EnergyProgress" type="ProgressBar" parent="CanvasLayer"]
+margin_left = 48.386
+margin_top = 767.025
+margin_right = 248.386
+margin_bottom = 797.025
+rect_min_size = Vector2( 200, 0 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+
+[node name="BulletImage" type="TextureRect" parent="CanvasLayer"]
+margin_left = 251.0
+margin_top = 730.0
+margin_right = 291.0
+margin_bottom = 760.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = SubResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="BulletCount" type="Label" parent="CanvasLayer"]
+margin_left = 292.0
+margin_top = 740.0
+margin_right = 301.0
+margin_bottom = 754.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "X"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
