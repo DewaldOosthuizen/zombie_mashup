@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="PopupPanel" type="PopupPanel"]
+margin_left = -100.5
+margin_top = -81.0
+margin_right = 112.5
+margin_bottom = -28.0
+
+[node name="Label" type="Label" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 209.0
+margin_bottom = 49.0
+autowrap = true

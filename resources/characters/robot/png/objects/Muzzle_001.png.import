@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Muzzle_001.png-fad51737b3224fb35a50f55bde0b6172.stex"
+path="res://.import/Muzzle_001.png-044b7d2b35fabe99b9f6e188c288cef2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/characters/robot/png/objects/Muzzle_001.png"
-dest_files=[ "res://.import/Muzzle_001.png-fad51737b3224fb35a50f55bde0b6172.stex" ]
+source_file="res://resources/characters/robot/png/Objects/Muzzle_001.png"
+dest_files=[ "res://.import/Muzzle_001.png-044b7d2b35fabe99b9f6e188c288cef2.stex" ]
 
 [params]
 

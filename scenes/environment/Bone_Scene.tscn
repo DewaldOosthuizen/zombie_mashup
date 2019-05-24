@@ -6,7 +6,9 @@
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( -0.629952, -8.34976 )
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="RigidBody2D" type="RigidBody2D" groups=[
+"bones",
+]]
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -2.58472, 3.87707 )

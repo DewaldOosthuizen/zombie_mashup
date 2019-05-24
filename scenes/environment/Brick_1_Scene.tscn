@@ -22,7 +22,7 @@ func _ready():
 func break_object():
 	var particleEffect = bricksParticle_scene.instance()
 	particleEffect.get_node(\".\").set_emitting(true)
-	particleEffect.position = get_node(\"RigidBody2D\").get_position()
+	particleEffect.position = get_node(\"StaticBody2D/Sprite\").get_position()
 	get_tree().root.add_child(particleEffect)
 	self.queue_free()"
 
@@ -37,6 +37,8 @@ scale = Vector2( 0.8, 0.8 )
 script = SubResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 1048575
+collision_mask = 1048575
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D"]
 position = Vector2( 0.116503, -0.035367 )

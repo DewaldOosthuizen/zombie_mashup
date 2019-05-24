@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://resources/characters/blood/tile000.png" type="Texture" id=1]
+[ext_resource path="res://resources/characters/blood/blood.png" type="Texture" id=1]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id=1]
+
+[sub_resource type="ParticlesMaterial" id=2]
 resource_local_to_scene = true
 render_priority = 2
 trail_divisor = 4
@@ -12,7 +14,7 @@ flatness = 1.0
 gravity = Vector3( 0, 100, 0 )
 initial_velocity = 107.47
 initial_velocity_random = 1.0
-angular_velocity = 1.05
+angular_velocity = 1.62225e-007
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
@@ -22,19 +24,35 @@ damping = 50.0
 scale = 4.5
 scale_random = 1.0
 
+[sub_resource type="GDScript" id=3]
+script/source = "extends Particles2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	set_process(true)
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if (!self.emitting):
+		self.queue_free()
+	pass
+"
+
 [node name="BloodParticle" type="Particles2D"]
 pause_mode = 1
 modulate = Color( 0.72549, 0.0431373, 0.0431373, 1 )
 light_mask = 0
+material = SubResource( 1 )
 use_parent_material = true
 scale = Vector2( 0.1, 0.1 )
 emitting = false
-amount = 37
-lifetime = 10.0
+amount = 20
+lifetime = 6.0
 one_shot = true
+preprocess = 0.1
 speed_scale = 6.0
 explosiveness = 1.0
-randomness = 1.0
-visibility_rect = Rect2( -500, -500, 500, 500 )
-process_material = SubResource( 1 )
+process_material = SubResource( 2 )
 texture = ExtResource( 1 )
+script = SubResource( 3 )

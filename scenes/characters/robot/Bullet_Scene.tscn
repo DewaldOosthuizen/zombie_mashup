@@ -7,11 +7,13 @@
 [ext_resource path="res://resources/characters/robot/png/objects/Bullet_004.png" type="Texture" id=5]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends \"res://scenes/characters/generic_bullet_behaviour.gd\"
+script/source = "extends \"res://scripts/generic_bullet_behaviour.gd\"
+
+onready var muzzle = preload(\"res://scenes/characters/robot/Muzzle_Scene.tscn\")
 
 func _ready():
 	sprite = get_node(\"AnimatedSprite\")
-	._create_muzzle(load(\"res://scenes/characters/robot/Muzzle_Scene.tscn\"))
+	._create_muzzle(muzzle)
 	set_process(true)
 	get_node(\"VisibilityNotifier2D\").connect(\"screen_exited\", self, \"_screen_exited\")
 	pass
@@ -36,7 +38,9 @@ extents = Vector2( 1.02742, 5.26883 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 15.6892, 5.28616 )
 
-[node name="Bullet" type="KinematicBody2D"]
+[node name="Bullet" type="KinematicBody2D" groups=[
+"bullet",
+]]
 scale = Vector2( 0.3, 0.3 )
 script = SubResource( 1 )
 

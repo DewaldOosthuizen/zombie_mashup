@@ -1,21 +1,60 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resources/hud/power/Power1.png" type="Texture" id=1]
 
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
 
-[sub_resource type="CircleShape2D" id=1]
+# Declare member variables here. Examples:
+var energyIncreases = [15, 20, 35]
+var energy
+
+func _ready():
+	energy = energyIncreases[randi()%energyIncreases.size()]
+	get_node(\"Label\").text = str(energy) + \"%\"
+	set_process(true)
+	pass 
+	
+
+func _process(delta):
+	var objectsInArea = get_node(\"Area2D\").get_overlapping_bodies()
+	
+	if (objectsInArea):
+		for i in objectsInArea:
+			if (i.is_in_group(\"character\")):
+				if (i.energy < i.maxEnergy):
+					i.energy += i.maxEnergy * energy / 100 # restore health percentage
+					if (i.energy > i.maxEnergy):
+						i.energy = i.maxEnergy
+					i._emit_refresh_hud()
+					self.queue_free()
+	pass"
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 241.269
 
-[node name="PowerUp" type="RigidBody2D" groups=[
+[node name="PowerUp" type="Node2D" groups=[
 "energy_stone",
+"power_up",
 ]]
+script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.313309, -1.3845 )
 scale = Vector2( 0.07, 0.07 )
 texture = ExtResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0.248377, -0.515921 )
 scale = Vector2( 0.07, 0.07 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -10.8174
+margin_top = -6.42395
+margin_right = 17.1826
+margin_bottom = 8.57605
+rect_scale = Vector2( 0.8, 0.8 )
+text = "20%"

@@ -8,7 +8,10 @@ script/source = "extends Node2D
 # Declare member variables here.
 const bricksParticle_scene = preload(\"res://scenes/environment/Brick_1_Particle_Scene.tscn\")
 const energy_stone_scene = preload(\"res://scenes/Energy_Stone_Scene.tscn\")
+const health_scene = preload(\"res://scenes/Health_Scene.tscn\")
+const ammo_scene = preload(\"res://scenes/Ammo_Scene.tscn\")
 
+var power_up_scenes = [energy_stone_scene, health_scene, ammo_scene]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,9 +29,9 @@ func break_object():
 	particleEffect.position = self.get_position()  - Vector2(0, 20)
 	get_tree().root.add_child(particleEffect)
 	
-	# create actual power up
-	var powerUp = energy_stone_scene.instance()
-	powerUp.position = self.position - Vector2(0, 50)
+	# create actual power up 
+	var powerUp = power_up_scenes[randi()%power_up_scenes.size()].instance()
+	powerUp.position = self.position
 	get_tree().root.add_child(powerUp)
 	
 	self.queue_free()
