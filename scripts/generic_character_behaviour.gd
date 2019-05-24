@@ -58,7 +58,6 @@ const JUMPFORCE = 400 # default jump force
 
 # preloaded scenes
 const bloodParticle_scene = preload("res://scenes/Blood_Particle_Scene.tscn")
-const bone_scene = preload("res://scenes/environment/Bone_Scene.tscn")
 
 # scenes that can be changed
 var bullet_scene
@@ -403,9 +402,6 @@ func _emit_reload():
 	if(mainCharacter):
 		emit_signal("reload", self)
 	else:
-		var bones = bone_scene.instance()
-		bones.position = self.get_position()  - Vector2(0, -70)
-		get_tree().root.add_child(bones)
 		self.queue_free()
 	pass
 

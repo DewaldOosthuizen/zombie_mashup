@@ -34,8 +34,8 @@ func _process(delta):
 radius = 241.269
 
 [node name="PowerUp" type="Node2D" groups=[
-"energy_stone",
 "power_up",
+"energy_stone",
 ]]
 script = SubResource( 1 )
 

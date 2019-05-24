@@ -1,25 +1,22 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://resources/levels/freetileset/png/BG/BG.png" type="Texture" id=1]
-[ext_resource path="res://scenes/environment/Open_Door_Scene.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/environment/Door_Scene.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/environment/Flora_5_scene.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/environment/Flora_6_scene.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/environment/Flora_2_scene.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/environment/Flora_1_scene.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/environment/Flora_4_scene.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/environment/Flora_3_scene.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/environment/Flora_11_scene.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/environment/Flora_9_scene.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/enemies/Enemy_Saw_Scene.tscn" type="PackedScene" id=11]
-[ext_resource path="res://scenes/environment/Brick_1_Power_Up_Scene.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/environment/Brick_1_Scene.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/environment/Pit_1_Scenet.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scenes/environment/Float_1_Scene.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scenes/environment/Floor_1_Scene.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/environment/Floor_1_High_Scene.tscn" type="PackedScene" id=17]
-[ext_resource path="res://scenes/environment/Floor_1_High_Scene_2.tscn" type="PackedScene" id=18]
-[ext_resource path="res://scenes/enemies/Enemy_Zombie_Scene.tscn" type="PackedScene" id=19]
-[ext_resource path="res://scenes/enemies/Enemy_barrier.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/environment/Brick_1_Power_Up_Scene.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/environment/Brick_1_Scene.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/environment/Pit_1_Scenet.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/environment/Float_1_Scene.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/environment/Floor_1_Scene.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/environment/Floor_1_High_Scene.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/environment/Floor_1_High_Scene_2.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scenes/enemies/Enemy_Zombie_Scene.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/enemies/Enemy_barrier.tscn" type="PackedScene" id=17]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends \"res://scripts/generic_level_script.gd\"
@@ -132,7 +129,7 @@ scale = Vector2( 4.50749, 2.80372 )
 texture = ExtResource( 1 )
 
 [node name="OpenDoor" parent="Backgrounds" instance=ExtResource( 2 )]
-position = Vector2( 1597.56, 502.015 )
+position = Vector2( 1598.92, 544.187 )
 
 [node name="Flora" type="Node2D" parent="."]
 position = Vector2( 196.122, 361.219 )
@@ -227,188 +224,118 @@ position = Vector2( 4884.77, -15.1603 )
 [node name="Mushroom7" parent="Flora" instance=ExtResource( 7 )]
 position = Vector2( 10967.7, 339.762 )
 
-[node name="Flora" parent="Flora" instance=ExtResource( 9 )]
-position = Vector2( 11646.5, -198.944 )
-
-[node name="Flora8" parent="Flora" instance=ExtResource( 9 )]
-position = Vector2( 10355.6, -717.975 )
-
-[node name="Flora12" parent="Flora" instance=ExtResource( 9 )]
-position = Vector2( 7275.95, -670.153 )
-
-[node name="Flora2" parent="Flora" instance=ExtResource( 9 )]
-position = Vector2( 11166, 315.985 )
-
-[node name="Flora7" parent="Flora" instance=ExtResource( 9 )]
-position = Vector2( 9578.18, 315.485 )
-
-[node name="Flora3" parent="Flora" instance=ExtResource( 10 )]
+[node name="Flora3" parent="Flora" instance=ExtResource( 5 )]
 position = Vector2( 10406.1, -31.8089 )
 
-[node name="Flora4" parent="Flora" instance=ExtResource( 10 )]
+[node name="Flora4" parent="Flora" instance=ExtResource( 5 )]
 position = Vector2( 10083.5, -34.081 )
 
-[node name="Flora5" parent="Flora" instance=ExtResource( 10 )]
+[node name="Flora5" parent="Flora" instance=ExtResource( 5 )]
 position = Vector2( 10315.2, 331.89 )
 
-[node name="Flora9" parent="Flora" instance=ExtResource( 10 )]
+[node name="Flora9" parent="Flora" instance=ExtResource( 5 )]
 position = Vector2( 9999.93, -700.978 )
 
-[node name="Flora10" parent="Flora" instance=ExtResource( 10 )]
+[node name="Flora10" parent="Flora" instance=ExtResource( 5 )]
 position = Vector2( 9289.03, -780.821 )
 
-[node name="Flora11" parent="Flora" instance=ExtResource( 10 )]
+[node name="Flora11" parent="Flora" instance=ExtResource( 5 )]
 position = Vector2( 8862.49, -776.873 )
 
-[node name="Flora6" parent="Flora" instance=ExtResource( 10 )]
+[node name="Flora6" parent="Flora" instance=ExtResource( 5 )]
 position = Vector2( 9081.48, 15.9046 )
-
-[node name="Enemies_saw" type="Node2D" parent="."]
-
-[node name="Enemy_saw" parent="Enemies_saw" instance=ExtResource( 11 )]
-position = Vector2( 9390.55, 723.597 )
-moveDirectionY = -1
-canTween = true
-moveDistanceY = 220
-tweenDuration = 2
-
-[node name="Enemy_saw2" parent="Enemies_saw" instance=ExtResource( 11 )]
-position = Vector2( 9952.22, 507.835 )
-moveDirectionY = 1
-canTween = true
-moveDistanceY = 220
-tweenDuration = 2
-
-[node name="Enemy_saw3" parent="Enemies_saw" instance=ExtResource( 11 )]
-position = Vector2( 10489.9, 723.597 )
-moveDirectionY = -1
-canTween = true
-moveDistanceY = 220
-tweenDuration = 2
-
-[node name="Enemy_saw4" parent="Enemies_saw" instance=ExtResource( 11 )]
-position = Vector2( 11791.3, 716.747 )
-moveDirectionX = -1
-canTween = true
-moveDistanceX = 500
-tweenDuration = 2
-
-[node name="Enemy_saw5" parent="Enemies_saw" instance=ExtResource( 11 )]
-position = Vector2( 12011.7, 289.953 )
-moveDirectionX = 1
-canTween = true
-moveDistanceX = 390
-tweenDuration = 2
-
-[node name="Enemy_saw6" parent="Enemies_saw" instance=ExtResource( 11 )]
-position = Vector2( 9581.9, -322.903 )
-tweenDuration = 0
-
-[node name="Enemy_saw7" parent="Enemies_saw" instance=ExtResource( 11 )]
-position = Vector2( 8179.55, -279.643 )
-moveDirectionX = 1
-canTween = true
-moveDistanceX = 310
-tweenDuration = 2
-
-[node name="Enemy_saw8" parent="Enemies_saw" instance=ExtResource( 11 )]
-position = Vector2( 9953.09, -223.853 )
-moveDirectionY = 1
-canTween = true
-moveDistanceY = 600
-tweenDuration = 3
 
 [node name="Bricks" type="Node2D" parent="."]
 
-[node name="brick_power_up1" parent="Bricks" instance=ExtResource( 12 )]
+[node name="brick_power_up1" parent="Bricks" instance=ExtResource( 9 )]
 position = Vector2( 1009.82, 694.558 )
 script = SubResource( 2 )
 
-[node name="brick_power_up4" parent="Bricks" instance=ExtResource( 12 )]
+[node name="brick_power_up4" parent="Bricks" instance=ExtResource( 9 )]
 position = Vector2( 7736.02, -291.475 )
 script = SubResource( 2 )
 
-[node name="brick_power_up5" parent="Bricks" instance=ExtResource( 12 )]
+[node name="brick_power_up5" parent="Bricks" instance=ExtResource( 9 )]
 position = Vector2( 12189.7, 693.403 )
 script = SubResource( 2 )
 
-[node name="brick_power_up11" parent="Bricks" instance=ExtResource( 12 )]
+[node name="brick_power_up11" parent="Bricks" instance=ExtResource( 9 )]
 position = Vector2( 12281.6, 693.403 )
 script = SubResource( 2 )
 
-[node name="brick_power_up12" parent="Bricks" instance=ExtResource( 12 )]
+[node name="brick_power_up12" parent="Bricks" instance=ExtResource( 9 )]
 position = Vector2( 12234.5, 642.682 )
 script = SubResource( 2 )
 
-[node name="brick_power_up6" parent="Bricks" instance=ExtResource( 12 )]
+[node name="brick_power_up6" parent="Bricks" instance=ExtResource( 9 )]
 position = Vector2( 10395.9, -344.826 )
 script = SubResource( 2 )
 
-[node name="brick_power_up3" parent="Bricks" instance=ExtResource( 12 )]
+[node name="brick_power_up3" parent="Bricks" instance=ExtResource( 9 )]
 position = Vector2( 11097.7, 694.717 )
 script = SubResource( 2 )
 
-[node name="brick1" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick1" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5156.86, 339.771 )
 script = SubResource( 3 )
 
-[node name="brick2" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick2" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5320.28, 742.173 )
 script = SubResource( 3 )
 
-[node name="brick4" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick4" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5320.21, 691.047 )
 script = SubResource( 3 )
 
-[node name="brick6" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick6" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 2234.78, 693.68 )
 script = SubResource( 3 )
 
-[node name="brick7" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick7" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 2234.7, 643.321 )
 script = SubResource( 3 )
 
-[node name="brick10" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick10" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5000.26, 339.762 )
 script = SubResource( 3 )
 
-[node name="brick11" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick11" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 3485.79, 725.66 )
 script = SubResource( 3 )
 
-[node name="brick12" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick12" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5269.81, 742.174 )
 script = SubResource( 3 )
 
-[node name="brick13" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick13" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 1060.28, 643.304 )
 script = SubResource( 3 )
 
-[node name="brick14" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick14" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 1060.3, 694.557 )
 script = SubResource( 3 )
 
-[node name="brick15" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick15" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 1009.82, 643.306 )
 script = SubResource( 3 )
 
-[node name="brick16" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick16" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5320.21, 640.024 )
 script = SubResource( 3 )
 
-[node name="brick17" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick17" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5269.81, 690.992 )
 script = SubResource( 3 )
 
-[node name="brick18" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick18" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 6530.68, 696.107 )
 script = SubResource( 3 )
 
-[node name="brick19" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick19" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 5269.87, 640.043 )
 script = SubResource( 3 )
 
-[node name="brick20" parent="Bricks" instance=ExtResource( 13 )]
+[node name="brick20" parent="Bricks" instance=ExtResource( 10 )]
 position = Vector2( 6228, 372.321 )
 script = SubResource( 3 )
 
@@ -441,133 +368,133 @@ scale = Vector2( 4, 1 )
 shape = SubResource( 4 )
 
 [node name="Pits" type="Node2D" parent="."]
-position = Vector2( 0, -3.57628e-006 )
+position = Vector2( 0, -3.57628e-06 )
 scale = Vector2( 3, 1 )
 
-[node name="Pit1" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit1" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( 1084.76, 785.02 )
 scale = Vector2( 3, 5 )
 
-[node name="Pit2" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit2" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( -171.505, 792.987 )
 scale = Vector2( 3, 5 )
 
-[node name="Pit9" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit9" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( -498.415, 792.987 )
 scale = Vector2( 3, 5 )
 
-[node name="Pit3" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit3" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( -303.97, 792.987 )
 scale = Vector2( 3, 5 )
 
-[node name="Pit8" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit8" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( -630.88, 792.987 )
 scale = Vector2( 3, 5 )
 
-[node name="Pit4" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit4" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( 1680.39, 780.282 )
 scale = Vector2( 3, 5 )
 
-[node name="Pit5" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit5" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( 2786.63, 794.299 )
 scale = Vector2( 3, 5 )
 
-[node name="Pit6" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit6" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( 4151.41, 780.282 )
 scale = Vector2( 3, 5 )
 
-[node name="Pit7" parent="Pits" instance=ExtResource( 14 )]
+[node name="Pit7" parent="Pits" instance=ExtResource( 11 )]
 position = Vector2( 4323.37, 780.282 )
 scale = Vector2( 3, 5 )
 
 [node name="Floats" type="Node2D" parent="."]
 
-[node name="Float1" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float1" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 2110.65, 320.005 )
 moveDirectionY = 1
 canTween = true
 moveDistanceY = 220
 tweenDuration = 2
 
-[node name="Float7" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float7" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 1597.67, 597.093 )
 scale = Vector2( 1, 1 )
 
-[node name="Float6" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float6" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 1595.25, 650.313 )
 scale = Vector2( 1.5, 1 )
 
-[node name="Float4" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float4" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 1593.01, 703.13 )
 scale = Vector2( 2, 1 )
 
-[node name="Float3" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float3" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 2567.97, 324.366 )
 moveDirectionX = 1
 canTween = true
 moveDistanceX = 600
 tweenDuration = 3
 
-[node name="Float5" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float5" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 3521.88, 271.982 )
 
-[node name="Float8" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float8" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 4371.78, -203.757 )
 
-[node name="Float9" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float9" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 5358.39, 388.344 )
 moveDirectionX = 1
 canTween = true
 moveDistanceX = 500
 tweenDuration = 3
 
-[node name="Float10" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float10" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 6119.8, 421.062 )
 
-[node name="Float11" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float11" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 6519.13, 381.397 )
 
-[node name="Float12" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float12" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 6888.29, 476.81 )
 
-[node name="Float13" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float13" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 7241.85, 405.758 )
 
-[node name="Float14" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float14" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 7645.81, 361.615 )
 
-[node name="Float15" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float15" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 7990.29, 297.656 )
 
-[node name="Float16" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float16" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 8441.19, 293.984 )
 
-[node name="Float17" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float17" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 5068.06, 388.261 )
 
-[node name="Float19" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float19" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 4720.15, 327.907 )
 moveDirectionX = -1
 canTween = true
 moveDistanceX = 800
 
-[node name="Float21" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float21" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 12218.6, 221.409 )
 moveDirectionY = -1
 canTween = true
 moveDistanceY = 500
 tweenDuration = 3
 
-[node name="Float22" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float22" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 11818, -197.647 )
 
-[node name="Float23" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float23" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 11383.8, -247.538 )
 
-[node name="Float24" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float24" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 10918.7, -271.741 )
 
-[node name="Float27" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float27" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 6940.3, -198.853 )
 moveDirectionX = -1
 canTween = true
@@ -575,14 +502,14 @@ moveDistanceX = 2200
 moveDistanceY = 200
 tweenDuration = 6
 
-[node name="Float28" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float28" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 3865.75, -487.321 )
 moveDirectionY = 1
 canTween = true
 moveDistanceY = 350
 tweenDuration = 2
 
-[node name="Float29" parent="Floats" instance=ExtResource( 15 )]
+[node name="Float29" parent="Floats" instance=ExtResource( 12 )]
 position = Vector2( 3340.99, -242.95 )
 moveDirectionY = -1
 canTween = true
@@ -592,250 +519,250 @@ tweenDuration = 2
 [node name="Ground" type="Node2D" parent="."]
 position = Vector2( 6.13867, 419.887 )
 
-[node name="floor1" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor1" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 378.676, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor2" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor2" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 14.5723, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor3" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor3" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 1116.02, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor4" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor4" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 745.866, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor5" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor5" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 1853.81, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor6" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor6" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 1482.36, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor7" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor7" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 2225.9, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor8" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor8" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 2595.77, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor9" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor9" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 2968.74, 433.631 )
 scale = Vector2( 3, 5 )
 
-[node name="floor10" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor10" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 4025.16, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor11" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor11" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 3654.6, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor12" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor12" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 4398.23, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor13" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor13" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 4769.24, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor14" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor14" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 5460.4, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor15" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor15" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 5829.22, 435.79 )
 scale = Vector2( 3.13735, 5 )
 
-[node name="floor16" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor16" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 6206.29, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor17" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor17" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 6575.51, 435.79 )
 scale = Vector2( 2.75935, 5 )
 
-[node name="floor18" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor18" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 6915.87, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor19" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor19" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 7287.41, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor20" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor20" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 7657.63, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor21" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor21" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 8030.24, 435.79 )
 scale = Vector2( 3, 5 )
 
-[node name="floor22" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor22" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 8721.3, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor32" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor32" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 8757.4, 62.2871 )
 
-[node name="floor33" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor33" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 9125.94, 62.3115 )
 
-[node name="floor34" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor34" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 9496.75, 62.3115 )
 
-[node name="floor35" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor35" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 10302.4, -658.497 )
 
-[node name="floor36" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor36" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 9941.96, -658.497 )
 
-[node name="floor37" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor37" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 9581.55, -658.497 )
 
-[node name="floor23" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor23" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 9464.4, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor24" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor24" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 9092.78, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor25" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor25" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 9835.8, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor26" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor26" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 10208.9, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor27" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor27" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 10576.8, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor28" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor28" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 10938.3, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor29" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor29" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 11304.7, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor30" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor30" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 11671.5, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor31" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor31" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 12039.6, 431.794 )
 scale = Vector2( 3, 5 )
 
-[node name="floor38" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor38" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 7473.8, -607.704 )
 
-[node name="floor41" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor41" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 2677.97, -690.914 )
 
-[node name="floor39" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor39" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 7106.71, -607.704 )
 
-[node name="floor40" parent="Ground" instance=ExtResource( 16 )]
+[node name="floor40" parent="Ground" instance=ExtResource( 13 )]
 position = Vector2( 2310.88, -690.914 )
 
-[node name="floor_high" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 9860.85, 50.1404 )
 
-[node name="floor_high2" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high2" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 10224.9, 50.1404 )
 
-[node name="floor_high3" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high3" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 10588.9, 50.1404 )
 
-[node name="floor_high4" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high4" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 10954.1, 9.24319 )
 
-[node name="floor_high8" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high8" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 9215.58, -696.892 )
 
-[node name="floor_high11" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high11" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 8856.64, -696.892 )
 
-[node name="floor_high12" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high12" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 8496.2, -696.892 )
 
-[node name="floor_high13" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high13" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 7833.16, -619.283 )
 
-[node name="floor_high14" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high14" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 1945.64, -704.256 )
 
-[node name="floor_high5" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high5" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 11317, -51.3436 )
 
-[node name="floor_high6" parent="Ground" instance=ExtResource( 17 )]
+[node name="floor_high6" parent="Ground" instance=ExtResource( 14 )]
 position = Vector2( 11672.4, -101.329 )
 
-[node name="floor_high9" parent="Ground" instance=ExtResource( 18 )]
+[node name="floor_high9" parent="Ground" instance=ExtResource( 15 )]
 position = Vector2( 12495.9, -561.855 )
 rotation = 1.5708
 scale = Vector2( 9, 8 )
 
-[node name="floor_high10" parent="Ground" instance=ExtResource( 18 )]
+[node name="floor_high10" parent="Ground" instance=ExtResource( 15 )]
 position = Vector2( 12496.1, -1648.05 )
 rotation = 1.5708
 scale = Vector2( 9, 8 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Enemy1" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy1" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2522.1, 681.166 )
 
-[node name="Enemy13" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy13" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 3145.25, 662.627 )
 
-[node name="Enemy2" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy2" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 3934.53, 656.621 )
 
-[node name="Enemy14" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy14" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 4773.03, 672.4 )
 
-[node name="Enemy3" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy3" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 4479.32, 645.034 )
 allowMove = false
 
-[node name="Enemy12" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy12" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 6024.55, 675.545 )
 
-[node name="Enemy4" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy4" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 5897.79, 685.111 )
 
-[node name="Enemy11" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy11" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 6697.75, 686.852 )
 allowMove = false
 
-[node name="Enemy5" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy5" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 6146.53, 364.63 )
 allowMove = false
 
-[node name="Enemy19" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy19" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 8785.2, 377.399 )
 
-[node name="Enemy6" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy6" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 7971.68, 241.61 )
 allowMove = false
 
-[node name="Enemy16" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy16" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 9698.01, 680.14 )
 allowMove = false
 
-[node name="Enemy7" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy7" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 8062.24, 682.719 )
 
-[node name="Enemy15" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy15" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 11930, 687.58 )
 maxSpeed = 100
 energy = 50
@@ -846,28 +773,28 @@ action2Damage = 40
 characterScale = Vector2( 2, 2 )
 allowMove = false
 
-[node name="Enemy8" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy8" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 9103.26, 688.158 )
 allowMove = false
 
-[node name="Enemy17" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy17" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 10174.8, 684.61 )
 allowMove = false
 
-[node name="Enemy9" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy9" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 10751.3, 683.298 )
 allowMove = false
 
-[node name="Enemy18" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy18" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 10006.4, -358.819 )
 
-[node name="Enemy27" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy27" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 8883.73, -400.866 )
 
-[node name="Enemy28" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy28" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 7571.85, -299.953 )
 
-[node name="Enemy29" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy29" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 7270.63, -298.214 )
 energy = 50
 maxEnergy = 50
@@ -877,105 +804,105 @@ action2Damage = 40
 characterScale = Vector2( 2, 2 )
 allowMove = false
 
-[node name="Enemy30" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy30" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2913.01, -379.843 )
 
-[node name="Enemy31" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy31" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2673.34, -379.843 )
 
-[node name="Enemy33" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy33" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2433.67, -379.843 )
 
-[node name="Enemy32" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy32" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 2118.31, -430.299 )
 
-[node name="Enemy21" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy21" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 11506.2, 175.722 )
 
-[node name="Enemy23" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy23" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 11064.8, 284.733 )
 
-[node name="Enemy25" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy25" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 9236.56, 376.514 )
 
-[node name="Enemy10" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy10" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 12343.8, 687.374 )
 allowMove = false
 
-[node name="Enemy22" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy22" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 10754.4, 317.66 )
 
-[node name="Enemy24" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy24" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 10268.9, 318.14 )
 
-[node name="Enemy26" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy26" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 9678.98, 371.348 )
 
-[node name="Enemy20" parent="Enemies" instance=ExtResource( 19 )]
+[node name="Enemy20" parent="Enemies" instance=ExtResource( 16 )]
 position = Vector2( 7409.91, 678.217 )
 
 [node name="Enemy_barriers" type="Node2D" parent="."]
 
-[node name="Enemy_barrier" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 3481.46, 710.775 )
 
-[node name="Enemy_barrier11" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier11" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 3080.34, -342.956 )
 scale = Vector2( 0.3, 1 )
 
-[node name="Enemy_barrier12" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier12" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 1885.12, -415.747 )
 scale = Vector2( 0.3, 1 )
 
-[node name="Enemy_barrier13" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier13" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 2302.82, -427.878 )
 scale = Vector2( 0.2, 1 )
 
-[node name="Enemy_barrier2" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier2" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 5282.05, 680.758 )
 
-[node name="Enemy_barrier3" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier3" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 5943.59, 339.194 )
 scale = Vector2( 0.3, 1 )
 
-[node name="Enemy_barrier4" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier4" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 6301.5, 339.596 )
 scale = Vector2( 0.3, 1 )
 
-[node name="Enemy_barrier14" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier14" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 7086.07, -254.767 )
 scale = Vector2( 0.2, 1 )
 
-[node name="Enemy_barrier15" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier15" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 8326.52, -334.569 )
 
-[node name="Enemy_barrier16" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier16" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 10725.2, -308.12 )
 scale = Vector2( 0.5, 1 )
 
-[node name="Enemy_barrier5" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier5" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 7838.14, 230.843 )
 scale = Vector2( 0.2, 1 )
 
-[node name="Enemy_barrier6" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier6" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 8145.88, 235.339 )
 scale = Vector2( 0.2, 1 )
 
-[node name="Enemy_barrier8" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier8" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 8662.88, 375.243 )
 scale = Vector2( 0.5, 1 )
 
-[node name="Enemy_barrier9" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier9" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 9845.09, 312.702 )
 scale = Vector2( 0.2, 1 )
 
-[node name="Enemy_barrier17" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier17" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 10930.2, 301.887 )
 scale = Vector2( 0.2, 1 )
 
-[node name="Enemy_barrier10" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier10" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 11298.4, 267.215 )
 scale = Vector2( 0.2, 1 )
 
-[node name="Enemy_barrier7" parent="Enemy_barriers" instance=ExtResource( 20 )]
+[node name="Enemy_barrier7" parent="Enemy_barriers" instance=ExtResource( 17 )]
 position = Vector2( 8543.52, 686.115 )
