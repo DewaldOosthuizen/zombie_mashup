@@ -6,7 +6,7 @@
 Zombie Mashup created with Godot 3. It is a single playable level from the zombie_apocalypse game that is in the making.
 
 This will be a community driven game and anyone will be able to use this project as a baseline and create
-your own game or you can add onto this game and build a community edition of retro_apocalypse.
+your own game or you can add onto this game and build a community edition of zombie_apocalypse.
 
 ## CONTROLS
   * ESC: Pause the game
